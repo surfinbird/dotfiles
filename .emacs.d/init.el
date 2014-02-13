@@ -1,16 +1,24 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Load paths
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Turn off mouse interface early in startup to avoid momentary display
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; Don't use messages that you don't read
+(setq initial-scratch-message "")
+(setq inhibit-startup-message t)
+
+;; Setup load path
 (message "*** Setting load paths")
-(setq load-path (cons (expand-file-name "~/.emacs.d") load-path))
-(setq load-path (cons (expand-file-name "~/.emacs.d/vendor") load-path))
-(setq load-path (cons (expand-file-name "~/.emacs.d/el-get/el-get") load-path))
-(setq load-path (cons (expand-file-name "~/.emacs.d/vendor/el-get/GNU Emacs") load-path))
+(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/vendor")
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get/")
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/el-get/tomorrow-theme/GNU Emacs")
-
+;; Add some stuff to the regular path
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
+
+;; Fix our good looks
+(require 'appearance)   
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Machine specific, loaded early since I need to setup a proxy at work
@@ -76,53 +84,8 @@
 (load "~/.emacs.d/init-evil.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Appearance
+;; Ediff
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(message "*** Appearance")
-
-(defun toggle-fullscreen (&optional f)
-  (interactive)
-  (let ((current-value (frame-parameter nil 'fullscreen)))
-    (set-frame-parameter nil 'fullscreen
-                         (if (equal 'fullboth current-value)
-                             (if (boundp 'old-fullscreen) old-fullscreen nil)
-                           (progn (setq old-fullscreen current-value)
-                                  'fullboth)))))
-
-;; Font
-(cond
- ((string-match "linux" system-configuration)
-  (set-default-font "Inconsolata-11:antialias=1")
-  (add-to-list 'default-frame-alist '(font . "Inconsolata-11:antialias=1"))
-))
-
-;; Highlight the current line with a custom face
-(defface hl-line '((t (:background "Gray10")))
-  "Face to use for `hl-line-face'." :group 'hl-line)
-(setq hl-line-face 'hl-line)
-(global-hl-line-mode t)
-
-;; show line number
-(global-linum-mode t)
-
-;; Prevent the cursor from blinking
-(blink-cursor-mode 0)
-;; Don't use messages that you don't read
-(setq initial-scratch-message "")
-(setq inhibit-startup-message t)
-
-;; Who use the bar to scroll?
-(scroll-bar-mode 0)
-
-(tool-bar-mode 0)
-(menu-bar-mode 0)
-
-(require 'ansi-color)
-(defun colorize-compilation-buffer ()
-  (toggle-read-only)
-  (ansi-color-apply-on-region (point-min) (point-max))
-  (toggle-read-only))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-merge-split-window-function 'split-window-horizontally)
@@ -464,9 +427,6 @@ autosave-dir "\\1") t)))
 ;; Misc misc
 (setq frame-title-format "%S: %f")  ; window title
 (setq initial-frame-alist (quote ((height . 65) (width . 100)))) ; window size
-(tool-bar-mode 0) ; remove button toolbar
-(setq inhibit-startup-screen t)
-(show-paren-mode t)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (setq grep-find-command "find . -name \"*.[ch]\" -print0 | xargs -0 grep -n ")
