@@ -1,0 +1,3 @@
+--smart-case
+--no-binary
+--type-set=bitbake=.bb,.bbappend,.inc,.conf
