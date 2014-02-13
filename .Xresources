@@ -1,0 +1,35 @@
+! Pretty font
+XTerm*faceName: Inconsolata Medium
+XTerm*faceSize: 10
+
+! Metastuff
+XTerm*eightBitInput:          false
+XTerm*metaSendsEscape:        true
+XTerm*altIsNotMeta:           true
+XTerm*altSendsEscape:         true
+
+! Every shell is a login shell by default (for inclusion of all necessary environment variables)
+XTerm*loginshell: true
+
+! I like a LOT of scrollback...
+XTerm*savelines: 65536
+
+! double-click to select whole URLs
+XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+
+! right hand side scrollbar...
+XTerm*rightScrollBar: true
+XTerm*ScrollBar: true
+
+XTerm*termName: xterm-256color
+
+XTerm.bellIsUrgent: true
+
+Xft.dpi: 96
+Xft.lcdfilter: lcddefault
+Xft.antialias: true
+Xft.autohint: true
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.hintstyle: slight
+Xft.rgba: rgb

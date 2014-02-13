@@ -1,0 +1,17 @@
+#!/bin/sh
+
+export auto_proxy=""
+
+if [ -z "$GNOME_KEYRING_PID" ]; then
+    eval $(gnome-keyring-daemon --start)
+    export GNOME_KEYRING_SOCKET
+    export GNOME_KEYRING_PID
+fi
+
+case "$DESKTOP_SESSION" in 
+    xmonad)
+        gnome-settings-daemon &
+        ;;
+esac
+
+exec "$@"
