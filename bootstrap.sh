@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 cd "$(dirname "${BASH_SOURCE}")"
-#git pull origin master
+git pull origin master
+git submodule update --init --recursive
 function doIt() {
     rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
-        --exclude "README.md" --exclude "*.swp" -av --no-perms . ~
+        --exclude "README.md" --exclude "*.swp" --exclude ".gitmodules" \
+        -av --no-perms . ~
 }
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
     doIt
