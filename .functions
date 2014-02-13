@@ -1,0 +1,27 @@
+#!/bin/sh
+
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
+
+##############################################################################
+# Some functions
+##############################################################################
+
+untarall ()
+{
+    for el in $(ls *.tar.gz);
+    do
+        dr=$(basename $el .tar.gz)
+        mkdir $dr && tar xvf $el -C $dr
+    done
+}
+
+casedupes ()
+{  find | perl -ne 's!([^/]+)$!lc $1!e; print if 1 == $seen{$_}++'
+}
+
+fvim ()
+{
+    vim `find -not -path "*_build*" -name $1`
+}
+
