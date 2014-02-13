@@ -1,0 +1,6 @@
+(evil-mode 1)
+(setcdr evil-insert-state-map nil)
+(define-key evil-insert-state-map [escape] 'evil-normal-state)
+(define-key evil-normal-state-map (kbd "C-r") 'isearch-backward) 
+(setq evil-default-cursor t)
+(set-cursor-color "darkred")
