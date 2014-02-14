@@ -105,11 +105,18 @@
 (require 'init-org-mode)
 (require 'init-dired)
 (require 'init-yasnippet)
+(require 'init-perspective)
+(require 'init-ffip)
+
+;; Put any language specific setup here
+
+(require 'mode-mappings)
+
 (load "~/.emacs.d/init-multiple-cursors.el")
-(load "~/.emacs.d/init-org-mode.el")
 (load "~/.emacs.d/init-projectile.el")
 (load "~/.emacs.d/init-smex.el")
 (load "~/.emacs.d/init-evil.el")
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -241,56 +248,12 @@
                  '("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)"
                    nil 1 2 4))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Misc
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(message "*** Misc")
-;; Modes for various file types
-(require 'sws-mode)
-(require 'jade-mode)
-(load-file "~/.emacs.d/vendor/robot-mode.el")
-(setq auto-mode-alist
-      (append '(
-                ("\\.js\\'"        . js2-mode)
-                ("\\.ldf\\'"       . ld-script-mode)
-                ("\\.jade\\'"      . jade-mode)
-                ("\\.styl\\'"      . sws-mode)
-                ("\\.bb\\'"        . python-mode)
-                ("\\.bbappend\\'"  . python-mode)
-                ("SConstruct"      . python-mode)
-                ("SConscript"      . python-mode)
-                ) auto-mode-alist))
-
 ;; vim's ci and co commands
 (require 'change-inner)
 
 ;; Wind Move
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
-
-;; Autosaves
-(defvar autosave-dir "~/.emacs.autosaves/")
-(make-directory autosave-dir t)
-(setq auto-save-file-name-transforms `(("\\(?:[^/]*/\\)*\\(.*\\)" ,(concat
-autosave-dir "\\1") t)))
-
-;; Indentation
-(setq-default indent-tabs-mode nil)
-
-(defun sort-symbols (reverse beg end)
-  "Sort symbols in region alphabetically, in REVERSE if negative.
-    See `sort-words'."
-  (interactive "*P\nr")
-  (sort-regexp-fields reverse "\\(\\sw\\|\\s_\\)+" "\\&" beg end))
-
-(defun sort-words (reverse beg end)
-  "Sort words in region alphabetically, in REVERSE if negative.
-    Prefixed with negative \\[universal-argument], sorts in reverse.
-    The variable `sort-fold-case' determines whether alphabetic case
-    affects the sort order.
-    See `sort-regexp-fields'."
-  (interactive "*P\nr")
-  (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 
 ;; Show function name
 (setq which-func-modes (quote (emacs-lisp-mode c-mode c++-mode python-mode makefile-mode diff-mode)))
