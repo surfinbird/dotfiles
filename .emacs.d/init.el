@@ -103,20 +103,14 @@
 (require 'init-magit)
 (require 'init-ido)
 (require 'init-org-mode)
+(require 'init-dired)
+(require 'init-yasnippet)
 (load "~/.emacs.d/init-multiple-cursors.el")
 (load "~/.emacs.d/init-org-mode.el")
 (load "~/.emacs.d/init-projectile.el")
 (load "~/.emacs.d/init-smex.el")
-(load "~/.emacs.d/init-yasnippet.el")
 (load "~/.emacs.d/init-evil.el")
 
- 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Dired
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'dired-details)
-(setq-default dired-details-hidden-string "--- ")
-(dired-details-install)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Minibuffer
