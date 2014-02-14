@@ -842,3 +842,4 @@
                             :background "Black"))
                     (define-key org-mode-map "\C-c\C-g" 'ps:org-make-gc-header)))
 
+(provide 'init-org-mode)
