@@ -61,7 +61,8 @@
 ;; Install extensions if they're missing
 (defun init--install-packages ()
   (packages-install
-   '(guide-key flymake-jshint js2-mode sws-mode flx-ido ido-at-point ido-ubiquitous)))
+   '(guide-key flymake-jshint js2-mode sws-mode flx-ido ido-at-point ido-ubiquitous
+               highlight-escape-sequences visual-regexp)))
 
 (condition-case nil
     (init--install-packages)
@@ -111,6 +112,17 @@
 ;; Put any language specific setup here
 
 (require 'mode-mappings)
+
+;; Highlight escape sequences
+(require 'highlight-escape-sequences)
+(hes-mode)
+(put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face)
+
+;; Visual regexp
+(require 'visual-regexp)
+(define-key global-map (kbd "M-&") 'vr/query-replace)
+(define-key global-map (kbd "M-/") 'vr/replace)
+
 
 (load "~/.emacs.d/init-multiple-cursors.el")
 (load "~/.emacs.d/init-projectile.el")
