@@ -49,7 +49,8 @@
                               org-mode flymake-cursor highlight-symbol idomenu jade-mode jump-char magit
                               multiple-cursors nose pkg-info projectile rainbow-mode s ido-vertical-mode
                               smex tern tomorrow-theme xcscope yasnippet evil evil-numbers
-                              find-file-in-project perspective smooth-scrolling)
+                              find-file-in-project perspective smooth-scrolling wgrep
+                              smart-forward browse-kill-ring fill-column-indicator)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
@@ -125,6 +126,11 @@
 (define-key global-map (kbd "M-/") 'vr/replace)
 
 (require 'multiple-cursors)
+(require 'expand-region)
+(require 'jump-char)
+(require 'change-inner)
+(require 'wgrep)
+(require 'smart-forward)
 
 ;; Smart M-x is smart
 (require 'smex)
@@ -132,6 +138,15 @@
 
 (projectile-global-mode)
 (setq projectile-enable-caching t)
+
+;; Fill column indicator
+(require 'fill-column-indicator)
+(setq fci-rule-color "#111122")
+
+;; Browse kill ring
+(require 'browse-kill-ring)
+(setq browse-kill-ring-quit-action 'save-and-restore)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Minibuffer
@@ -312,8 +327,6 @@
 (setq require-final-newline t)
 (setq-default fill-column 80)
 
-;; Add stuff without a dedicated setup
-(require 'multiple-cursors)
 
 ;; Setup key bindings
 (require 'init-key-bindings)
