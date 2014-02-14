@@ -1,0 +1,4 @@
+*.elc
+.emacs.d/el-get
+.xmonad/history
+.emacs.d/projectile*

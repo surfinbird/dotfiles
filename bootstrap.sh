@@ -3,9 +3,18 @@ cd "$(dirname "${BASH_SOURCE}")"
 git pull origin master
 git submodule update --init --recursive
 function doIt() {
-    rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
-        --exclude "README.md" --exclude "*.swp" --exclude ".gitmodules" \
-        -av --no-perms . ~
+    stuff=(".emacs.d .scripts .vim .xmonad .zprezto \
+        .ackrc .bash_profile .bashrc .conkyrc .functions \
+        .gitconfig .rtorrent.rc .screenrc .tmux.conf .vimrc \
+        .Xmodmap .Xresources .xsessionrc")
+    
+    for el in $stuff; do
+        ln -fsv $(pwd)/$el ~
+    done
+
+#    rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
+#        --exclude "README.md" --exclude "*.swp" --exclude ".gitmodules" \
+#        -av --no-perms . ~
 }
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
     doIt
