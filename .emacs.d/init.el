@@ -13,12 +13,16 @@
 (add-to-list 'load-path (concat user-emacs-directory "vendor"))
 (add-to-list 'load-path (concat user-emacs-directory "el-get/el-get"))
 
-;; Add some stuff to the regular path
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
-
 ;; Fix our good looks
 (require 'appearance)   
+
+;; Write backup files to own directory
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+
+;; Make backups of files, even when they're in version control
+(setq vc-make-backup-files t)
 
 ;; Machine specific, loaded early since I need to setup a proxy at work
 (cond (
@@ -57,7 +61,7 @@
 ;; Install extensions if they're missing
 (defun init--install-packages ()
   (packages-install
-   '(flymake-jshint js2-mode sws-mode flx-ido)))
+   '(guide-key flymake-jshint js2-mode sws-mode flx-ido)))
 
 (condition-case nil
     (init--install-packages)
@@ -68,13 +72,30 @@
 ;; Set some sane defaults
 (require 'sane-defaults)
 
+;; Save point position between sessions
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Load my files
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(load "~/.emacs.d/init-auto-complete.el")
-(load "~/.emacs.d/init-greps.el")
-(load "~/.emacs.d/init-magit.el")
+;; Are we on a mac?
+(setq is-mac (equal system-type 'darwin))
+
+;; Setup environment variables from the user's shell.
+(when is-mac
+  (require-package 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+
+;; guide-key
+(require 'guide-key)
+(setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-x +"))
+(guide-key-mode 1)
+(setq guide-key/recursive-key-sequence-flag t)
+(setq guide-key/popup-window-position 'bottom)
+
+;; Setup extensions
+(require 'init-auto-complete)
+(require 'init-greps)
+(require 'init-magit)
 (load "~/.emacs.d/init-multiple-cursors.el")
 (load "~/.emacs.d/init-org-mode.el")
 (load "~/.emacs.d/init-projectile.el")
@@ -325,11 +346,6 @@ Symbols matching the text at point are put first in the completion list."
 
 ;; vim's ci and co commands
 (require 'change-inner)
-
-;; Backup
-(setq make-backup-files t)
-(setq backup-directory-alist (quote ((".*" . "~/.emacs.backups/"))))
-(setq temporary-file-directory "~/.emacs.d/tmp/")
 
 ;; Wind Move
 (when (fboundp 'windmove-default-keybindings)
