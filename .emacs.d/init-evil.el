@@ -4,3 +4,4 @@
 (define-key evil-normal-state-map (kbd "C-r") 'isearch-backward) 
 (setq evil-default-cursor t)
 (set-cursor-color "darkred")
+(provide 'init-evil)

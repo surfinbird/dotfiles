@@ -108,6 +108,7 @@
 (require 'init-yasnippet)
 (require 'init-perspective)
 (require 'init-ffip)
+(require 'init-evil)
 
 ;; Put any language specific setup here
 
@@ -123,13 +124,14 @@
 (define-key global-map (kbd "M-&") 'vr/query-replace)
 (define-key global-map (kbd "M-/") 'vr/replace)
 
+(require 'multiple-cursors)
 
-(load "~/.emacs.d/init-multiple-cursors.el")
-(load "~/.emacs.d/init-projectile.el")
-(load "~/.emacs.d/init-smex.el")
-(load "~/.emacs.d/init-evil.el")
+;; Smart M-x is smart
+(require 'smex)
+(smex-initialize)
 
-
+(projectile-global-mode)
+(setq projectile-enable-caching t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Minibuffer
