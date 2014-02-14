@@ -2,3 +2,8 @@
 .emacs.d/el-get
 .xmonad/history
 .emacs.d/projectile*
+.emacs.d/ac-comphist.dat
+.emacs.d/auto-save-list/
+.emacs.d/bookmarks
+.emacs.d/history
+.emacs.d/url/
