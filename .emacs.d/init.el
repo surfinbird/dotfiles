@@ -9,9 +9,9 @@
 
 ;; Setup load path
 (message "*** Setting load paths")
-(add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "~/.emacs.d/vendor")
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get/")
+(add-to-list 'load-path user-emacs-directory)
+(add-to-list 'load-path (concat user-emacs-directory "vendor"))
+(add-to-list 'load-path (concat user-emacs-directory "el-get/el-get"))
 
 ;; Add some stuff to the regular path
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
@@ -20,16 +20,12 @@
 ;; Fix our good looks
 (require 'appearance)   
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Machine specific, loaded early since I need to setup a proxy at work
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Machine specific, loaded early since I need to setup a proxy at work
 (cond (
        (file-exists-p "~/.emacs-this-pc.el")
        (load "~/.emacs-this-pc.el")))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; El-get
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (message "*** Setup el-get")
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -39,23 +35,22 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
  
-;; local sources
+; local sources
 (setq el-get-sources
       '())
 
-;; packages to install
+; packages to install
 (setq my-packages
       (append '(ace-jump-mode auto-complete bm dash dired-details elpy epl expand-region
-			     org-mode flymake-cursor highlight-symbol idomenu jade-mode jump-char magit
-                     multiple-cursors nose pkg-info projectile rainbow-mode s ido-vertical-mode
-                     smex tern tomorrow-theme xcscope yasnippet evil evil-numbers)
+                              org-mode flymake-cursor highlight-symbol idomenu jade-mode jump-char magit
+                              multiple-cursors nose pkg-info projectile rainbow-mode s ido-vertical-mode
+                              smex tern tomorrow-theme xcscope yasnippet evil evil-numbers
+                              find-file-in-project perspective smooth-scrolling)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Elpa
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (message "*** Setup elpa")
 (require 'init-package)
 
@@ -70,6 +65,10 @@
    (package-refresh-contents)
    (init--install-packages)))
 
+;; Set some sane defaults
+(require 'sane-defaults)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Load my files
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -82,13 +81,6 @@
 (load "~/.emacs.d/init-smex.el")
 (load "~/.emacs.d/init-yasnippet.el")
 (load "~/.emacs.d/init-evil.el")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Ediff
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-merge-split-window-function 'split-window-horizontally)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Dired
@@ -205,10 +197,6 @@ Symbols matching the text at point are put first in the completion list."
 
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
 
-;; Uniquify
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'reverse)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bookmarks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -229,7 +217,6 @@ Symbols matching the text at point are put first in the completion list."
 ;; C syntax
 (setq c-default-style "k&r"
       c-basic-offset 4
-      indent-tabs-mode nil
       c-auto-newline nil
       c-tab-always-indent t)
 (c-set-offset 'substatement-open 0)
@@ -336,27 +323,13 @@ Symbols matching the text at point are put first in the completion list."
                 ("SConscript"      . python-mode)
                 ) auto-mode-alist))
 
-;; Use X clipboard
-(setq x-select-enable-clipboard t)
-
-;; Wrap text docs at 80 characters
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'text-mode-hook
-  '(lambda() (set-fill-column 80)))
-
 ;; vim's ci and co commands
 (require 'change-inner)
-
-;; expand region
-(delete-selection-mode 1)
 
 ;; Backup
 (setq make-backup-files t)
 (setq backup-directory-alist (quote ((".*" . "~/.emacs.backups/"))))
 (setq temporary-file-directory "~/.emacs.d/tmp/")
-
-;; I am a winner
-(winner-mode)
 
 ;; Wind Move
 (when (fboundp 'windmove-default-keybindings)
@@ -420,10 +393,6 @@ autosave-dir "\\1") t)))
 (add-hook 'c-mode-hook          'ccc-add-to-menubar)
 (add-hook 'c++-mode-hook        'ccc-add-to-menubar)
 
-;; Scrolling
-(setq scroll-conservatively 1)
-(setq scroll-preserve-screen-position t)
-
 ;; Misc misc
 (setq frame-title-format "%S: %f")  ; window title
 (setq initial-frame-alist (quote ((height . 65) (width . 100)))) ; window size
@@ -474,6 +443,7 @@ autosave-dir "\\1") t)))
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(highlight ((t (:background "#454545" :foreground "#ffffff"))))
  '(magit-item-highlight ((t (:inherit nil)))))
 
 (let ((after-init-time (current-time))) (message "Emacs initialization took %s" (emacs-init-time)))
