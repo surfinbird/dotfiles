@@ -117,6 +117,11 @@
 (require 'init-evil)
 
 ;; Put any language specific setup here
+(require 'init-c)
+(require 'init-js)
+(require 'init-python)
+
+(require 'compilation)
 
 (require 'mode-mappings)
 
@@ -152,14 +157,11 @@
 (require 'browse-kill-ring)
 (setq browse-kill-ring-quit-action 'save-and-restore)
 
+(require 'bm)
+(setq bookmark-default-file "~/.emacs.d/bookmarks" bookmark-save-flag 1)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Minibuffer
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(message "*** Minibuffer")
-
-;; Icomplete
-(icomplete-mode)
+(load-library "flymake")
+(load-library "flymake-cursor")
 
 ;; Iswitchb
 (require 'iswitchb-highlight)
@@ -175,141 +177,6 @@
           ("<down>"  . ignore             ))))
 
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Bookmarks
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(message "*** Bookmarks")
-(require 'bm)
-(setq bookmark-default-file "~/.emacs.d/bookmarks" bookmark-save-flag 1)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Emacs server
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(load "server")
-(unless (server-running-p) (server-start))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; C setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(message "*** C-setup")
-;; C syntax
-(setq c-default-style "k&r"
-      c-basic-offset 4
-      c-auto-newline nil
-      c-tab-always-indent t)
-(c-set-offset 'substatement-open 0)
-(setq c-font-lock-extra-types (quote ("\\sw+_t" "bool" "complex" "imaginary" "FILE" "lconv" "tm" "va_list" "jmp_buf" "Lisp_Object" "TXPACKET")))
-
-(defun linux-c-mode ()
-  "C mode with adjusted defaults for use with the Linux kernel."
-  (interactive)
-  (c-mode)
-  (c-set-style "K&R")
-  (setq c-basic-offset 8))
-
-(defun knr-c-mode ()
-  "C mode as k&r would want it."
-  (interactive)
-  (c-mode)
-  (c-set-style "K&R")
-  (setq c-basic-offset 4))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Haskell setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Flymake setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(load-library "flymake")
-(load-library "flymake-cursor")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Javascript setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq js-indent-level 2)
-(setq js2-basic-offset 2)
-(setq js2-bounce-indent-p nil)
-
-(require 'flymake-jshint)
-(add-hook 'js2-mode-hook
-     (lambda () (flymake-mode t)))
-(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
-
-(eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Python setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Use pep8 and pylint when running compile for python code
-(require `tramp)
-(autoload 'python-pep8 "python-pep8")
-(autoload 'pep8 "python-pep8")
-
-(autoload 'python-pylint "python-pylint")
-(autoload 'pylint "python-pylint")
-
-(elpy-enable)
-(setq elpy-rpc-backend "jedi")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; HTML setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'html-mode-hook
-          (lambda()
-            (flymake-mode t)
-            (setq sgml-basic-offset 4)
-            (setq indent-tabs-mode t)))
-
-(defun flymake-html-init ()
-      (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                         'flymake-create-temp-inplace))
-             (local-file (file-relative-name
-                          temp-file
-                          (file-name-directory buffer-file-name))))
-        (list "tidy" (list local-file))))
-
-    (add-to-list 'flymake-allowed-file-name-masks
-                 '("\\.html$\\|\\.ctp" flymake-html-init))
-
-    (add-to-list 'flymake-err-line-patterns
-                 '("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)"
-                   nil 1 2 4))
-
-;; vim's ci and co commands
-(require 'change-inner)
-
-;; Wind Move
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
-
-;; Show function name
-(setq which-func-modes (quote (emacs-lisp-mode c-mode c++-mode python-mode makefile-mode diff-mode)))
-(which-function-mode t)
-
-(add-hook 'emacs-lisp-mode-hook
-  (lambda()
-    (setq mode-name "el")))
-
-;; Compilation
-(defun python-compile ()
-  "Use compile to run python programs"
-  (interactive)
-  (compile (concat "python " (buffer-name))))
-
-(setq compilation-scroll-output t)
-(setq compile-command "cd ~/Source && ls -la")
-
-
-(defun no-backslash-today ()
-  (replace-string "\\" "/" nil (point-min) (point-max)))
-(add-hook 'compilation-filter-hook 'no-backslash-today)
 
 ;; Setup key bindings
 (require 'init-key-bindings)

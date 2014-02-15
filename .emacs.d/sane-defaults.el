@@ -122,4 +122,8 @@
     (dotimes (i 10)
       (when (= p (point)) ad-do-it))))
 
+;; Wind Move
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+
 (provide 'sane-defaults)
