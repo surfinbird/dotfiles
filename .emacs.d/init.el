@@ -16,6 +16,11 @@
 ;; Fix our good looks
 (require 'appearance)   
 
+;; Settings for currently logged in user
+(setq user-settings-dir
+      (concat "~/users/" user-login-name))
+(add-to-list 'load-path user-settings-dir)
+
 ;; Write backup files to own directory
 (setq backup-directory-alist
       `(("." . ,(expand-file-name
@@ -306,44 +311,21 @@
   (replace-string "\\" "/" nil (point-min) (point-max)))
 (add-hook 'compilation-filter-hook 'no-backslash-today)
 
-;; Show column number
-(column-number-mode t)
-
-;; Imenu
-(defun ccc-add-to-menubar ()
-  (imenu-add-to-menubar "Index"))
-
-(add-hook 'emacs-lisp-mode-hook 'ccc-add-to-menubar)
-(add-hook 'cperl-mode-hook      'ccc-add-to-menubar)
-(add-hook 'c-mode-hook          'ccc-add-to-menubar)
-(add-hook 'c++-mode-hook        'ccc-add-to-menubar)
-
-;; Misc misc
-(setq frame-title-format "%S: %f")  ; window title
-(setq initial-frame-alist (quote ((height . 65) (width . 100)))) ; window size
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(setq grep-find-command "find . -name \"*.[ch]\" -print0 | xargs -0 grep -n ")
-(setq require-final-newline t)
-(setq-default fill-column 80)
-
-
 ;; Setup key bindings
 (require 'init-key-bindings)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Mac OS specific
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(cond
- ((string-match "darwin" system-configuration)
-  (message "mac specific setup")
-  (setq mac-option-key-is-meta nil)
-  (setq mac-command-key-is-meta t)
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier nil)
-  (setq cscope-program "/usr/local/bin/cscope")
-  (setq magit-git-executable "/usr/bin/git")
-  ))
+(when is-mac (require 'mac))
+
+;; Emacs server
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+;; Run at full power please
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -369,7 +351,6 @@
  '(highlight ((t (:background "#454545" :foreground "#ffffff"))))
  '(magit-item-highlight ((t (:inherit nil)))))
 
-(let ((after-init-time (current-time))) (message "Emacs initialization took %s" (emacs-init-time)))
-
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
+;; Conclude init by setting up specifics for the current user
+(when (file-exists-p user-settings-dir)
+  (mapc 'load (directory-files user-settings-dir nil "^[^#].*el$")))
