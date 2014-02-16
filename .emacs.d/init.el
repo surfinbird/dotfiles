@@ -102,7 +102,8 @@
 ;; Functions (load all files in defuns-dir)
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
 (dolist (file (directory-files defuns-dir t "\\w+"))
-  (when (file-regular-p file)))
+  (when (file-regular-p file)
+    (load file)))
 
 ;; Setup extensions
 (require 'init-auto-complete)
@@ -206,7 +207,6 @@
  '(cursor-color "#839496")
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "159bb8f86836ea30261ece64ac695dc490e871d57107016c09f286146f0dae64" "03f28a4e25d3ce7e8826b0a67441826c744cbf47077fb5bc9ddb18afe115005f" "cf08ae4c26cacce2eebff39d129ea0a21c9d7bf70ea9b945588c1c66392578d1" "52588047a0fe3727e3cd8a90e76d7f078c9bd62c0b246324e557dfa5112e0d0c" "5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "1157a4055504672be1df1232bed784ba575c60ab44d8e6c7b3800ae76b42f8bd" default)))
- '(fci-rule-color "#282a2e")
  '(foreground-color "#839496")
  '(pylint-options "--output-format=parseable --include-ids=y -rn"))
 

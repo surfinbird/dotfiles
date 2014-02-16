@@ -6,6 +6,9 @@
       truncate-partial-width-windows nil)
 
 ;; Highlight current line
+;(defface hl-line '((t (:background "Gray10")))
+;  "Face to use for `hl-line-face'." :group 'hl-line)
+;(setq hl-line-face 'hl-line)
 (global-hl-line-mode 1)
 
 ;; Don't defer screen updates when performing operations
