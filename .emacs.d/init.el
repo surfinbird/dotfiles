@@ -18,7 +18,7 @@
 
 ;; Settings for currently logged in user
 (setq user-settings-dir
-      (concat "~/users/" user-login-name))
+      (concat "~/.users/" user-login-name))
 (add-to-list 'load-path user-settings-dir)
 
 ;; Write backup files to own directory

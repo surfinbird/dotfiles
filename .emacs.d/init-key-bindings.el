@@ -295,6 +295,8 @@
 
 ;; Find file in project, with specific patterns
 (global-unset-key (kbd "C-x C-o")) ;; which used to be delete-blank-lines (also bound to C-c C-<return>)
+(global-set-key (kbd "C-x C-o py") (ffip-create-pattern-file-finder "*.py"))
+(global-set-key (kbd "C-x C-o cc") (ffip-create-pattern-file-finder "*.c" "*.h" "*.cpp" "*.hpp"))
 (global-set-key (kbd "C-x C-o ja") (ffip-create-pattern-file-finder "*.java"))
 (global-set-key (kbd "C-x C-o js") (ffip-create-pattern-file-finder "*.js"))
 (global-set-key (kbd "C-x C-o ht") (ffip-create-pattern-file-finder "*.html"))
