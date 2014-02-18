@@ -1,6 +1,6 @@
 [submodule ".zprezto"]
 	path = .zprezto
-	url = https://github.com/anr78/prezto.git
+	url = git@github.com:anr78/prezto.git
 [submodule ".vim/bundle/YouCompleteMe"]
 	path = .vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
