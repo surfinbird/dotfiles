@@ -1,6 +1,6 @@
 (message "*** Yasnippet")
 (require 'yasnippet)
-(yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
 (yas/global-mode 1)
 
 ;; Jump to end of snippet definition

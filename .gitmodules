@@ -19,3 +19,9 @@
 [submodule ".vim/bundle/buffalo"]
 	path = .vim/bundle/buffalo
 	url = https://github.com/Raimondi/vim-buffalo.git
+[submodule ".emacs.d/site-lisp/browse-kill-ring.git"]
+	path = .emacs.d/site-lisp/browse-kill-ring.git
+	url = https://github.com/T-J-Teru/browse-kill-ring.git
+[submodule ".emacs.d/site-lisp/dash"]
+	path = .emacs.d/site-lisp/dash
+	url = https://github.com/magnars/dash.el.git

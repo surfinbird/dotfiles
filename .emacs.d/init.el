@@ -7,11 +7,14 @@
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 
+;; Set path to dependencies
+(setq site-lisp-dir
+      (expand-file-name "site-lisp" user-emacs-directory))
+
 ;; Setup load path
 (message "*** Setting load paths")
 (add-to-list 'load-path user-emacs-directory)
-(add-to-list 'load-path (concat user-emacs-directory "vendor"))
-(add-to-list 'load-path (concat user-emacs-directory "el-get/el-get"))
+(add-to-list 'load-path site-lisp-dir)
 
 ;; Fix our good looks
 (require 'appearance)   
@@ -20,6 +23,11 @@
 (setq user-settings-dir
       (concat "~/.users/" user-login-name))
 (add-to-list 'load-path user-settings-dir)
+
+;; Add external projects to load path
+(dolist (project (directory-files site-lisp-dir t "\\w+"))
+  (when (file-directory-p project)
+    (add-to-list 'load-path project)))
 
 ;; Write backup files to own directory
 (setq backup-directory-alist
@@ -34,32 +42,6 @@
        (file-exists-p "~/.emacs-this-pc.el")
        (load "~/.emacs-this-pc.el")))
 
-;; El-get
-(message "*** Setup el-get")
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
- 
-; local sources
-(setq el-get-sources
-      '())
-
-; packages to install
-(setq my-packages
-      (append '(ace-jump-mode auto-complete bm dash dired-details elpy epl expand-region
-                              org-mode flymake-cursor highlight-symbol idomenu jade-mode jump-char magit
-                              multiple-cursors nose pkg-info projectile rainbow-mode s ido-vertical-mode
-                              smex tern tomorrow-theme xcscope yasnippet evil evil-numbers
-                              find-file-in-project perspective smooth-scrolling wgrep
-                              smart-forward browse-kill-ring fill-column-indicator)
-       (mapcar 'el-get-source-name el-get-sources)))
-
-(el-get 'sync my-packages)
-
 ;; Elpa
 (message "*** Setup elpa")
 (require 'init-package)
@@ -67,8 +49,50 @@
 ;; Install extensions if they're missing
 (defun init--install-packages ()
   (packages-install
-   '(guide-key flymake-jshint js2-mode sws-mode flx-ido ido-at-point ido-ubiquitous
-               highlight-escape-sequences visual-regexp)))
+   '(ace-jump-mode
+     auto-complete
+     bm
+     bm
+     dash
+     dired-details
+     elpy
+     epl
+     evil
+     evil-numbers
+     expand-region
+     fill-column-indicator
+     find-file-in-project
+     flx-ido
+     flymake-cursor
+     flymake-jshint
+     guide-key
+     highlight-escape-sequences
+     highlight-symbol
+     ido-at-point ido-ubiquitous
+     ido-vertical-mode
+     idomenu
+     jade-mode
+     js2-mode
+     jump-char
+     magit
+     magit-topgit
+     multiple-cursors
+     nose
+     org
+     perspective
+     pkg-info
+     projectile
+     rainbow-mode
+     s
+     smart-forward
+     smex
+     smooth-scrolling
+     sws-mode
+     tern
+     visual-regexp
+     wgrep
+     xcscope
+     yasnippet)))
 
 (condition-case nil
     (init--install-packages)
@@ -115,7 +139,7 @@
 (require 'init-yasnippet)
 (require 'init-perspective)
 (require 'init-ffip)
-(require 'init-evil)
+;(require 'init-evil)
 
 ;; Put any language specific setup here
 (require 'init-c)
