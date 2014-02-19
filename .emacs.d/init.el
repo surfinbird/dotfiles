@@ -89,6 +89,7 @@
      smooth-scrolling
      sws-mode
      tern
+     tern-auto-complete
      visual-regexp
      wgrep
      xcscope
