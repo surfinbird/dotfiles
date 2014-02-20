@@ -17,7 +17,7 @@
 (add-to-list 'load-path site-lisp-dir)
 
 ;; Fix our good looks
-(require 'appearance)   
+(require 'appearance)
 
 ;; Settings for currently logged in user
 (setq user-settings-dir
@@ -240,8 +240,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(highlight ((t (:background "#454545" :foreground "#ffffff"))))
- '(magit-item-highlight ((t (:inherit nil)))))
+ '(cursor ((t (:background "chartreuse4"))))
+ '(magit-item-highlight ((t (:inherit nil))))
+ '(region ((t (:background "SteelBlue4" :foreground "#f6f3e8")))))
 
 ;; Conclude init by setting up specifics for the current user
 (when (file-exists-p user-settings-dir)
