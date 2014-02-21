@@ -51,4 +51,10 @@
 (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
 (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
 
+;; Python
+(add-to-list 'auto-mode-alist '("SConstruct$" . python-mode))
+(add-to-list 'auto-mode-alist '("SConscript$" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.bb$" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.bbappend$" . python-mode))
+
 (provide 'mode-mappings)
