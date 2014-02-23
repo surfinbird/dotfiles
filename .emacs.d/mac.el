@@ -1,5 +1,8 @@
 (require 'dash)
 
+(set-face-attribute 'default nil
+                    :family "Inconsolata" :height 125 :weight 'normal)
+
 ;; change command to meta, and ignore option to use weird Norwegian keyboard
 (setq mac-option-modifier 'super)
 (setq mac-command-modifier 'meta)
