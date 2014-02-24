@@ -82,6 +82,7 @@
      perspective
      pkg-info
      projectile
+     qml-mode
      rainbow-mode
      s
      smart-forward
