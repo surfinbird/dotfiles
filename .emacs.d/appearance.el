@@ -25,7 +25,7 @@
 ))
 
 ;; show line number
-(global-linum-mode t)
+;(global-linum-mode t)
 
 ;; Prevent the cursor from blinking
 (blink-cursor-mode 0)
