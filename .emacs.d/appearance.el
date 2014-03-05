@@ -18,11 +18,8 @@
 (show-paren-mode 1)
 
 ;; Font
-(cond
- ((string-match "linux" system-configuration)
-  (set-default-font "Inconsolata-11:antialias=1")
-  (add-to-list 'default-frame-alist '(font . "Inconsolata-11:antialias=1"))
-))
+(set-default-font "Inconsolata-11:antialias=1")
+(add-to-list 'default-frame-alist '(font . "Inconsolata-11:antialias=1"))
 
 ;; show line number
 ;(global-linum-mode t)
