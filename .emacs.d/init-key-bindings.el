@@ -77,7 +77,7 @@
 (global-set-key (kbd "C-c C-<return>") 'delete-blank-lines)
 
 ;; Turn on the menu bar for exploring new modes
-(global-set-key (kbd "C-<f10>") 'menu-bar-mode)
+;(global-set-key (kbd "C-<f10>") 'menu-bar-mode)
 
 ;; Compilation
 (global-set-key (kbd "S-<f7>")      'compile)
@@ -190,10 +190,10 @@
 ;; Navigation bindings
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
 
-(global-set-key (kbd "<prior>") 'beginning-of-buffer)
-(global-set-key (kbd "<home>") 'beginning-of-buffer)
-(global-set-key (kbd "<next>") 'end-of-buffer)
-(global-set-key (kbd "<end>") 'end-of-buffer)
+;(global-set-key (kbd "<prior>") 'beginning-of-buffer)
+;(global-set-key (kbd "<home>") 'beginning-of-buffer)
+;(global-set-key (kbd "<next>") 'end-of-buffer)
+;(global-set-key (kbd "<end>") 'end-of-buffer)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
 

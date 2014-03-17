@@ -2,7 +2,7 @@
 (require 's)
 
 ;; No need to be stingy
-(setq ffip-limit 4096)
+(setq ffip-limit 16384)
 
 ;; Use full project path for ffip
 
