@@ -19,7 +19,7 @@
 
 ;; toggle two most recent buffers
 (fset 'quick-switch-buffer [?\C-x ?b return])
-(global-set-key (kbd "s-b") 'quick-switch-buffer)
+(global-set-key (kbd "C-x C-b") 'quick-switch-buffer)
 
 (global-set-key (kbd "s-y") 'bury-buffer)
 
@@ -51,7 +51,7 @@
 
 ;; Zap to char
 (global-set-key (kbd "M-z") 'zap-up-to-char)
-(global-set-key (kbd "s-z") (lambda (char) (interactive "cZap up to char backwards: ") (zap-up-to-char -1 char)))
+(global-set-key (kbd "C-M-z") (lambda (char) (interactive "cZap up to char backwards: ") (zap-up-to-char -1 char)))
 
 ;; iy-go-to-char - like f in Vim
 (global-set-key (kbd "M-m") 'jump-char-forward)
@@ -62,8 +62,8 @@
 (global-set-key (kbd "M-I")         'change-inner)
 (global-set-key (kbd "M-O")         'change-outer)
 
-(global-set-key (kbd "s-i") 'copy-inner)
-(global-set-key (kbd "s-o") 'copy-outer)
+(global-set-key (kbd "C-c i") 'copy-inner)
+(global-set-key (kbd "C-c o") 'copy-outer)
 
 ;; Expand region (increases selected region by semantic units)
 (global-set-key (if is-mac (kbd "C-@") (kbd "C-'")) 'er/expand-region)
