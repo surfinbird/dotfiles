@@ -1,1 +1,1 @@
-STARTUP="start_session $STARTUP"
+STARTUP="/home/anr/.scripts/start_session $STARTUP"
