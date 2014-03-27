@@ -140,7 +140,6 @@
 (require 'init-dired)
 (require 'init-yasnippet)
 (require 'init-perspective)
-(require 'init-ffip)
 ;(require 'init-evil)
 
 ;; Put any language specific setup here
