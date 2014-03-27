@@ -66,6 +66,7 @@
      flymake-cursor
      flymake-jshint
      guide-key
+     helm-projectile
      highlight-escape-sequences
      highlight-symbol
      ido-at-point ido-ubiquitous
