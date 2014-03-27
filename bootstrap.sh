@@ -6,7 +6,7 @@ function doIt() {
     stuff=(".emacs.d .scripts .vim .xmonad .zprezto \
         .ackrc .bash_profile .bashrc .conkyrc .functions \
         .gitconfig .rtorrent.rc .screenrc .tmux.conf .vimrc \
-        .Xmodmap .Xresources .xsessionrc")
+        .Xmodmap .Xresources .xsessionrc .xmobarrc")
     
     for el in $stuff; do
         ln -fsv $(pwd)/$el ~
