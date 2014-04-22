@@ -62,8 +62,8 @@
 (global-set-key (kbd "M-I")         'change-inner)
 (global-set-key (kbd "M-O")         'change-outer)
 
-(global-set-key (kbd "C-c i") 'copy-inner)
-(global-set-key (kbd "C-c o") 'copy-outer)
+(global-set-key (kbd "C-c C-c i") 'copy-inner)
+(global-set-key (kbd "C-c C-c o") 'copy-outer)
 
 ;; Expand region (increases selected region by semantic units)
 (global-set-key (if is-mac (kbd "C-@") (kbd "C-'")) 'er/expand-region)
@@ -311,7 +311,7 @@
 (define-key occur-mode-map (kbd "p") 'previous-line)
 
 ;; Helm
-(global-set-key (kbd "C-c h") 'helm-projectile)
+;;(global-set-key (kbd "C-c h") 'helm-projectile)
 
 ;; Misc
 (global-set-key (kbd "<f1>")         'goto-line)

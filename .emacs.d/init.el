@@ -66,7 +66,7 @@
      flymake-cursor
      flymake-jshint
      guide-key
-     helm-projectile
+;;     helm-projectile
      highlight-escape-sequences
      highlight-symbol
      ido-at-point ido-ubiquitous
@@ -82,7 +82,7 @@
      org
      perspective
      pkg-info
-     projectile
+;;     projectile
      qml-mode
      rainbow-mode
      s
@@ -175,8 +175,8 @@
 (require 'smex)
 (smex-initialize)
 
-(projectile-global-mode)
-(setq projectile-enable-caching t)
+;;(projectile-global-mode)
+;;(setq projectile-enable-caching t)
 
 ;; Fill column indicator
 (require 'fill-column-indicator)
