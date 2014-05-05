@@ -311,7 +311,7 @@
 (define-key occur-mode-map (kbd "p") 'previous-line)
 
 ;; Helm
-;;(global-set-key (kbd "C-c h") 'helm-projectile)
+(global-set-key (kbd "C-c h") 'helm-projectile)
 
 ;; Misc
 (global-set-key (kbd "<f1>")         'goto-line)
