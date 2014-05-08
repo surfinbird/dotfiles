@@ -8,5 +8,7 @@ alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
 
 alias v='f -e vim'
+alias sv='sf -e vim'
 alias ec='f -e emacsclient'
+alias sec='sf -e emacsclient'
 
