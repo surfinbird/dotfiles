@@ -66,6 +66,7 @@
      flymake-cursor
      flymake-jshint
      guide-key
+     haskell-mode
      helm
      helm-projectile
      highlight-escape-sequences
@@ -112,6 +113,9 @@
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
+
+;; <dead-tilde> stopped working on Ubuntu 14.04, this fixes it
+(require 'iso-transl)
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
