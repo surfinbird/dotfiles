@@ -287,6 +287,9 @@
 ;; Find files by name and display results in dired
 (global-set-key (kbd "M-s f") 'find-name-dired)
 
+;; Fasd
+(global-set-key (kbd "C-c f") 'fasd-find-file)
+
 ;; Find file in project
 (global-set-key (kbd "C-x o") 'find-file-in-project)
 

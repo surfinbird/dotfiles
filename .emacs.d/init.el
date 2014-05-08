@@ -60,6 +60,7 @@
      evil
      evil-numbers
      expand-region
+     fasd
      fill-column-indicator
      find-file-in-project
      flx-ido
@@ -198,6 +199,9 @@
 
 (load-library "flymake")
 (load-library "flymake-cursor")
+
+;; Fasd
+(global-fasd-mode 1)
 
 ;; Iswitchb
 (require 'iswitchb-highlight)

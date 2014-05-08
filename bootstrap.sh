@@ -3,7 +3,7 @@ cd "$(dirname "${BASH_SOURCE}")"
 git pull origin master
 git submodule update --init --recursive
 function doIt() {
-    stuff=(".emacs.d .scripts .vim .xmonad .zprezto \
+    stuff=(".aliases .emacs.d .scripts .vim .xmonad .zprezto \
         .ackrc .bash_profile .bashrc .conkyrc .functions \
         .gitconfig .rtorrent.rc .screenrc .tmux.conf .vimrc \
         .Xmodmap .Xresources .xsessionrc .xmobarrc")
