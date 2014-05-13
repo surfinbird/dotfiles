@@ -91,8 +91,8 @@
 ;; Set anchor to start rectangular-region-mode
 (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
 
-;; Replace rectangle-text with inline-string-rectangle
-(global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+;; Replace rectangle-text with string-rectangle
+(global-set-key (kbd "C-x r t") 'string-rectangle)
 
 ;; Quickly jump in document with ace-jump-mode
 (define-key global-map (kbd "C-ø") 'ace-jump-mode)
