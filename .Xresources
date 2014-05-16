@@ -33,3 +33,5 @@ Xft.hinting: true
 Xft.hintstyle: hintfull
 Xft.hintstyle: slight
 Xft.rgba: rgb
+
+XTerm.omitTranslation: fullscreen
