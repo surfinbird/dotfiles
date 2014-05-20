@@ -8,6 +8,9 @@ XTerm*metaSendsEscape:        true
 XTerm*altIsNotMeta:           true
 XTerm*altSendsEscape:         true
 
+! Clipboard
+XTerm.*.selectToClipboard:      true
+
 ! Every shell is a login shell by default (for inclusion of all necessary environment variables)
 XTerm*loginshell: true
 
