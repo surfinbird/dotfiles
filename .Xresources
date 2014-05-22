@@ -38,3 +38,20 @@ Xft.hintstyle: slight
 Xft.rgba: rgb
 
 XTerm.omitTranslation: fullscreen
+
+XTerm*color0:    rgb:0000/0000/0000
+XTerm*color1:    rgb:dccc/3222/2fff
+XTerm*color2:    rgb:0000/bfff/0000
+XTerm*color3     rgb:bfff/bfff/0000
+XTerm*color4:    rgb:4666/8bbb/ffff
+XTerm*color5:    rgb:d333/3666/8222
+XTerm*color6:    rgb:2aaa/a111/9888
+XTerm*color7:    rgb:bfff/bfff/bfff
+XTerm*color8:    rgb:4000/4000/4000
+XTerm*color9:    rgb:f111/3666/3333
+XTerm*color10:   rgb:0000/ffff/0000
+XTerm*color11:   rgb:ffff/ffff/0000
+XTerm*color12:   rgb:2666/8bbb/d222
+XTerm*color13:   rgb:ffff/0000/ffff
+XTerm*color14:   rgb:0000/ffff/ffff
+XTerm*color15:   rgb:ffff/ffff/ffff
