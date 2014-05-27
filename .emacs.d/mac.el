@@ -7,6 +7,7 @@
 (setq mac-option-modifier 'super)
 (setq mac-command-modifier 'meta)
 (setq ns-function-modifier 'hyper)
+(setq ns-alternate-modifier 'none)
 
 (setq cscope-program "/usr/local/bin/cscope")
 (setq magit-git-executable "/usr/bin/git")
