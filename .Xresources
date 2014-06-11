@@ -9,13 +9,13 @@ XTerm*altIsNotMeta:           true
 XTerm*altSendsEscape:         true
 
 ! Clipboard
-XTerm.*.selectToClipboard:      true
+XTerm*selectToClipboard:      true
 
 ! Every shell is a login shell by default (for inclusion of all necessary environment variables)
-XTerm*loginshell: true
+XTerm*loginShell: true
 
 ! I like a LOT of scrollback...
-XTerm*savelines: 65536
+XTerm*saveLines: 65536
 
 ! double-click to select whole URLs
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
@@ -26,7 +26,7 @@ XTerm*ScrollBar: true
 
 XTerm*termName: xterm-256color
 
-XTerm.bellIsUrgent: true
+XTerm*bellIsUrgent: true
 
 Xft.dpi: 96
 Xft.lcdfilter: lcddefault
