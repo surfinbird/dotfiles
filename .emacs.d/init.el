@@ -177,7 +177,10 @@
 (require 'change-inner)
 (require 'wgrep)
 (require 'smart-forward)
+
+;; Cscope
 (require 'xcscope)
+(cscope-setup)
 
 ;; Smart M-x is smart
 (require 'smex)
@@ -245,7 +248,7 @@
  '(background-color "#002b36")
  '(background-mode dark)
  '(cursor-color "#839496")
- '(custom-enabled-themes (quote (ir-black)))
+ '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes (quote ("cea6d15a8333e0c78e1e15a0524000de69aac2afa7bb6cf9d043a2627327844e" "4a60f0178f5cfd5eafe73e0fc2699a03da90ddb79ac6dbc73042a591ae216f03" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "159bb8f86836ea30261ece64ac695dc490e871d57107016c09f286146f0dae64" "03f28a4e25d3ce7e8826b0a67441826c744cbf47077fb5bc9ddb18afe115005f" "cf08ae4c26cacce2eebff39d129ea0a21c9d7bf70ea9b945588c1c66392578d1" "52588047a0fe3727e3cd8a90e76d7f078c9bd62c0b246324e557dfa5112e0d0c" "5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "1157a4055504672be1df1232bed784ba575c60ab44d8e6c7b3800ae76b42f8bd" default)))
  '(foreground-color "#839496")
  '(safe-local-variable-values (quote ((ffip-local-excludes "node_modules" "public/images") (ffip-local-patterns "*.js" "*.jade" "*.css" "*.html"))))
