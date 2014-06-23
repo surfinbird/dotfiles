@@ -56,3 +56,11 @@ XTerm*color13:   rgb:ffff/0000/ffff
 XTerm*color14:   rgb:0000/ffff/ffff
 XTerm*color15:   rgb:ffff/ffff/ffff
 
+! Fixes from Peder to make emacs in a terminal behave better (key and colorwise)
+*VT100.translations: #override\
+                        ~Ctrl  Meta  Shift <Key>Return: string("\033[27;4;13~")\n\
+                         Ctrl  Meta ~Shift <Key>Return: string("\033[27;7;13~")\n\
+                         Ctrl  Meta  Shift <Key>Return: string("\033[27;8;13~")\n
+XTerm.VT100.modifyOtherKeys:  1
+
+XTerm.VT100.decTerminalID:    vt100

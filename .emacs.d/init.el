@@ -237,6 +237,19 @@
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+;; Fixes from Peder to make emacs in a terminal behave better (key and colorwise)x
+(eval-after-load "xterm"
+  '(progn
+     (define-key xterm-function-map "\e[27;4;13~" [S-M-return])
+     (define-key xterm-function-map "\e[27;8;13~" [C-M-S-return])
+     ))
+(eval-after-load "screen"
+  '(progn
+     ;; override screens init to just use xterms
+     (defadvice terminal-init-screen
+       (around fix-terminal-init-screen first () activate)
+       (terminal-init-xterm))))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
