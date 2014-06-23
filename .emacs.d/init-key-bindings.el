@@ -59,8 +59,8 @@
 (global-set-key (kbd "s-m") 'jump-char-backward)
 
 ;; vim's ci and co commands
-(global-set-key (kbd "M-I")         'change-inner)
-(global-set-key (kbd "M-O")         'change-outer)
+(global-set-key (kbd "C-c i")         'change-inner)
+(global-set-key (kbd "C-c o")         'change-outer)
 
 (global-set-key (kbd "C-c C-c i") 'copy-inner)
 (global-set-key (kbd "C-c C-c o") 'copy-outer)
@@ -282,7 +282,7 @@
 (global-set-key (kbd "M-s M") 'multi-occur-in-matching-buffers)
 
 ;; Display and edit occurances of regexp in buffer
-(global-set-key (kbd "C-c o") 'occur)
+(global-set-key (kbd "C-o") 'occur)
 
 ;; Find files by name and display results in dired
 (global-set-key (kbd "M-s f") 'find-name-dired)
