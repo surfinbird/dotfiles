@@ -122,7 +122,7 @@ main = do
     { modMask            = mod4Mask
     , borderWidth        = 1 -- default 1
     , normalBorderColor  = "#696969" -- default "gray"
-    , focusedBorderColor = "#1874cd" -- "#4682b4" -- default "red"
+    , focusedBorderColor = "magenta" -- "#4682b4" -- default "red"
     , startupHook        = dynStatusBarStartup barCreator barDestroyer
     , handleEventHook    = dynStatusBarEventHook barCreator barDestroyer                                  
                            <+> fullscreenEventHook
