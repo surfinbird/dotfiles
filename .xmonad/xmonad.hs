@@ -84,7 +84,7 @@ myLayoutHook = lessBorders Screen $
     imLayout = mkToggle (single NBFULL) $ reflectHoriz $ withIM (1/5) (Role "buddy_list") Grid
 
 wsPP = xmobarPP { ppOrder  = \(ws:_:f:r)   -> ws:f:r                 
-                , ppUrgent = xmobarColor "#FF0000" ""}
+                , ppUrgent = xmobarColor "#ff0000" ""}
 
 --  colors match Ubuntu Human theme and Gnome panels
 background = "'#222222'"
@@ -140,9 +140,9 @@ main = do
     withUrgencyHook NoUrgencyHook $
     sessionConfig
     { modMask            = mod4Mask
-    , borderWidth        = 1 -- default 1
-    , normalBorderColor  = "#696969" -- default "gray"
-    , focusedBorderColor = "magenta" -- "#4682b4" -- default "red"
+    , borderWidth        = 1
+    , normalBorderColor  = "#696969"
+    , focusedBorderColor = "#ff0000"
     , startupHook        = dynStatusBarStartup barCreator barDestroyer
     , handleEventHook    = dynStatusBarEventHook barCreator barDestroyer                                  
                            <+> fullscreenEventHook
