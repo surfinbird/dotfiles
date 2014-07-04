@@ -96,7 +96,7 @@ selectedFg = "'#eeeeee'"
 barHeight = "24"
 
 --  font intended to match Ubuntu default application font
-appFontXft = "xft:Inconsolata:size=11:antialias=true"
+appFontXft = "xft:Inconsolata:size=12:antialias=true"
 
 -- GridSelect config
 myGSConfig = (buildDefaultGSConfig myColorizer)
@@ -126,7 +126,7 @@ myDmenuTitleBar =
     "exec `dmenu_run\
         \ -p 'Run:'\
         \ -i\
-        \ -fn Inconsolata:size=11:antialias=true\
+        \ -fn Inconsolata:size=12:antialias=true\
     \`"
 
 -- bind it all together
