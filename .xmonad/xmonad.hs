@@ -86,9 +86,21 @@ myLayoutHook = lessBorders Screen $
 wsPP = xmobarPP { ppOrder  = \(ws:_:f:r)   -> ws:f:r                 
                 , ppUrgent = xmobarColor "#FF0000" ""}
 
+--  colors match Ubuntu Human theme and Gnome panels
+background = "'#222222'"
+foreground = "'#bbbbbb'"
+selectedBg = "'#005577'"
+selectedFg = "'#eeeeee'"
+ 
+-- height matches Ubuntu top Gnome panel
+barHeight = "24"
+
+--  font intended to match Ubuntu default application font
+appFontXft = "xft:Inconsolata:size=11:antialias=true"
+
 -- GridSelect config
 myGSConfig = (buildDefaultGSConfig myColorizer)
-  { gs_font       = "xft:Inconsolate:size=11:antialias=true"
+  { gs_font       = appFontXft
   , gs_cellwidth  = 240
   , gs_cellheight = 40
   , gs_navigate   = navNSearch
@@ -96,18 +108,26 @@ myGSConfig = (buildDefaultGSConfig myColorizer)
 
 myColorizer w a =
   if a
-  then return ("#880000", "#ffffff")
-  else return ("#333333", "#d3d3d3")
+  then return ("#005577", "#eeeeee")
+  else return ("#222222", "#bbbbbb")
 
 myXPConfig = defaultXPConfig
-  { font        = "xft:Inconsolate:size=11:antialias=true"
-  , fgColor     = "#d3d3d3"
-  , bgColor     = "#333333"
-  , fgHLight    = "#ffffff"
-  , bgHLight    = "#880000"
+  { font        = appFontXft
+  , fgColor     = "#bbbbbb"
+  , bgColor     = "#222222"
+  , fgHLight    = "#eeeeee"
+  , bgHLight    = "#005577"
   , height      = 24
   , borderColor = "#888888"
   }
+
+-- dmenu config
+myDmenuTitleBar =
+    "exec `dmenu_run\
+        \ -p 'Run:'\
+        \ -i\
+        \ -fn Inconsolata:size=11:antialias=true\
+    \`"
 
 -- bind it all together
 main :: IO ()
@@ -139,6 +159,7 @@ main = do
       , ("M-S-g",                  gridselectWorkspace myGSConfig (\ws -> W.greedyView ws))
       , ("M-a",                    toggleWS) -- nextMatch History (return True))
       , ("M-C-x",                  xmonadPrompt myXPConfig)
+      , ("M-p",                    spawn myDmenuTitleBar)
       -- EmptyWS - WS without windows
       -- NonEmptyWS - WS with windows
       -- HiddenWS - Any WS not shown
