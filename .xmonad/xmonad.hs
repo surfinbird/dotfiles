@@ -187,6 +187,7 @@ main = do
       , ("<XF86AudioLowerVolume>", lowerVolume 3 >> return ())
       , ("<XF86AudioRaiseVolume>", raiseVolume 3 >> return ())
       , ("<XF86AudioMute>",        toggleMute    >> return ()) -- toggleMute
+      , ("M-C-l",                  spawn "gnome-screensaver-command --lock")
       ]
       ++
       [ ("M-" ++ [key], action)
