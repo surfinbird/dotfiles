@@ -8,12 +8,15 @@
 (setq inhibit-startup-message t)
 
 ;; Set path to dependencies
+(setq init-lisp-dir
+      (expand-file-name "init" user-emacs-directory))
+
 (setq site-lisp-dir
       (expand-file-name "site-lisp" user-emacs-directory))
 
 ;; Setup load path
 (message "*** Setting load paths")
-(add-to-list 'load-path user-emacs-directory)
+(add-to-list 'load-path init-lisp-dir)
 (add-to-list 'load-path site-lisp-dir)
 
 ;; Fix our good looks
