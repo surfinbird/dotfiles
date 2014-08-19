@@ -190,10 +190,6 @@
 ;; Navigation bindings
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
 
-;(global-set-key (kbd "<prior>") 'beginning-of-buffer)
-;(global-set-key (kbd "<home>") 'beginning-of-buffer)
-;(global-set-key (kbd "<next>") 'end-of-buffer)
-;(global-set-key (kbd "<end>") 'end-of-buffer)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
 
@@ -201,14 +197,6 @@
 (global-set-key (kbd "M-<down>") 'smart-down)
 (global-set-key (kbd "M-<left>") 'smart-backward)
 (global-set-key (kbd "M-<right>") 'smart-forward)
-
-;; Like isearch, but adds region (if any) to history and deactivates mark
-(global-set-key (kbd "C-s") 'isearch-forward-use-region)
-(global-set-key (kbd "C-r") 'isearch-backward-use-region)
-
-;; Like isearch-*-use-region, but doesn't fuck with the active region
-(global-set-key (kbd "C-S-s") 'isearch-forward)
-(global-set-key (kbd "C-S-r") 'isearch-backward)
 
 ;; Move more quickly
 (global-set-key (kbd "C-S-n") (λ (ignore-errors (next-line 5))))
