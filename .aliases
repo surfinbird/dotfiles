@@ -14,3 +14,4 @@ alias ecd='d -e emacsclient'
 alias sec='sf -e emacsclient'
 alias secd='sd -e emacsclient'
 
+alias fuck='sudo $(fc -ln -1)'
