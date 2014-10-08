@@ -53,7 +53,9 @@
 (defun init--install-packages ()
   (packages-install
    '(ace-jump-mode
+     adaptive-wrap-mode
      bm
+     browse-kill-ring
      dash
      dired-details
      elpy
@@ -96,7 +98,7 @@
      smooth-scrolling
      sws-mode
      tern
-     tern-auto-complete
+     undo-tree
      visual-regexp
      wgrep
      xcscope
