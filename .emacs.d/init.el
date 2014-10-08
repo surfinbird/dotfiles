@@ -53,7 +53,7 @@
 (defun init--install-packages ()
   (packages-install
    '(ace-jump-mode
-     adaptive-wrap-mode
+     adaptive-wrap
      bm
      browse-kill-ring
      dash
