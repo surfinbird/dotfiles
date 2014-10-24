@@ -229,6 +229,9 @@
 (unless (server-running-p)
   (server-start))
 
+;; Enable company in all modes
+(add-hook 'after-init-hook 'global-company-mode)
+
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
