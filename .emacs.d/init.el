@@ -231,6 +231,7 @@
 
 ;; Enable company in all modes
 (add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0)
 
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
