@@ -40,7 +40,7 @@
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
 
-;; Machine specific, loaded early since I need to setup a proxy at work
+;; Machine specific, loaded early for possible proxy setup
 (cond (
        (file-exists-p "~/.emacs-this-pc.el")
        (load "~/.emacs-this-pc.el")))
