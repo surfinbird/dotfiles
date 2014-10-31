@@ -1,5 +1,4 @@
 --                                                           -*- haskell -*-
-{-# LANGUAGE OverloadedStrings #-} -- needed for DBus constants
 
 import XMonad
 import XMonad.Prompt
@@ -24,6 +23,7 @@ import XMonad.Hooks.UrgencyHook     -- withUrgencyHook, NoUrgencyHook, focusUrge
 import XMonad.Hooks.FadeInactive    -- fadeInactiveLogHook (need xcompmgr)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.DynamicBars
 
 import XMonad.Layout.NoBorders      -- lessBorders, OnlyFloat
 import XMonad.Layout.Grid           -- Grid
@@ -35,6 +35,7 @@ import XMonad.Layout.MultiToggle.Instances -- MIRROR, NBFULL
 
 import XMonad.Util.EZConfig         -- additionalKeysP
 import XMonad.Util.Loggers          --
+import XMonad.Util.Run
 
 import XMonad.Prompt
 import XMonad.Prompt.XMonad
@@ -42,19 +43,11 @@ import XMonad.Prompt.XMonad
 import qualified XMonad.Actions.DynamicWorkspaceOrder as DWO
 import qualified XMonad.StackSet as W
 
-
 import System.Posix.Env (getEnv)
 import Data.Maybe (maybe, fromMaybe)
 import Data.List
 
 import qualified Data.Map as M
-
--- for dbus messages
-import qualified DBus as D
-import qualified DBus.Client as DC
-import qualified Codec.Binary.UTF8.String as UTF8
-
-
 
 myWorkspaces = [ "code", "hack", "web", "chat" ] --,  "media" ]
 
@@ -139,9 +132,6 @@ myDmenuTitleBar =
 -- bind it all together
 main :: IO ()
 main = do
-  -- connect to DBus
-  dbus <- DC.connectSession
-  getWellKnownName dbus
   -- load suitable session config
   mSession <- getEnv "DESKTOP_SESSION"
   let sessionConfig = getSessionConfig $ fromMaybe "xmonad" mSession
@@ -152,19 +142,16 @@ main = do
     { modMask            = mod4Mask
     , borderWidth        = 1
     , normalBorderColor  = "#696969"
-    , focusedBorderColor = "red" -- "#4682b4" -- default "red"
-    , handleEventHook    = handleEventHook sessionConfig
+    , focusedBorderColor = "#ff0000"
+    , startupHook        = dynStatusBarStartup barCreator barDestroyer
+    , handleEventHook    = dynStatusBarEventHook barCreator barDestroyer                                  
                            <+> fullscreenEventHook
                            <+> docksEventHook
     , manageHook         = manageHook sessionConfig
                            <+> myManageHook 
     , layoutHook         = myLayoutHook
     , workspaces         = myWorkspaces
-    , logHook            = dynamicLogWithPP (dbusPP dbus)
-                           -- >> historyHook
-                           -- >> fadeInactiveLogHook 0.75
-    , startupHook        = startupHook sessionConfig
-                           <+> setWMName "LG3D" -- for JAVA borkenness
+    , logHook = multiPP wsPP wsPP                           
     , terminal           = "xterm"
     } `additionalKeysP` (
       [ ("M-y",                    focusUrgent)
@@ -230,6 +217,13 @@ myGestures = M.fromList
            ]
 
 
+barCreator :: DynamicStatusBar
+barCreator (S sid) = do trace ("CREATING " ++ show sid)
+                        spawnPipe ("xmobar ~/.xmobarrc --screen " ++ show sid)
+
+barDestroyer :: DynamicStatusBarCleanup
+barDestroyer = trace "DESTROYING"
+
 -- Since withNthWorkspace uses the wrong sort
 withNthWS :: (String -> WindowSet -> WindowSet) -> Int -> X ()
 withNthWS job wnum = do sort <- DWO.getSortByOrder
@@ -252,54 +246,3 @@ layoutNameMap x = case x of
   "Mirror Tall" -> "Wide"
   "ReflectX IM Grid" -> "IM"
   _ -> x
-
--- http://xmonad.org/xmonad-docs/
--- xmonad-contrib/src/XMonad-Hooks-DynamicLog.html#defaultPP
-dbusPP :: DC.Client -> PP
-dbusPP dbus = defaultPP
-    { ppOutput          = dbusOutput dbus -- putStrLn
-    , ppCurrent         = pangoColor "lightgreen" . wrap "[" "]" . pangoSanitize
-                          -- wrap "[" "]"
-    , ppVisible         = pangoColor "yellow" . wrap "(" ")" . pangoSanitize
-                          -- wrap "<" ">"
-    , ppHidden          = pangoSanitize -- id
-    , ppHiddenNoWindows = pangoColor "darkgray" . pangoSanitize -- const ""
-    , ppUrgent          = pangoColor "red" . pangoSanitize -- id
-    , ppSep             = pangoColor "orange" " ••• " -- " : "
-    , ppWsSep           = " " -- " "
-    , ppTitle           = pangoSanitize -- shorten 80
-    , ppLayout          = layoutNameMap -- id
---    , ppOrder           = \(ws:l:t:r) -> (l:ws:t:r) -- id
-    , ppSort            = DWO.getSortByOrder -- getSortByIndex
---    , ppExtras = [ loadAvg, aumixVolume, battery, date "%FT%T" ] -- []
-    }
-
--- DynamicLog to DBus
-
-getWellKnownName :: DC.Client -> IO ()
-getWellKnownName dbus = do
-  DC.requestName dbus "org.xmonad.Log"
-                        [DC.nameAllowReplacement, DC.nameReplaceExisting, DC.nameDoNotQueue]
-  return ()
-
-dbusOutput :: DC.Client -> String -> IO ()
-dbusOutput dbus str = do
-  let signal = (D.signal "/org/xmonad/Log" "org.xmonad.Log" "Update") {
-        D.signalBody = [D.toVariant $ UTF8.decodeString str]
-        }
-  DC.emit dbus signal
-
-pangoColor :: String -> String -> String
-pangoColor fg = wrap left right
-  where
-    left  = "<span foreground=\"" ++ fg ++ "\">"
-    right = "</span>"
-
-pangoSanitize :: String -> String
-pangoSanitize = foldr sanitize ""
-  where
-    sanitize '>'  xs = "&gt;" ++ xs
-    sanitize '<'  xs = "&lt;" ++ xs
-    sanitize '\"' xs = "&quot;" ++ xs
-    sanitize '&'  xs = "&amp;" ++ xs
-    sanitize x    xs = x:xs
