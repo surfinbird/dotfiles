@@ -61,6 +61,8 @@
      elpy
      epl
      expand-region
+     evil
+     evil-numbers
      fasd
      fill-column-indicator
      find-file-in-project
