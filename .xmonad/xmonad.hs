@@ -84,6 +84,8 @@ myLayoutHook = lessBorders Screen $
     imLayout = mkToggle (single NBFULL) $ reflectHoriz $ withIM (1/5) (Role "buddy_list") Grid
 
 wsPP = xmobarPP { ppOrder  = \(ws:_:f:r)   -> ws:f:r                 
+                , ppTitle = xmobarColor "#698b22" ""
+                , ppCurrent = xmobarColor "#8b7500" ""
                 , ppUrgent = xmobarColor "#ff0000" ""}
 
 --  colors match Ubuntu Human theme and Gnome panels
