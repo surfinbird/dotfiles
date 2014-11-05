@@ -58,6 +58,7 @@
      browse-kill-ring
      dash
      dired-details
+     dos
      elpy
      epl
      expand-region
