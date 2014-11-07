@@ -144,7 +144,7 @@ main = do
     { modMask            = mod4Mask
     , borderWidth        = 1
     , normalBorderColor  = "#696969"
-    , focusedBorderColor = "#ff0000"
+    , focusedBorderColor = "#191970"
     , startupHook        = dynStatusBarStartup barCreator barDestroyer
     , handleEventHook    = dynStatusBarEventHook barCreator barDestroyer                                  
                            <+> fullscreenEventHook
@@ -154,7 +154,7 @@ main = do
     , layoutHook         = myLayoutHook
     , workspaces         = myWorkspaces
     , logHook = multiPP wsPP wsPP                           
-    , terminal           = "xterm"
+    , terminal           = "gnome-terminal"
     } `additionalKeysP` (
       [ ("M-y",                    focusUrgent)
       , ("M-g",                    goToSelected myGSConfig)
