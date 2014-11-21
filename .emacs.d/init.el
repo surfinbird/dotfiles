@@ -257,6 +257,9 @@
        (terminal-init-xterm))))
 
 
+(when is-mac (load-theme 'solarized-dark t))
+(unless is-mac (load-theme 'twilight t))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -264,9 +267,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector [default bold shadow italic underline bold bold-italic bold])
  '(cursor-color "#839496")
- '(custom-enabled-themes (quote (twilight)))
- '(custom-safe-themes (quote ("e24180589c0267df991cf54bf1a795c07d00b24169206106624bb844292807b9" default)))
- '(foreground-color "#839496")
+ '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e24180589c0267df991cf54bf1a795c07d00b24169206106624bb844292807b9" default)))
  '(safe-local-variable-values (quote ((ffip-local-excludes "node_modules" "public/images") (ffip-local-patterns "*.js" "*.jade" "*.css" "*.html"))))
  '(vc-handled-backends (quote (SVN Bzr Git Hg))))
 
