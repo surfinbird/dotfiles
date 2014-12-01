@@ -154,7 +154,7 @@ main = do
     , layoutHook         = myLayoutHook
     , workspaces         = myWorkspaces
     , logHook = multiPP wsPP wsPP                           
-    , terminal           = "xterm"
+    , terminal           = "gnome-terminal"
     } `additionalKeysP` (
       [ ("M-y",                    focusUrgent)
       , ("M-g",                    goToSelected myGSConfig)
