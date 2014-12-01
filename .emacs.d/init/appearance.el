@@ -17,9 +17,9 @@
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
-;; Font
-(set-default-font "Inconsolata-11:antialias=1")
-(add-to-list 'default-frame-alist '(font . "Inconsolata-11:antialias=1"))
+;;(set-default-font "Inconsolata-14:antialias=1")
+;;(add-to-list 'default-frame-alist '(font . "Inconsolata-14:antialias=1"))
+
 
 ;; show line number
 ;(global-linum-mode t)

@@ -6,11 +6,13 @@ function doIt() {
     stuff=(".aliases .emacs.d .scripts .vim .xmonad .zprezto \
         .ackrc .bash_profile .bashrc .conkyrc .functions \
         .gitconfig .rtorrent.rc .screenrc .tmux.conf .vimrc \
-        .Xmodmap .Xresources .xsessionrc .xmobarrc")
+        .Xmodmap .Xresources .Xresources.d .xsessionrc .xmobarrc")
     
     for el in $stuff; do
         ln -fsv $(pwd)/$el ~
     done
+
+    cp -vR .config ~/
 
 #    rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
 #        --exclude "README.md" --exclude "*.swp" --exclude ".gitmodules" \

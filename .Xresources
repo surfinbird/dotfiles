@@ -1,6 +1,3 @@
-! Pretty font
-XTerm*faceName: Inconsolata Medium
-XTerm*faceSize: 10
 
 ! Metastuff
 XTerm*eightBitInput:          false
@@ -27,15 +24,6 @@ XTerm*ScrollBar: true
 XTerm*termName: xterm-256color
 
 XTerm*bellIsUrgent: true
-
-Xft.dpi: 96
-Xft.lcdfilter: lcddefault
-Xft.antialias: true
-Xft.autohint: true
-Xft.hinting: true
-Xft.hintstyle: hintfull
-Xft.hintstyle: slight
-Xft.rgba: rgb
 
 XTerm.omitTranslation: fullscreen
 
@@ -64,3 +52,6 @@ XTerm*color15:   rgb:ffff/ffff/ffff
 XTerm.VT100.modifyOtherKeys:  1
 
 XTerm.VT100.decTerminalID:    vt100
+
+XTerm*faceName: Inconsolata-12
+Emacs*font: Inconsolata-12

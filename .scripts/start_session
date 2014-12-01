@@ -14,4 +14,28 @@ case "$DESKTOP_SESSION" in
         ;;
 esac
 
+msg() {
+    local template="$1"; shift
+    printf "$template\n" ${1+"$@"} >&2
+}
+
+shopt -s nullglob
+
+msg "Starting session [%s]" "$DESKTOP_SESSION"
+
+for script in $HOME/.config/start-session/common.d/*.sh; do
+    if [ -x "$script" ]; then
+	msg "= Running common script: %s" "$script"
+	"$script" "$DESKTOP_SESSION"
+    fi
+done
+
+for script in $HOME/.config/start-session/$DESKTOP_SESSION.d/*.sh; do
+    if [ -x "$script" ]; then
+	msg "= Running %s script: %s" "$DESKTOP_SESSION" "$script"
+	"$script" "$DESKTOP_SESSION"
+    fi
+done
+
+msg "= Running session [$*]..."
 exec "$@"
