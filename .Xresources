@@ -27,23 +27,6 @@ XTerm*bellIsUrgent: true
 
 XTerm.omitTranslation: fullscreen
 
-XTerm*color0:    rgb:0000/0000/0000
-XTerm*color1:    rgb:dccc/3222/2fff
-XTerm*color2:    rgb:0000/bfff/0000
-XTerm*color3     rgb:bfff/bfff/0000
-XTerm*color4:    rgb:4666/8bbb/ffff
-XTerm*color5:    rgb:d333/3666/8222
-XTerm*color6:    rgb:2aaa/a111/9888
-XTerm*color7:    rgb:bfff/bfff/bfff
-XTerm*color8:    rgb:4000/4000/4000
-XTerm*color9:    rgb:f111/3666/3333
-XTerm*color10:   rgb:0000/ffff/0000
-XTerm*color11:   rgb:ffff/ffff/0000
-XTerm*color12:   rgb:2666/8bbb/d222
-XTerm*color13:   rgb:ffff/0000/ffff
-XTerm*color14:   rgb:0000/ffff/ffff
-XTerm*color15:   rgb:ffff/ffff/ffff
-
 ! Fixes from Peder to make emacs in a terminal behave better (key and colorwise)
 *VT100.translations: #override\
                         ~Ctrl  Meta  Shift <Key>Return: string("\033[27;4;13~")\n\
@@ -55,3 +38,75 @@ XTerm.VT100.decTerminalID:    vt100
 
 XTerm*faceName: Inconsolata-12
 Emacs*font: Inconsolata-12
+
+! Solarized color scheme for the X Window System
+!
+! http://ethanschoonover.com/solarized
+
+
+! Common
+
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+
+
+! Dark
+
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+
+! Light
+
+! #define S_base03        #fdf6e3
+! #define S_base02        #eee8d5
+! #define S_base01        #93a1a1
+! #define S_base00        #839496
+! #define S_base0         #657b83
+! #define S_base1         #586e75
+! #define S_base2         #073642
+! #define S_base3         #002b36
+
+
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+! URxvt*background:            S_base03
+
+*background:              S_base03
+*foreground:              S_base0
+*fading:                  40
+*fadeColor:               S_base03
+*cursorColor:             S_base1
+*pointerColorBackground:  S_base01
+*pointerColorForeground:  S_base1
+
+*color0:                  S_base02
+*color1:                  S_red
+*color2:                  S_green
+*color3:                  S_yellow
+*color4:                  S_blue
+*color5:                  S_magenta
+*color6:                  S_cyan
+*color7:                  S_base2
+*color9:                  S_orange
+*color8:                  S_base03
+*color10:                 S_base01
+*color11:                 S_base00
+*color12:                 S_base0
+*color13:                 S_violet
+*color14:                 S_base1
+*color15:                 S_base3
+

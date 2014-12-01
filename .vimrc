@@ -88,11 +88,17 @@ filetype on                   " try to detect filetypes
 filetype plugin indent on     " enable loading indent file for filetype
 set number                    " Display line numbers
 set numberwidth=1             " using only 1 column (and 1 space) while possible
-set background=dark           " We are using dark background in vim
 set notitle                   " (do not) show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
 set wildmode=list:longest     " <Tab> cycles between all matching choices.
 
+syntax enable
+set t_Co=16
+"set background=dark
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
+colorscheme solarized
+"
 " don't bell or blink
 set noerrorbells
 set vb t_vb=
@@ -172,12 +178,6 @@ set smarttab                " Handle tabs more intelligently
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
 
-"""" Display
-
-" set some stuff solarized wants
-set t_Co=256
-set background=dark
-colorscheme twilight
 
 if has("gui_running")
     set guioptions-=m        " Remove menu bar 
