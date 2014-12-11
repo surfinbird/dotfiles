@@ -90,6 +90,7 @@
      moe-theme
      multiple-cursors
      nose
+     nsis-mode
      org
      perspective
      pkg-info
