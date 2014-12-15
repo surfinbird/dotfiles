@@ -57,4 +57,7 @@
 (add-to-list 'auto-mode-alist '("\\.bb$" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.bbappend$" . python-mode))
 
+;; QML
+(add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
+
 (provide 'mode-mappings)
