@@ -7,6 +7,8 @@
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 
+(setq user-emacs-directory "~/.emacs.d")
+
 ;; Set path to dependencies
 (setq init-lisp-dir
       (expand-file-name "init" user-emacs-directory))
@@ -258,8 +260,7 @@
        (terminal-init-xterm))))
 
 
-(when is-mac (load-theme 'solarized-dark t))
-(unless is-mac (load-theme 'solarized-light t))
+(load-theme 'solarized-light t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

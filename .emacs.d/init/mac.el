@@ -1,7 +1,6 @@
 (require 'dash)
 
-(set-face-attribute 'default nil
-                    :family "Inconsolata" :height 125 :weight 'normal)
+(setq default-frame-alist '((font . "Monaco-12")))
 
 ;; change command to meta, and ignore option to use weird Norwegian keyboard
 (setq mac-option-modifier 'super)
