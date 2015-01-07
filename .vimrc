@@ -94,10 +94,10 @@ set wildmode=list:longest     " <Tab> cycles between all matching choices.
 
 syntax enable
 set t_Co=16
-"set background=dark
+set background=dark
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
-colorscheme solarized
+colorscheme twilight
 "
 " don't bell or blink
 set noerrorbells
