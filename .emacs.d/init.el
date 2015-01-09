@@ -71,18 +71,15 @@
      fill-column-indicator
      find-file-in-project
      sublime-themes
-     flx-ido
      flymake-cursor
      flymake-jshint
      git-timemachine
      guide-key
      haskell-mode
      helm
+     helm-projectile
      highlight-escape-sequences
      highlight-symbol
-     ido-at-point
-     ido-ubiquitous
-     ido-vertical-mode
      idomenu
      ir-black-theme
      jade-mode
@@ -95,7 +92,7 @@
      nose
      nsis-mode
      org
-     perspective
+     projectile
      pkg-info
      qml-mode
      rainbow-mode
@@ -103,7 +100,6 @@
      smart-forward
      smart-mode-line
      smart-mode-line-powerline-theme
-     smex
      smooth-scrolling
      sws-mode
      tern
@@ -156,11 +152,11 @@
 ;; Setup extensions
 (require 'init-greps)
 (require 'init-magit)
-(require 'init-ido)
 (require 'init-org-mode)
 (require 'init-dired)
 (require 'init-yasnippet)
-(require 'init-perspective)
+(require 'init-helm)
+(require 'init-projectile)
 (require 'init-ffip)
 (require 'init-smart-mode-line)
 ;(require 'init-evil)

@@ -302,7 +302,17 @@
 (define-key occur-mode-map (kbd "p") 'previous-line)
 
 ;; Helm
-(global-set-key (kbd "C-c h") 'helm-projectile)
+(global-set-key (kbd "C-c h /") 'helm-find)
+(global-set-key (kbd "C-c h i") 'helm-semantic-or-imenu)
+(global-set-key (kbd "C-c h l") 'helm-locate)
+(global-set-key (kbd "C-c h m") 'helm-man-woman)
+(global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-c p h") 'helm-projectile)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 
 ;; Cscope
 (define-key cscope-minor-mode-keymap [(control f3)]  'cscope-set-initial-directory)
