@@ -69,6 +69,7 @@ myManageHook = composeOne
   , className =? "Spotify"       -?> doMakeShift "media"
   , className =? "Fldiff"        -?> doFloat
   , title     =? "Ediff"         -?> doFloat
+  , title     =? "PD-100 Remote" -?> doFloat
   ]
 
 myLayoutHook = lessBorders Screen $
