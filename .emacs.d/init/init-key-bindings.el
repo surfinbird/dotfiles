@@ -278,24 +278,6 @@
 ;; Fasd
 (global-set-key (kbd "C-c f") 'fasd-find-file)
 
-;; Find file in project
-(global-set-key (kbd "C-x o") 'find-file-in-project)
-
-;; Find file in project, with specific patterns
-(global-unset-key (kbd "C-x C-o")) ;; which used to be delete-blank-lines (also bound to C-c C-<return>)
-(global-set-key (kbd "C-x C-o py") (ffip-create-pattern-file-finder "*.py"))
-(global-set-key (kbd "C-x C-o cc") (ffip-create-pattern-file-finder "*.c" "*.h" "*.cpp" "*.hpp"))
-(global-set-key (kbd "C-x C-o ja") (ffip-create-pattern-file-finder "*.jade"))
-(global-set-key (kbd "C-x C-o js") (ffip-create-pattern-file-finder "*.js"))
-(global-set-key (kbd "C-x C-o ht") (ffip-create-pattern-file-finder "*.html"))
-(global-set-key (kbd "C-x C-o cs") (ffip-create-pattern-file-finder "*.css"))
-(global-set-key (kbd "C-x C-o el") (ffip-create-pattern-file-finder "*.el"))
-(global-set-key (kbd "C-x C-o rb") (ffip-create-pattern-file-finder "*.rb"))
-(global-set-key (kbd "C-x C-o or") (ffip-create-pattern-file-finder "*.org"))
-(global-set-key (kbd "C-x C-o tx") (ffip-create-pattern-file-finder "*.txt"))
-(global-set-key (kbd "C-x C-o bb") (ffip-create-pattern-file-finder "*.bb" "*.bbappend" "*.inc" "*.conf"))
-(global-set-key (kbd "C-x C-o !") (ffip-create-pattern-file-finder "*"))
-
 ;; View occurrence in occur mode
 (define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)
 (define-key occur-mode-map (kbd "n") 'next-line)

@@ -157,7 +157,6 @@
 (require 'init-yasnippet)
 (require 'init-helm)
 (require 'init-projectile)
-(require 'init-ffip)
 (require 'init-smart-mode-line)
 ;(require 'init-evil)
 
