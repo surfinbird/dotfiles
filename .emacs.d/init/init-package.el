@@ -4,9 +4,14 @@
 ;; Add gnu and melpa to package repos
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 
-(package-initialize)
+;; This allows you to specify what repository to download a particular package from
+;; But it only works on Emacs 24.4, and pretest versions are given a 24.3 numbering scheme,
+;; so to make things simple we'll just ignore any potential errors
+(ignore-errors
+  (setq package-pinned-archives '((highlight-indentation-mode . "melpa-stable"))))
 
 (unless (file-exists-p "~/.emacs.d/elpa/archives/melpa")
   (package-refresh-contents))
@@ -30,5 +35,8 @@ re-downloaded in order to locate PACKAGE."
       (progn
         (package-refresh-contents)
         (require-package package min-version t)))))
+
+
+(package-initialize)
 
 (provide 'init-package)
