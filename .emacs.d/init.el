@@ -101,6 +101,7 @@
      smart-mode-line
      smart-mode-line-powerline-theme
      smooth-scrolling
+     solarized-theme
      sws-mode
      tern
      twilight-theme
@@ -189,10 +190,6 @@
 ;; Cscope
 (require 'xcscope)
 (cscope-setup)
-
-;; Smart M-x is smart
-(require 'smex)
-(smex-initialize)
 
 ;; Fill column indicator
 (require 'fill-column-indicator)
