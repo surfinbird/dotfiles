@@ -11,7 +11,7 @@
 ;; But it only works on Emacs 24.4, and pretest versions are given a 24.3 numbering scheme,
 ;; so to make things simple we'll just ignore any potential errors
 (ignore-errors
-  (setq package-pinned-archives '((highlight-indentation-mode . "melpa-stable"))))
+(setq package-pinned-archives '((highlight-indentation . "melpa-stable"))))
 
 (unless (file-exists-p "~/.emacs.d/elpa/archives/melpa")
   (package-refresh-contents))
