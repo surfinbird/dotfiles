@@ -23,6 +23,7 @@
 (helm-mode 1)
 
 (require 'helm-projectile)
+(setq projectile-switch-project-action 'helm-projectile)
 (helm-projectile-on)
 
 (provide 'init-helm)
