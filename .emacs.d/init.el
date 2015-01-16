@@ -129,8 +129,9 @@
 ;; <dead-tilde> stopped working on Ubuntu 14.04, this fixes it
 (require 'iso-transl)
 
-;; Are we on a mac?
+;; Where are we?
 (setq is-mac (equal system-type 'darwin))
+(setq is-win (equal system-type 'windows-nt))
 
 ;; Setup environment variables from the user's shell.
 (when is-mac
@@ -206,7 +207,7 @@
 (load-library "flymake-cursor")
 
 ;; Fasd
-(global-fasd-mode 1)
+(unless is-win (global-fasd-mode 1))
 
 ;; ace-isearch
 (global-ace-isearch-mode 1)
