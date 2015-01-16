@@ -243,7 +243,7 @@
        (around fix-terminal-init-screen first () activate)
        (terminal-init-xterm))))
 
-(load-theme 'solarized-dark t)
+(load-theme 'twilight t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
