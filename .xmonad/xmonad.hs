@@ -143,9 +143,9 @@ main = do
     withUrgencyHook NoUrgencyHook $
     sessionConfig
     { modMask            = mod4Mask
-    , borderWidth        = 1
+    , borderWidth        = 2
     , normalBorderColor  = "#696969"
-    , focusedBorderColor = "#191970"
+    , focusedBorderColor = "#ffa500"
     , startupHook        = dynStatusBarStartup barCreator barDestroyer
     , handleEventHook    = dynStatusBarEventHook barCreator barDestroyer                                  
                            <+> fullscreenEventHook
