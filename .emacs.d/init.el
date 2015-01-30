@@ -162,6 +162,9 @@
 (require 'init-smart-mode-line)
 ;(require 'init-evil)
 
+(require 'init-auto-minor-mode)
+(require 'init-sensitive)
+
 ;; Put any language specific setup here
 (require 'init-c)
 (require 'init-js)
