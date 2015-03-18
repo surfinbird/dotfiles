@@ -65,8 +65,6 @@
      elpy
      epl
      expand-region
-     evil
-     evil-numbers
      fasd
      fill-column-indicator
      find-file-in-project
@@ -160,7 +158,6 @@
 (require 'init-helm)
 (require 'init-projectile)
 (require 'init-smart-mode-line)
-;(require 'init-evil)
 
 (require 'init-auto-minor-mode)
 (require 'init-sensitive)
