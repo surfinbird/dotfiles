@@ -80,6 +80,7 @@
      helm-projectile
      highlight-escape-sequences
      highlight-symbol
+     hydra
      idomenu
      ir-black-theme
      jade-mode
