@@ -99,7 +99,6 @@
      s
      smart-forward
      smart-mode-line
-     smart-mode-line-powerline-theme
      smooth-scrolling
      solarized-theme
      sws-mode
