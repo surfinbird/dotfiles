@@ -210,7 +210,7 @@
 (unless is-win (global-fasd-mode 1))
 
 ;; ace-isearch
-(global-ace-isearch-mode 1)
+;(global-ace-isearch-mode 1)
 
 ;; Setup key bindings
 (require 'init-key-bindings)
