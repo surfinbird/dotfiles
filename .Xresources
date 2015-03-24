@@ -36,8 +36,9 @@ XTerm.VT100.modifyOtherKeys:  1
 
 XTerm.VT100.decTerminalID:    vt100
 
-XTerm*faceName: Inconsolata-12
-Emacs*font: Inconsolata-12
+XTerm*faceName: DejaVu Sans Mono-10
+Emacs*font: DejaVu Sans Mono-10
+
 
 XTerm*color0:    rgb:0000/0000/0000
 XTerm*color1:    rgb:dccc/3222/2fff
