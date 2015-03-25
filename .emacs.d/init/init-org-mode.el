@@ -254,6 +254,37 @@
 
   )
 
+;; Set up plantuml.
+;;
+;;
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((plantuml . t)))
+
+(setq org-plantuml-jar-path
+      (setq plantuml-jar-path (expand-file-name "./plantuml.jar")))
+
+;; Setup latex exporting
+;;
+;;
+
+(unless (boundp 'org-latex-classes)
+  (setq org-latex-classes nil))
+
+(add-to-list 'org-latex-classes
+             '("my-style" 
+               "\\documentclass{./my-style} 
+                 [DEFAULT-PACKAGES]
+                 [PACKAGES]
+                 [EXTRA]"
+               ("\\section{%s}" . "\\section{%s}")
+               ("\\subsection{%s}" . "\\subsection{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+               ("\\paragraph{%s}" . "\\paragraph{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph{%s}")))
+
+
 (eval-after-load "org-src"
                  '(setq org-src-lang-modes			; mapping name to mode
                         (append '(("perl" . cperl))

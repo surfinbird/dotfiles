@@ -93,6 +93,7 @@
      org
      projectile
      pkg-info
+     plantuml-mode
      qml-mode
      rainbow-mode
      s
