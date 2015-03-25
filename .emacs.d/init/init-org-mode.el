@@ -254,6 +254,10 @@
 
   )
 
+(add-to-list 'org-latex-packages-alist
+             "\\hypersetup{colorlinks,breaklinks,urlcolor=blue,linkcolor=blue}"
+             )
+
 (eval-after-load "org-src"
                  '(setq org-src-lang-modes			; mapping name to mode
                         (append '(("perl" . cperl))
