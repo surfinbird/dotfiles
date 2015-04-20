@@ -17,9 +17,11 @@
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
-;;(set-default-font "Inconsolata-14:antialias=1")
-;;(add-to-list 'default-frame-alist '(font . "Inconsolata-14:antialias=1"))
+(setq is-mac (equal system-type 'darwin))
 
+(when is-mac
+  (set-default-font "Source Code Pro-14:antialias=1")
+  (add-to-list 'default-frame-alist '(font . "Source Code Pro-14:antialias=1")))
 
 ;; show line number
 ;(global-linum-mode t)
