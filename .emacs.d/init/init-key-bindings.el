@@ -296,20 +296,6 @@
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 
-;; Cscope
-(define-key cscope-minor-mode-keymap [(control f3)]  'cscope-set-initial-directory)
-(define-key cscope-minor-mode-keymap [(control f4)]  'cscope-unset-initial-directory)
-(define-key cscope-minor-mode-keymap [(control f5)]  'cscope-find-this-symbol)
-(define-key cscope-minor-mode-keymap [(control f6)]  'cscope-find-global-definition)
-(define-key cscope-minor-mode-keymap [(control f7)]  'cscope-find-global-definition-no-prompting)
-(define-key cscope-minor-mode-keymap [(control f8)]  'cscope-pop-mark)
-(define-key cscope-minor-mode-keymap [(control f9)]  'cscope-history-forward-line)
-(define-key cscope-minor-mode-keymap [(control f10)] 'cscope-history-forward-file)
-(define-key cscope-minor-mode-keymap [(control f11)] 'cscope-history-backward-line)
-(define-key cscope-minor-mode-keymap [(control f12)] 'cscope-history-backward-file)
-(define-key cscope-minor-mode-keymap [(meta f9)]     'cscope-display-buffer)
-(define-key cscope-minor-mode-keymap [(meta f10)]    'cscope-display-buffer-toggle)
-
 ;; Misc
 (global-set-key (kbd "<f1>")         'goto-line)
 (global-set-key (kbd "M-<return>")  'toggle-fullscreen)
