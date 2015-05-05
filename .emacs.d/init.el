@@ -71,6 +71,7 @@
      sublime-themes
      flymake-cursor
      flymake-jshint
+     ggtags
      git-timemachine
      guide-key
      haskell-mode
@@ -106,7 +107,6 @@
      undo-tree
      visual-regexp
      wgrep
-     xcscope
      zenburn-theme
      yasnippet)))
 
@@ -162,6 +162,8 @@
 (require 'init-auto-minor-mode)
 (require 'init-sensitive)
 
+(require 'init-ggtags)
+
 ;; Put any language specific setup here
 (require 'init-c)
 (require 'init-js)
@@ -187,10 +189,6 @@
 (require 'change-inner)
 (require 'wgrep)
 (require 'smart-forward)
-
-;; Cscope
-(require 'xcscope)
-(cscope-setup)
 
 ;; Fill column indicator
 (require 'fill-column-indicator)
