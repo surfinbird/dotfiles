@@ -92,6 +92,7 @@
      nose
      nsis-mode
      org
+     plantuml-mode
      projectile
      pkg-info
      qml-mode

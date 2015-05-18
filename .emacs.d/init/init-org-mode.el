@@ -285,4 +285,24 @@
                             :background "Black"))
                     (define-key org-mode-map "\C-c\C-g" 'ps:org-make-gc-header)))
 
+;; (add-to-list 'org-latex-classes
+;;              '("my-style"
+;;                           ;                                                "\\documentclass{./my-style}
+;;                "[DEFAULT-PACKAGES]
+;;                [PACKAGES]
+;;                [EXTRA]"
+;;                ("\\section{%s}" . "\\section{%s}")
+;;                ("\\subsection{%s}" . "\\subsection{%s}")
+;;                ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+;;                ("\\paragraph{%s}" . "\\paragraph{%s}")
+;;                ("\\subparagraph{%s}" . "\\subparagraph{%s}")))
+
+;; Set up plantuml.
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((plantuml . t)))
+
+(setq org-plantuml-jar-path
+      (setq plantuml-jar-path (expand-file-name "~/.emacs.d/resources/plantuml.jar")))
+
 (provide 'init-org-mode)
