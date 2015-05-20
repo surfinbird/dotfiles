@@ -12,6 +12,8 @@
 (set-default 'magit-stage-all-confirm nil)
 (set-default 'magit-unstage-all-confirm nil)
 
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 (eval-after-load 'ediff
   '(progn
      (set-face-foreground 'ediff-odd-diff-B "#ffffff")

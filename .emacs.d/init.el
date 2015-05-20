@@ -59,6 +59,7 @@
      adaptive-wrap
      bm
      browse-kill-ring
+     color-theme-sanityinc-tomorrow
      dash
      dired-details
      dos
