@@ -48,6 +48,18 @@
 (message "*** Setup elpa")
 (require 'init-package)
 
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; make sure we have a use-package macro available at all times
+(when (not (require 'use-package nil t))
+  (defmacro use-package (name &rest args)
+    "Just a dummy, since use-package wasn't loaded"
+    (message "Warning: Setup of %s ignored due to missing use-package" name)))
+
+
 ;; Install extensions if they're missing
 (defun init--install-packages ()
   (packages-install
@@ -99,7 +111,6 @@
      tern
      twilight-theme
      undo-tree
-     use-package
      visual-regexp
      wgrep
      yasnippet)))
@@ -109,8 +120,6 @@
   (error
    (package-refresh-contents)
    (init--install-packages)))
-
-(require 'use-package)
 
 ;; Save point position between sessions
 (require 'saveplace)
