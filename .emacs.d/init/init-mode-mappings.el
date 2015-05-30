@@ -60,4 +60,4 @@
 ;; QML
 (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
 
-(provide 'mode-mappings)
+(provide 'init-mode-mappings)

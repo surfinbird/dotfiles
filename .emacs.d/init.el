@@ -21,9 +21,6 @@
 (add-to-list 'load-path init-lisp-dir)
 (add-to-list 'load-path site-lisp-dir)
 
-;; Fix our good looks
-(require 'appearance)
-
 ;; Settings for currently logged in user
 (setq user-settings-dir
       (concat "~/.users/" user-login-name))
@@ -119,9 +116,6 @@
 
 (require 'use-package)
 
-;; Set some sane defaults
-(require 'sane-defaults)
-
 ;; Save point position between sessions
 (require 'saveplace)
 (setq-default save-place t)
@@ -163,11 +157,6 @@
        (require (intern base))))
    (directory-files init-dir nil "^init-.*\\.elc?$")))
 
-
-(require 'compilation)
-
-(require 'mode-mappings)
-
 ;; Highlight escape sequences
 (require 'highlight-escape-sequences)
 (hes-mode)
@@ -207,8 +196,6 @@
 
 ;; Setup key bindings
 (require 'init-key-bindings)
-
-(when is-mac (require 'mac))
 
 ;; Emacs server
 (require 'server)

@@ -126,4 +126,4 @@
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
-(provide 'sane-defaults)
+(provide 'init-sane-defaults)

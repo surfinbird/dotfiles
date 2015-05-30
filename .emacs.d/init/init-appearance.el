@@ -41,4 +41,4 @@
   (tooltip-mode -1)
   (blink-cursor-mode -1))
 
-(provide 'appearance)
+(provide 'init-appearance)
