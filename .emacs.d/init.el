@@ -65,7 +65,6 @@
      fasd
      fill-column-indicator
      find-file-in-project
-     sublime-themes
      flymake-cursor
      flymake-jshint
      git-timemachine
@@ -77,13 +76,11 @@
      highlight-symbol
      hydra
      idomenu
-     ir-black-theme
      jade-mode
      js2-mode
      jump-char
      magit
      magit-topgit
-     moe-theme
      multiple-cursors
      nose
      nsis-mode
@@ -105,7 +102,6 @@
      use-package
      visual-regexp
      wgrep
-     zenburn-theme
      yasnippet)))
 
 (condition-case nil
@@ -224,7 +220,7 @@
        (around fix-terminal-init-screen first () activate)
        (terminal-init-xterm))))
 
-(load-theme 'twilight t)
+(load-theme 'solarized-dark t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
