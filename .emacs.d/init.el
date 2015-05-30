@@ -7,7 +7,7 @@
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 
-(setq user-emacs-directory "~/.emacs.d")
+(setq user-emacs-directory "~/.emacs.d/")
 
 ;; Set path to dependencies
 (setq init-lisp-dir
@@ -71,7 +71,6 @@
      sublime-themes
      flymake-cursor
      flymake-jshint
-     ggtags
      git-timemachine
      guide-key
      haskell-mode
@@ -106,6 +105,7 @@
      tern
      twilight-theme
      undo-tree
+     use-package
      visual-regexp
      wgrep
      zenburn-theme
@@ -116,6 +116,8 @@
   (error
    (package-refresh-contents)
    (init--install-packages)))
+
+(require 'use-package)
 
 ;; Set some sane defaults
 (require 'sane-defaults)
@@ -150,25 +152,17 @@
   (when (file-regular-p file)
     (load file)))
 
-;; Setup extensions
-(require 'init-greps)
-(require 'init-magit)
-(require 'init-org-mode)
-(require 'init-dired)
-(require 'init-yasnippet)
-(require 'init-helm)
-(require 'init-projectile)
-(require 'init-smart-mode-line)
+;; Load all init-*.el-files in ~/.emacs.d/init
+(let ((force-load-messages t)
+      (init-dir (concat user-emacs-directory "init")))
+  (add-to-list 'load-path init-dir)
+  (message "Loading init files...")
+  (mapcar
+   (lambda (file)
+     (let ((base (file-name-base file)))
+       (require (intern base))))
+   (directory-files init-dir nil "^init-.*\\.elc?$")))
 
-(require 'init-auto-minor-mode)
-(require 'init-sensitive)
-
-(require 'init-ggtags)
-
-;; Put any language specific setup here
-(require 'init-c)
-(require 'init-js)
-(require 'init-python)
 
 (require 'compilation)
 
