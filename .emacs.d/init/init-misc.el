@@ -15,4 +15,22 @@
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
 
+;; Run at full power please
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
+;; Fixes from Peder to make emacs in a terminal behave better (key and colorwise)
+(eval-after-load "xterm"
+  '(progn
+     (define-key xterm-function-map "\e[27;4;13~" [S-M-return])
+     (define-key xterm-function-map "\e[27;8;13~" [C-M-S-return])
+     ))
+(eval-after-load "screen"
+  '(progn
+     ;; override screens init to just use xterms
+     (defadvice terminal-init-screen
+         (around fix-terminal-init-screen first () activate)
+       (terminal-init-xterm))))
+
 (anr78:provide)

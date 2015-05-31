@@ -34,4 +34,11 @@
   (tooltip-mode -1)
   (blink-cursor-mode -1))
 
+(use-package  twilight-theme :ensure t)
+(use-package  solarized-theme
+  :ensure t
+  :config
+  (load-theme 'solarized-dark t)
+  )
+
 (anr78:provide)

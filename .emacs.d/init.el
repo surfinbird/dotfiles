@@ -57,7 +57,7 @@
 
 ;; useful function used in each init-*.el
 (defun anr78:provide ()
-  "Genereate symbol based on filename and provide it"
+  "Generate symbol based on filename and provide it"
   (provide (intern (file-name-sans-extension
                     (file-name-nondirectory load-file-name)))))
 
@@ -77,7 +77,6 @@
 (use-package  find-file-in-project :ensure t)
 (use-package  flymake-cursor :ensure t)
 (use-package  git-timemachine :ensure t)
-(use-package  guide-key :ensure t)
 (use-package  highlight-escape-sequences :ensure t)
 (use-package  highlight-symbol :ensure t)
 (use-package  hydra :ensure t)
@@ -89,9 +88,7 @@
 (use-package  rainbow-mode :ensure t)
 (use-package  smart-forward :ensure t)
 (use-package  smooth-scrolling :ensure t)
-(use-package  solarized-theme :ensure t)
 (use-package  tern :ensure t)
-(use-package  twilight-theme :ensure t)
 (use-package  undo-tree :ensure t)
 (use-package  visual-regexp :ensure t)
 (use-package  wgrep :ensure t)
@@ -116,13 +113,6 @@
     :config
     (exec-path-from-shell-initialize))
 )
-
-;; guide-key
-(require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-x +"))
-(guide-key-mode 1)
-(setq guide-key/recursive-key-sequence-flag t)
-(setq guide-key/popup-window-position 'bottom)
 
 ;; Functions (load all files in defuns-dir)
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
@@ -177,37 +167,10 @@
 ;; ace-isearch
 ;(global-ace-isearch-mode 1)
 
-;; Setup key bindings
-(require 'init-key-bindings)
-
-;; Emacs server
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
 ;; Enable company in all modes
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-idle-delay 0)
 
-;; Run at full power please
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-
-;; Fixes from Peder to make emacs in a terminal behave better (key and colorwise)
-(eval-after-load "xterm"
-  '(progn
-     (define-key xterm-function-map "\e[27;4;13~" [S-M-return])
-     (define-key xterm-function-map "\e[27;8;13~" [C-M-S-return])
-     ))
-(eval-after-load "screen"
-  '(progn
-     ;; override screens init to just use xterms
-     (defadvice terminal-init-screen
-       (around fix-terminal-init-screen first () activate)
-       (terminal-init-xterm))))
-
-(load-theme 'solarized-dark t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
