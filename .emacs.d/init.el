@@ -1,3 +1,35 @@
+(when
+    (functionp 'list-packages)          ; auto-loaded somewhere
+ 
+  (setq
+   package-enable-at-startup    t       ; load packages installed at startup
+   package-load-list            '(all)  ; all of them (latest of each)
+   )
+ 
+  (eval-after-load "package"
+    '(progn
+       (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+       (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+       (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+       (add-to-list 'package-archives '("elpy" . "http://jorgenschaefer.github.io/packages/"))       
+       ))
+ 
+  ;; do this before any local package init
+  (when user-init-file
+    (message "Initializing ELPA packages...")
+    (package-initialize)
+ 
+    ;; load package list if none loaded (typical first run)
+    (when (not package-archive-contents)
+      (package-refresh-contents))
+ 
+    ;; Bootstrap `use-package'
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+    ))
+
+
 (setq user-emacs-directory "~/.emacs.d/")
 
 (setq site-lisp-dir
@@ -17,15 +49,6 @@
        (file-exists-p "~/.emacs-this-pc.el")
        (load "~/.emacs-this-pc.el")))
 
-;; Elpa
-(message "*** Setup elpa")
-(load "~/.emacs.d/init/init-package.el")
-
-;; Bootstrap `use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
 ;; make sure we have a use-package macro available at all times
 (when (not (require 'use-package nil t))
   (defmacro use-package (name &rest args)
@@ -39,61 +62,50 @@
                     (file-name-nondirectory load-file-name)))))
 
 ;; Install extensions if they're missing
-(defun init--install-packages ()
-  (packages-install
-   '(ace-isearch
-     ace-jump-mode
-     adaptive-wrap
-     bm
-     browse-kill-ring
-     dash
-     dired-details
-     dos
-     epl
-     expand-region
-     fasd
-     fill-column-indicator
-     find-file-in-project
-     flymake-cursor
-     flymake-jshint
-     git-timemachine
-     guide-key
-     haskell-mode
-     helm
-     helm-projectile
-     highlight-escape-sequences
-     highlight-symbol
-     hydra
-     idomenu
-     jade-mode
-     js2-mode
-     jump-char
-     magit
-     magit-topgit
-     nose
-     nsis-mode
-     projectile
-     pkg-info
-     qml-mode
-     rainbow-mode
-     s
-     smart-forward
-     smart-mode-line
-     smooth-scrolling
-     solarized-theme
-     sws-mode
-     tern
-     twilight-theme
-     undo-tree
-     visual-regexp
-     wgrep
-     yasnippet)))
 
-(condition-case nil
-    (init--install-packages)
-  (error
-   (package-refresh-contents)
-   (init--install-packages)))
+(use-package  ace-isearch :ensure t)
+(use-package  ace-jump-mode :ensure t)
+(use-package  adaptive-wrap :ensure t)
+(use-package  bm :ensure t)
+(use-package  browse-kill-ring :ensure t)
+(use-package  dash :ensure t)
+(use-package  dired-details :ensure t)
+(use-package  dos :ensure t)
+(use-package  epl :ensure t)
+(use-package  expand-region :ensure t)
+(use-package  fasd :ensure t)
+(use-package  fill-column-indicator :ensure t)
+(use-package  find-file-in-project :ensure t)
+(use-package  flymake-cursor :ensure t)
+(use-package  flymake-jshint :ensure t)
+(use-package  git-timemachine :ensure t)
+(use-package  guide-key :ensure t)
+(use-package  helm :ensure t)
+(use-package  helm-projectile :ensure t)
+(use-package  highlight-escape-sequences :ensure t)
+(use-package  highlight-symbol :ensure t)
+(use-package  hydra :ensure t)
+(use-package  idomenu :ensure t)
+(use-package  jump-char :ensure t)
+(use-package  magit :ensure t)
+(use-package  magit-topgit :ensure t)
+(use-package  nose :ensure t)
+(use-package  projectile :ensure t)
+(use-package  pkg-info :ensure t)
+(use-package  qml-mode :ensure t)
+(use-package  rainbow-mode :ensure t)
+(use-package  s :ensure t)
+(use-package  smart-forward :ensure t)
+(use-package  smart-mode-line :ensure t)
+(use-package  smooth-scrolling :ensure t)
+(use-package  solarized-theme :ensure t)
+(use-package  tern :ensure t)
+(use-package  twilight-theme :ensure t)
+(use-package  undo-tree :ensure t)
+(use-package  visual-regexp :ensure t)
+(use-package  wgrep :ensure t)
+(use-package  yasnippet :ensure t)
+(use-package  tern-auto-complete :ensure t)
 
 ;; Save point position between sessions
 (require 'saveplace)
@@ -109,8 +121,11 @@
 
 ;; Setup environment variables from the user's shell.
 (when is-mac
-  (require-package 'exec-path-from-shell)
-  (exec-path-from-shell-initialize))
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize))
+)
 
 ;; guide-key
 (require 'guide-key)
@@ -189,7 +204,7 @@
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
-;; Fixes from Peder to make emacs in a terminal behave better (key and colorwise)x
+;; Fixes from Peder to make emacs in a terminal behave better (key and colorwise)
 (eval-after-load "xterm"
   '(progn
      (define-key xterm-function-map "\e[27;4;13~" [S-M-return])

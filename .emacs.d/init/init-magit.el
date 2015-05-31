@@ -114,8 +114,7 @@
 (define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
 
 ;; Show blame for current line
-
-(require-package 'git-messenger)
+(use-package git-messenger :ensure t)
 (global-set-key (kbd "C-x v p") #'git-messenger:popup-message)
 
 ;; Don't bother me with flyspell keybindings

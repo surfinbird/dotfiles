@@ -1,3 +1,14 @@
+(use-package sws-mode
+  :ensure t)
+(use-package haskell-mode
+  :ensure t)
+(use-package js2-mode
+  :ensure t)
+(use-package jade-mode
+  :ensure t)
+(use-package nsis-mode
+  :ensure t)
+
 ;; Emacs lisp
 (add-to-list 'auto-mode-alist '("Carton$" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("Cask$" . emacs-lisp-mode))
