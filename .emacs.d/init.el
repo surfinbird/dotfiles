@@ -59,6 +59,11 @@
     "Just a dummy, since use-package wasn't loaded"
     (message "Warning: Setup of %s ignored due to missing use-package" name)))
 
+;; useful function used in each init-*.el
+(defun anr78:provide ()
+  "Genereate symbol based on filename and provide it"
+  (provide (intern (file-name-sans-extension
+                    (file-name-nondirectory load-file-name)))))
 
 ;; Install extensions if they're missing
 (defun init--install-packages ()
@@ -71,7 +76,6 @@
      dash
      dired-details
      dos
-     elpy
      epl
      expand-region
      fasd

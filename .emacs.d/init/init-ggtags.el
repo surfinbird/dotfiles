@@ -8,4 +8,4 @@
                            (ggtags-mode 1))))
              )
 
-(provide 'init-ggtags)
+(anr78:provide)

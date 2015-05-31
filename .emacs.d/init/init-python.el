@@ -1,12 +1,11 @@
-;; Use pep8 and pylint when running compile for python code
-(require `tramp)
-(autoload 'python-pep8 "python-pep8")
-(autoload 'pep8 "python-pep8")
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable)
+  (global-set-key (kbd "S-<f8>") 'python-compile)
+  (use-package pylint
+    :config
+    (global-set-key (kbd "C-<f7>") 'pylint))
+  )
 
-(autoload 'python-pylint "python-pylint")
-(autoload 'pylint "python-pylint")
-
-(elpy-enable)
-;(setq elpy-rpc-backend "jedi")
-
-(provide 'init-python)
+(anr78:provide)

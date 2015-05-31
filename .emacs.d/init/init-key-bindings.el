@@ -81,9 +81,6 @@
 
 ;; Compilation
 (global-set-key (kbd "S-<f7>")      'compile)
-(global-set-key (kbd "C-<f7>")      'python-pylint)
-(global-set-key (kbd "C-<f8>")      'python-pep8)
-(global-set-key (kbd "S-<f8>")      'python-compile)
 (global-set-key (kbd "S-<f4>")      'next-error)
 (global-set-key (kbd "C-S-<f4>")    'previous-error)
 (global-set-key (kbd "S-M-<f4>")    'first-error)
