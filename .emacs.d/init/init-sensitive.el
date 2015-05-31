@@ -1,10 +1,3 @@
-;                                                         -*- emacs-lisp -*-
-;
-;    $Id$
-;
-; Copright (C) 2015 by Peder Stray <peder@ninja.no>
-;
-
 (define-minor-mode sensitive-mode
   "For sensitive files like password lists.
 It disables backup creation and auto saving.
@@ -33,5 +26,5 @@ Null prefix argument turns off the mode."
 
 (add-to-list 'auto-minor-mode-alist '("\\.gpg\\'" . sensitive-mode))
 
-(provide 'init-sensitive)
+(anr78:provide)
 

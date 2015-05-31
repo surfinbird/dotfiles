@@ -10,4 +10,4 @@
   (replace-string "\\" "/" nil (point-min) (point-max)))
 (add-hook 'compilation-filter-hook 'no-backslash-today)
 
-(provide 'init-compilation)
+(anr78:provide)

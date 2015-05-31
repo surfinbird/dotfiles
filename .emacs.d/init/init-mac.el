@@ -1,5 +1,5 @@
 (when is-mac
-  (require 'dash)
+  (use-package dash :ensure t)
 
   (setq default-frame-alist '((font . "Monaco-12")))
 
@@ -83,4 +83,5 @@
   ;; Don't open files from the workspace in a new frame
   (setq ns-pop-up-frames nil)
   )
-(provide 'init-mac)
+
+(anr78:provide)

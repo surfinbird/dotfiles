@@ -2,9 +2,12 @@
 (require 'dash)
 
 ;; Make dired less verbose
-(require 'dired-details)
-(setq-default dired-details-hidden-string "--- ")
-(dired-details-install)
+(use-package  dired-details
+  :ensure t
+  :config
+  (setq-default dired-details-hidden-string "--- ")
+  (dired-details-install)
+  )
 
 ;; Move files between split panes
 (setq dired-dwim-target t)
@@ -52,4 +55,4 @@
      (define-key wdired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
      (define-key wdired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
 
-(provide 'init-dired)
+(anr78:provide)

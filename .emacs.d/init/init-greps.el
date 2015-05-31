@@ -1,4 +1,4 @@
-(require 's)
+(use-package s :ensure t)
 
 (defun rgrep-fullscreen (regexp &optional files dir confirm)
   "Open grep in full screen, saving windows."
@@ -118,4 +118,4 @@
 (eval-after-load "wgrep"
   '(define-key wgrep-mode-map (kbd "C-c C-æ") 'mc/add-cursors-to-all-matches))
 
-(provide 'init-greps)
+(anr78:provide)

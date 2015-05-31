@@ -2,7 +2,8 @@
 (setq js2-basic-offset 2)
 (setq js2-bounce-indent-p nil)
 
-(require 'flymake-jshint)
+(use-package  flymake-jshint :ensure t)
+
 (add-hook 'js2-mode-hook
      (lambda () (flymake-mode t)))
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
@@ -12,4 +13,4 @@
       (require 'tern-auto-complete)
       (tern-ac-setup)))
 
-(provide 'init-js)
+(anr78:provide)

@@ -71,4 +71,4 @@
 ;; QML
 (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
 
-(provide 'init-mode-mappings)
+(anr78:provide)

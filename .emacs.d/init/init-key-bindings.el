@@ -272,5 +272,5 @@
                           (save-buffers-kill-emacs))))))
 
 
-(provide 'init-key-bindings)
+(anr78:provide)
 

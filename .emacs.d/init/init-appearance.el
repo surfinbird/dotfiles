@@ -1,14 +1,9 @@
-(message "*** Appearance")
-
 (setq visible-bell t
       font-lock-maximum-decoration t
       color-theme-is-global t
       truncate-partial-width-windows nil)
 
 ;; Highlight current line
-;(defface hl-line '((t (:background "Gray10")))
-;  "Face to use for `hl-line-face'." :group 'hl-line)
-;(setq hl-line-face 'hl-line)
 (global-hl-line-mode 1)
 
 ;; Don't defer screen updates when performing operations
@@ -23,13 +18,11 @@
   (set-default-font "Source Code Pro-14:antialias=1")
   (add-to-list 'default-frame-alist '(font . "Source Code Pro-14:antialias=1")))
 
-;; show line number
-;(global-linum-mode t)
-
 ;; Prevent the cursor from blinking
 (blink-cursor-mode 0)
 
 (require 'ansi-color)
+
 (defun colorize-compilation-buffer ()
   (toggle-read-only)
   (ansi-color-apply-on-region (point-min) (point-max))
@@ -41,4 +34,4 @@
   (tooltip-mode -1)
   (blink-cursor-mode -1))
 
-(provide 'init-appearance)
+(anr78:provide)

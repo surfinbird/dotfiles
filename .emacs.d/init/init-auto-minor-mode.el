@@ -1,10 +1,3 @@
-;                                                         -*- emacs-lisp -*-
-;
-;    $Id$
-;
-; Copright (C) 2015 by Peder Stray <peder@ninja.no>
-;
-
 (defvar auto-minor-mode-alist ()
   "Alist of filename patterns vs correpsonding minor mode functions, see `auto-mode-alist'.  
 All elements of this alist are checked, meaning you can enable
@@ -31,5 +24,5 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
 (add-hook 'find-file-hook
 	  'enable-minor-mode-based-on-extension)
 
-(provide 'init-auto-minor-mode)
+(anr78:provide)
 

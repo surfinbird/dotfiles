@@ -20,4 +20,4 @@
   (c-set-style "K&R")
   (setq c-basic-offset 4))
 
-(provide 'init-c)
+(anr78:provide)
