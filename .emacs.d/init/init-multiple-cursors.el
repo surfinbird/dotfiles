@@ -1,4 +1,5 @@
 (use-package multiple-cursors
+  :ensure t
   :config
   :bind (
   ;; Experimental multiple-cursors  

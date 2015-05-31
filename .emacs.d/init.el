@@ -12,9 +12,6 @@
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
 
-;; Make backups of files, even when they're in version control
-(setq vc-make-backup-files t)
-
 ;; Machine specific, loaded early for possible proxy setup
 (cond (
        (file-exists-p "~/.emacs-this-pc.el")
@@ -73,7 +70,6 @@
      jump-char
      magit
      magit-topgit
-     multiple-cursors
      nose
      nsis-mode
      projectile
