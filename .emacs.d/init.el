@@ -1,40 +1,16 @@
-;; Turn off mouse interface early in startup to avoid momentary display
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-
-;; Don't use messages that you don't read
-(setq initial-scratch-message "")
-(setq inhibit-startup-message t)
-
 (setq user-emacs-directory "~/.emacs.d/")
-
-;; Set path to dependencies
-(setq init-lisp-dir
-      (expand-file-name "init" user-emacs-directory))
 
 (setq site-lisp-dir
       (expand-file-name "site-lisp" user-emacs-directory))
 
 ;; Setup load path
 (message "*** Setting load paths")
-(add-to-list 'load-path init-lisp-dir)
 (add-to-list 'load-path site-lisp-dir)
-
-;; Settings for currently logged in user
-(setq user-settings-dir
-      (concat "~/.users/" user-login-name))
-(add-to-list 'load-path user-settings-dir)
 
 ;; Add external projects to load path
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
-
-;; Write backup files to own directory
-(setq backup-directory-alist
-      `(("." . ,(expand-file-name
-                 (concat user-emacs-directory "backups")))))
 
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
@@ -46,7 +22,7 @@
 
 ;; Elpa
 (message "*** Setup elpa")
-(require 'init-package)
+(load "~/.emacs.d/init/init-package.el")
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
@@ -176,7 +152,6 @@
 (define-key global-map (kbd "M-&") 'vr/query-replace)
 (define-key global-map (kbd "M-/") 'vr/replace)
 
-(require 'multiple-cursors)
 (require 'expand-region)
 (require 'jump-char)
 (require 'change-inner)
@@ -258,7 +233,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; Conclude init by setting up specifics for the current user
-(when (file-exists-p user-settings-dir)
-  (mapc 'load (directory-files user-settings-dir nil "^[^#].*el$")))

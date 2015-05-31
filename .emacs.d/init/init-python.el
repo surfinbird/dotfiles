@@ -1,11 +1,12 @@
 (use-package elpy
   :ensure t
+  :bind (("S-<f8>" . python-compile))
   :config
   (elpy-enable)
-  (global-set-key (kbd "S-<f8>") 'python-compile)
   (use-package pylint
     :config
-    (global-set-key (kbd "C-<f7>") 'pylint))
+    :bind (("C-<f7>" . pylint))
   )
+)
 
 (anr78:provide)
