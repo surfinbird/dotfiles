@@ -35,10 +35,8 @@
   (blink-cursor-mode -1))
 
 (use-package  twilight-theme :ensure t)
-(use-package  solarized-theme
-  :ensure t
-  :config
-  (load-theme 'solarized-dark t)
-  )
+(use-package  solarized-theme :ensure t)
+
+(load-theme 'twilight t)
 
 (anr78:provide)
