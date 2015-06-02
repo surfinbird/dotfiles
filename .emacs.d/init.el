@@ -122,7 +122,7 @@
     (load file)))
 
 ;; Load all init-*.el-files in ~/.emacs.d/init
-(let ((force-load-messages t)
+(let (
       (init-dir (concat user-emacs-directory "init")))
   (add-to-list 'load-path init-dir)
   (message "Loading init files...")
