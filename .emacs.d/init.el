@@ -93,6 +93,7 @@
 (use-package  visual-regexp :ensure t)
 (use-package  wgrep :ensure t)
 (use-package  tern-auto-complete :ensure t)
+(use-package  s :ensure t)
 
 ;; Save point position between sessions
 (require 'saveplace)
