@@ -22,15 +22,6 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((plantuml . t)))
-  (use-package org-clock)
-  (use-package org-element)
-  (use-package org-table)
-  (use-package plantuml-mode
-    :ensure t
-    :init
-    (setq org-plantuml-jar-path
-          (setq plantuml-jar-path (expand-file-name "~/.emacs.d/resources/plantuml.jar")))
-    )
   )
 
 (anr78:provide)
