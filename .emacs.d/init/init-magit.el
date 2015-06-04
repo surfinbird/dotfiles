@@ -1,5 +1,6 @@
 (use-package  magit
   :ensure t
+  :bind (("C-x g" . magit-status))
   :config
   (set-default 'magit-stage-all-confirm nil)
   (set-default 'magit-unstage-all-confirm nil)
@@ -102,12 +103,7 @@
 
   (define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
 
-  ;; Show blame for current line
-  (use-package git-messenger :ensure t)
-  (global-set-key (kbd "C-x v p") #'git-messenger:popup-message)
-
   ;; Don't bother me with flyspell keybindings
-
   (eval-after-load "flyspell"
     '(define-key flyspell-mode-map (kbd "C-.") nil))
   (use-package  magit-topgit :ensure t)
