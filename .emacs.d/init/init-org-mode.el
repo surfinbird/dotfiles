@@ -1,5 +1,6 @@
 (use-package org
   :ensure t
+  :defer t
   :config
   (setq
   ; agenda

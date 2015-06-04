@@ -1,17 +1,32 @@
 (use-package helm
   :ensure t
+  :commands (helm-execute-persistent-action helm-select-action)
   :bind (
          ("C-c h" . helm-command-prefix)
+         ("C-c h /" . helm-find)
+         ("C-c h i" . helm-semantic-or-imenu)
+         ("C-c h l" . helm-locate)
+         ("C-c h m" . helm-man-woman)
+         ("C-c h o" . helm-occur)
+         ("C-x C-f" . helm-find-files)
+         ("C-x b" . helm-mini)
+         ("M-x" . helm-M-x)
+         ("M-y" . helm-show-kill-ring)
+         ("C-h SPC" . helm-all-mark-rings)
          )
+  :init
+  (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
+  (bind-key "C-i" 'helm-execute-persistent-action helm-map)
+  (bind-key "C-z" 'helm-select-action helm-map)  
   :config
-  (use-package  helm-projectile
+  (use-package helm-projectile
     :ensure t
     :config
     (setq projectile-switch-project-action 'helm-projectile)
     (helm-projectile-on)
     )
-  (require 'helm-config)
 
+  (require 'helm-config)
   (when (executable-find "curl")
     (setq helm-google-suggest-use-curl-p t))
 
@@ -21,9 +36,6 @@
         helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
         helm-ff-file-name-history-use-recentf t)
 
-  (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
-  (bind-key "C-i" 'helm-execute-persistent-action helm-map)
-  (bind-key "C-z" 'helm-select-action helm-map)
   
   (helm-mode 1)
 )

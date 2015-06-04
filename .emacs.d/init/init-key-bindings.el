@@ -98,11 +98,6 @@
 (global-set-key (kbd "C-x g")       'magit-status)
 (autoload 'magit-status "magit")
 
-;; Smex
-(global-set-key (kbd "M-x")         'smex)
-(global-set-key (kbd "M-X")         'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
 ;; highlight-symbol
 (global-set-key (kbd "<f10>") 'highlight-symbol-at-point)
 (global-set-key (kbd "<f11>") 'highlight-symbol-prev)
@@ -246,19 +241,6 @@
 (define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)
 (define-key occur-mode-map (kbd "n") 'next-line)
 (define-key occur-mode-map (kbd "p") 'previous-line)
-
-;; Helm
-(global-set-key (kbd "C-c h /") 'helm-find)
-(global-set-key (kbd "C-c h i") 'helm-semantic-or-imenu)
-(global-set-key (kbd "C-c h l") 'helm-locate)
-(global-set-key (kbd "C-c h m") 'helm-man-woman)
-(global-set-key (kbd "C-c h o") 'helm-occur)
-(global-set-key (kbd "C-c p h") 'helm-projectile)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 
 ;; Misc
 (global-set-key (kbd "<f1>")         'goto-line)

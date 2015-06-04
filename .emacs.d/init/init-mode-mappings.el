@@ -1,13 +1,18 @@
 (use-package sws-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 (use-package haskell-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 (use-package js2-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 (use-package jade-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 (use-package nsis-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 
 ;; Emacs lisp
 (add-to-list 'auto-mode-alist '("Carton$" . emacs-lisp-mode))
@@ -15,12 +20,8 @@
 
 ;; CSS
 (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
-(autoload 'turn-on-css-eldoc "css-eldoc")
-(add-hook 'css-mode-hook 'turn-on-css-eldoc)
 
 ;; Jade and Stylus (sws = significant whitespace)
-(autoload 'sws-mode "sws-mode")
-(autoload 'jade-mode "jade-mode")
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 
@@ -30,7 +31,6 @@
 (add-to-list 'auto-mode-alist '("\\.vm$" . html-mode))
 
 ;; Ruby
-(autoload 'rhtml-mode "rhtml-mode")
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.watchr$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
@@ -41,7 +41,6 @@
 (add-to-list 'auto-mode-alist '("\\.erb$" . rhtml-mode))
 
 ;; JavaScript
-(autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.jshintrc$" . javascript-mode))
@@ -55,7 +54,6 @@
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 ;; Apache config
-(autoload 'apache-mode "apache-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
 (add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  . apache-mode))
 (add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
