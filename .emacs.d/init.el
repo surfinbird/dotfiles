@@ -39,14 +39,8 @@
 (message "*** Setting load paths")
 (add-to-list 'load-path site-lisp-dir)
 
-;; Add external projects to load path
-(dolist (project (directory-files site-lisp-dir t "\\w+"))
-  (when (file-directory-p project)
-    (add-to-list 'load-path project)))
-
 ;; Machine specific, loaded early for possible proxy setup
-(cond (
-       (file-exists-p "~/.emacs-this-pc.el")
+(cond ((file-exists-p "~/.emacs-this-pc.el")
        (load "~/.emacs-this-pc.el")))
 
 ;; make sure we have a use-package macro available at all times
@@ -106,20 +100,6 @@
 ;; Where are we?
 (setq is-mac (equal system-type 'darwin))
 (setq is-win (equal system-type 'windows-nt))
-
-;; Setup environment variables from the user's shell.
-(when is-mac
-  (use-package exec-path-from-shell
-    :ensure t
-    :config
-    (exec-path-from-shell-initialize))
-)
-
-;; Functions (load all files in defuns-dir)
-(setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
-(dolist (file (directory-files defuns-dir t "\\w+"))
-  (when (file-regular-p file)
-    (load file)))
 
 ;; Load all init-*.el-files in ~/.emacs.d/init
 (let (
