@@ -21,6 +21,11 @@
 (fset 'quick-switch-buffer [?\C-x ?b return])
 (global-set-key (kbd "C-x C-b") 'quick-switch-buffer)
 
+(global-set-key (kbd "s-y") 'bury-buffer)
+
+;; Revert without any fuss
+(global-set-key (kbd "M-<escape>") (λ (revert-buffer t t)))
+
 ;; Edit file with sudo
 (global-set-key (kbd "M-s e") 'sudo-edit)
 
@@ -101,6 +106,8 @@
 (global-set-key (kbd "C-c +") 'evil-numbers/inc-at-pt)
 (global-set-key (kbd "C-c -") 'evil-numbers/dec-at-pt)
 
+(global-set-key (kbd "M-h") 'kill-region-or-backward-word)
+
 ;; Transpose stuff with M-t
 (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
 (global-set-key (kbd "M-t l") 'transpose-lines)
@@ -115,6 +122,26 @@
 (global-set-key (kbd "C-c C--") 'replace-next-underscore-with-camel)
 (global-set-key (kbd "M-s M--") 'snakeify-current-word)
 
+;; Change word separators
+(global-unset-key (kbd "C-x +")) ;; used to be balance-windows
+(global-set-key (kbd "C-x + -") (λ (replace-region-by 's-dashed-words)))
+(global-set-key (kbd "C-x + _") (λ (replace-region-by 's-snake-case)))
+(global-set-key (kbd "C-x + c") (λ (replace-region-by 's-lower-camel-case)))
+(global-set-key (kbd "C-x + C") (λ (replace-region-by 's-upper-camel-case)))
+
+;; Killing text
+(global-set-key (kbd "C-S-k") 'kill-and-retry-line)
+(global-set-key (kbd "C-w") 'kill-region-or-backward-word)
+(global-set-key (kbd "C-c C-w") 'kill-to-beginning-of-line)
+
+;; Use M-w for copy-line if no active region
+(global-set-key (kbd "M-w") 'save-region-or-current-line)
+(global-set-key (kbd "s-w") 'save-region-or-current-line)
+(global-set-key (kbd "M-W") (λ (save-region-or-current-line 1)))
+
+;; Indentation help
+(global-set-key (kbd "M-j") (λ (join-line -1)))
+
 ;; Navigation bindings
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
 
@@ -125,6 +152,12 @@
 (global-set-key (kbd "M-<down>") 'smart-down)
 (global-set-key (kbd "M-<left>") 'smart-backward)
 (global-set-key (kbd "M-<right>") 'smart-forward)
+
+;; Move more quickly
+(global-set-key (kbd "C-S-n") (λ (ignore-errors (next-line 5))))
+(global-set-key (kbd "C-S-p") (λ (ignore-errors (previous-line 5))))
+(global-set-key (kbd "C-S-f") (λ (ignore-errors (forward-char 5))))
+(global-set-key (kbd "C-S-b") (λ (ignore-errors (backward-char 5))))
 
 (global-set-key (kbd "H-*") 'beginning-of-buffer) ;; H-p
 (global-set-key (kbd "H-n") 'end-of-buffer)
@@ -185,6 +218,7 @@
 
 ;; Jump from file to containing directory
 (global-set-key (kbd "C-x C-j") 'dired-jump) (autoload 'dired-jump "dired")
+(global-set-key (kbd "C-x M-j") '(λ (dired-jump 1)))
 
 ;; Multi-occur
 (global-set-key (kbd "M-s m") 'multi-occur)
