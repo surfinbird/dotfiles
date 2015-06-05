@@ -82,6 +82,11 @@
 
   ;; Don't open files from the workspace in a new frame
   (setq ns-pop-up-frames nil)
+  
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize))  
   )
 
 (anr78:provide)

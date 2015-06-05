@@ -29,25 +29,13 @@
       (package-install 'use-package))
     ))
 
-
 (setq user-emacs-directory "~/.emacs.d/")
-
-(setq site-lisp-dir
-      (expand-file-name "site-lisp" user-emacs-directory))
 
 ;; Setup load path
 (message "*** Setting load paths")
+(setq site-lisp-dir
+      (expand-file-name "site-lisp" user-emacs-directory))
 (add-to-list 'load-path site-lisp-dir)
-
-;; Add external projects to load path
-(dolist (project (directory-files site-lisp-dir t "\\w+"))
-  (when (file-directory-p project)
-    (add-to-list 'load-path project)))
-
-;; Machine specific, loaded early for possible proxy setup
-(cond (
-       (file-exists-p "~/.emacs-this-pc.el")
-       (load "~/.emacs-this-pc.el")))
 
 ;; make sure we have a use-package macro available at all times
 (when (not (require 'use-package nil t))
@@ -61,59 +49,10 @@
   (provide (intern (file-name-sans-extension
                     (file-name-nondirectory load-file-name)))))
 
-;; Install extensions if they're missing
-
-(use-package  ace-isearch :ensure t)
-(use-package  ace-jump-mode :ensure t)
-(use-package  adaptive-wrap :ensure t)
-(use-package  bm :ensure t)
-(use-package  browse-kill-ring :ensure t)
-(use-package  dash :ensure t)
-(use-package  dos :ensure t)
-(use-package  epl :ensure t)
-(use-package  expand-region :ensure t)
-(use-package  fasd :ensure t)
-(use-package  fill-column-indicator :ensure t)
-(use-package  find-file-in-project :ensure t)
-(use-package  flymake-cursor :ensure t)
-(use-package  git-timemachine :ensure t)
-(use-package  highlight-escape-sequences :ensure t)
-(use-package  highlight-symbol :ensure t)
-(use-package  hydra :ensure t)
-(use-package  idomenu :ensure t)
-(use-package  jump-char :ensure t)
-(use-package  nose :ensure t)
-(use-package  pkg-info :ensure t)
-(use-package  qml-mode :ensure t)
-(use-package  rainbow-mode :ensure t)
-(use-package  smart-forward :ensure t)
-(use-package  smooth-scrolling :ensure t)
-(use-package  tern :ensure t)
-(use-package  undo-tree :ensure t)
-(use-package  visual-regexp :ensure t)
-(use-package  wgrep :ensure t)
-(use-package  tern-auto-complete :ensure t)
-(use-package  s :ensure t)
-
-;; Save point position between sessions
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (expand-file-name ".places" user-emacs-directory))
-
-;; <dead-tilde> stopped working on Ubuntu 14.04, this fixes it
-(require 'iso-transl)
-
-;; Where are we?
-(setq is-mac (equal system-type 'darwin))
-(setq is-win (equal system-type 'windows-nt))
-
-;; Setup environment variables from the user's shell.
-(when is-mac
-  (use-package exec-path-from-shell
-    :ensure t
-    :config
-    (exec-path-from-shell-initialize))
-)
+;; Machine specific, loaded early for possible proxy setup
+(cond (
+       (file-exists-p "~/.emacs-this-pc.el")
+       (load "~/.emacs-this-pc.el")))
 
 ;; Functions (load all files in defuns-dir)
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
@@ -132,47 +71,7 @@
        (require (intern base))))
    (directory-files init-dir nil "^init-.*\\.elc?$")))
 
-;; Highlight escape sequences
-(require 'highlight-escape-sequences)
-(hes-mode)
-(put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face)
-
-;; Visual regexp
-(require 'visual-regexp)
-(define-key global-map (kbd "M-&") 'vr/query-replace)
-(define-key global-map (kbd "M-/") 'vr/replace)
-
-(require 'expand-region)
-(require 'jump-char)
-(require 'change-inner)
-(require 'wgrep)
-(require 'smart-forward)
-
-;; Fill column indicator
-(require 'fill-column-indicator)
-(setq fci-rule-color "#111122")
-
-;; Browse kill ring
-(require 'browse-kill-ring)
-(setq browse-kill-ring-quit-action 'save-and-restore)
-
-(require 'bm)
-(setq bookmark-default-file "~/.emacs.d/bookmarks" bookmark-save-flag 1)
-
-(load-library "flymake")
-(load-library "flymake-cursor")
-
-;; Fasd
-(unless is-win (global-fasd-mode 1))
-
-;; ace-isearch
-;(global-ace-isearch-mode 1)
-
-;; Enable company in all modes
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-idle-delay 0)
-
-
+;; Customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
