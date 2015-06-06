@@ -2,10 +2,11 @@
 (use-package  magit
   :ensure t
   :bind (("C-x g" . magit-status))
+  :init
+  (setq magit-last-seen-setup-instructions "1.4.0")
   :config
   (set-default 'magit-stage-all-confirm nil)
   (set-default 'magit-unstage-all-confirm nil)
-  (setq magit-last-seen-setup-instructions "1.4.0")
 
   (eval-after-load 'ediff
     '(progn

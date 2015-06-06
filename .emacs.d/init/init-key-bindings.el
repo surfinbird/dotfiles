@@ -4,14 +4,7 @@
 (global-set-key (kbd "M-s s")       'git-grep-fullscreen)
 (global-set-key (kbd "M-s S")       'rgrep-fullscreen)
 
-;; Jump to a definition in the current file
-(global-set-key (kbd "C-x C-i")     'ido-imenu)
-
 ;; File finding
-(global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
-(global-set-key (kbd "C-x f") 'recentf-ido-find-file)
-(global-set-key (kbd "C-x C-p") 'find-or-create-file-at-point)
-(global-set-key (kbd "C-x M-p") 'find-or-create-file-at-point-other-window)
 (global-set-key (kbd "C-c y") 'bury-buffer)
 (global-set-key (kbd "C-c r") 'revert-buffer)
 (global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
@@ -26,19 +19,14 @@
 ;; Revert without any fuss
 (global-set-key (kbd "M-<escape>") (λ (revert-buffer t t)))
 
-;; Edit file with sudo
-(global-set-key (kbd "M-s e") 'sudo-edit)
 
 ;; Copy file path to kill ring
 (global-set-key (kbd "C-x M-w") 'copy-current-file-path)
 
 ;; Window switching
 (windmove-default-keybindings) ;; Shift+direction
-(global-set-key (kbd "C-x -") 'toggle-window-split)
-(global-set-key (kbd "C-x C--") 'rotate-windows)
 (global-unset-key (kbd "C-x C-+")) ;; don't zoom like this
 
-(global-set-key (kbd "C-x 3") 'split-window-right-and-move-there-dammit)
 
 ;; Bookmarks
 (global-set-key (kbd "<f2>")        'bm-toggle)
@@ -71,14 +59,6 @@
 ;; Remap back-to-indentation
 (global-set-key (kbd "M-i")         'back-to-indentation)
 
-;; Perform general cleanup.
-(global-set-key (kbd "C-c n") 'cleanup-buffer)
-(global-set-key (kbd "C-c C-n") 'cleanup-buffer)
-(global-set-key (kbd "C-c C-<return>") 'delete-blank-lines)
-
-;; Turn on the menu bar for exploring new modes
-;(global-set-key (kbd "C-<f10>") 'menu-bar-mode)
-
 ;; Compilation
 (global-set-key (kbd "S-<f7>")      'compile)
 (global-set-key (kbd "S-<f4>")      'next-error)
@@ -106,33 +86,15 @@
 (global-set-key (kbd "C-c +") 'evil-numbers/inc-at-pt)
 (global-set-key (kbd "C-c -") 'evil-numbers/dec-at-pt)
 
-(global-set-key (kbd "M-h") 'kill-region-or-backward-word)
-
-;; Transpose stuff with M-t
-(global-unset-key (kbd "M-t")) ;; which used to be transpose-words
-(global-set-key (kbd "M-t l") 'transpose-lines)
-(global-set-key (kbd "M-t w") 'transpose-words)
-(global-set-key (kbd "M-t s") 'transpose-sexps)
-(global-set-key (kbd "M-t p") 'transpose-params)
-
-;; Interactive selective display
-(global-set-key (kbd "C-x $") 'inc-selective-display)
-
 ;; Change next underscore with a camel case
 (global-set-key (kbd "C-c C--") 'replace-next-underscore-with-camel)
 (global-set-key (kbd "M-s M--") 'snakeify-current-word)
 
-;; Change word separators
-(global-unset-key (kbd "C-x +")) ;; used to be balance-windows
-(global-set-key (kbd "C-x + -") (λ (replace-region-by 's-dashed-words)))
-(global-set-key (kbd "C-x + _") (λ (replace-region-by 's-snake-case)))
-(global-set-key (kbd "C-x + c") (λ (replace-region-by 's-lower-camel-case)))
-(global-set-key (kbd "C-x + C") (λ (replace-region-by 's-upper-camel-case)))
 
 ;; Killing text
 (global-set-key (kbd "C-S-k") 'kill-and-retry-line)
 (global-set-key (kbd "C-w") 'kill-region-or-backward-word)
-(global-set-key (kbd "C-c C-w") 'kill-to-beginning-of-line)
+
 
 ;; Use M-w for copy-line if no active region
 (global-set-key (kbd "M-w") 'save-region-or-current-line)
@@ -143,7 +105,6 @@
 (global-set-key (kbd "M-j") (λ (join-line -1)))
 
 ;; Navigation bindings
-(global-set-key [remap goto-line] 'goto-line-with-feedback)
 
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
@@ -175,23 +136,11 @@
 ;; Eval buffer
 (global-set-key (kbd "C-c C-k") 'eval-buffer)
 
-;; Create scratch buffer
-(global-set-key (kbd "C-c b") 'create-scratch-buffer)
-
 ;; Move windows, even in org-mode
 (global-set-key (kbd "<s-right>") 'windmove-right)
 (global-set-key (kbd "<s-left>") 'windmove-left)
 (global-set-key (kbd "<s-up>") 'windmove-up)
 (global-set-key (kbd "<s-down>") 'windmove-down)
-
-;; Clever newlines
-(global-set-key (kbd "C-o") 'open-line-and-indent)
-(global-set-key (kbd "<C-return>") 'open-line-below)
-(global-set-key (kbd "<C-S-return>") 'open-line-above)
-(global-set-key (kbd "<M-return>") 'new-line-dwim)
-
-;; Duplicate region
-(global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
 
 ;; Line movement
 (global-set-key (kbd "<C-S-down>") 'move-text-down)
@@ -205,12 +154,7 @@
 ;; Yank and indent
 (global-set-key (kbd "C-S-y") 'yank-unindented)
 
-;; Toggle quotes
-(global-set-key (kbd "C-\"") 'toggle-quotes)
-
 ;; Increase number at point (or other change based on prefix arg)
-(global-set-key (kbd "C-+") 'change-number-at-point)
-(global-set-key (kbd "C-?") 'subtract-number-at-point)
 (eval-after-load 'undo-tree '(define-key undo-tree-map (kbd "C-?") nil))
 
 ;; Browse the kill ring

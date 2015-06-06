@@ -54,12 +54,6 @@
        (file-exists-p "~/.emacs-this-pc.el")
        (load "~/.emacs-this-pc.el")))
 
-;; Functions (load all files in defuns-dir)
-(setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
-(dolist (file (directory-files defuns-dir t "\\w+"))
-  (when (file-regular-p file)
-    (load file)))
-
 ;; Load all init-*.el-files in ~/.emacs.d/init
 (let (
       (init-dir (concat user-emacs-directory "init")))
