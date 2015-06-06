@@ -29,7 +29,7 @@
     (delete-window))
 
   (eval-after-load "git-commit-mode"
-    '(define-key git-commit-mode-map (kbd "C-c C-k") 'magit-exit-commit-mode))
+    '(bind-key "C-c C-k" 'magit-exit-commit-mode git-commit-mode-map))
 
   (defun magit-just-amend ()
     (interactive)
@@ -38,9 +38,7 @@
        (shell-command "git --no-pager commit --amend --reuse-message=HEAD"))))
 
   (eval-after-load "magit"
-    '(define-key magit-status-mode-map (kbd "C-c C-a") 'magit-just-amend))
-
-  ;; C-x C-k to kill file on line
+    '(bind-key "C-c C-a" 'magit-just-amend git-commit-mode-map))
 
   (defun magit-kill-file-on-line ()
     "Show file on current magit line and prompt for deletion."
@@ -48,11 +46,11 @@
     (magit-visit-item)
     (delete-current-buffer-file)
     (magit-refresh))
-  
-  (define-key magit-status-mode-map (kbd "C-x C-k") 'magit-kill-file-on-line)
+
+    (eval-after-load "magit"
+      '(bind-key "C-c C-k" 'magit-kill-file-on-line magit-status-mode-map))
 
   ;; full screen magit-status
-
   (defadvice magit-status (around magit-fullscreen activate)
     (window-configuration-to-register :magit-fullscreen)
     ad-do-it
@@ -64,10 +62,9 @@
     (kill-buffer)
     (jump-to-register :magit-fullscreen))
 
-  (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+  (bind-key "q" 'magit-quit-session)
 
   ;; full screen vc-annotate
-
   (defun vc-annotate-quit ()
     "Restores the previous window configuration and kills the vc-annotate buffer"
     (interactive)
@@ -81,10 +78,9 @@
          ad-do-it
          (delete-other-windows))
 
-       (define-key vc-annotate-mode-map (kbd "q") 'vc-annotate-quit)))
+       (bind-key "q" 'vc-annotate-quit)))
 
   ;; ignore whitespace
-
   (defun magit-toggle-whitespace ()
     (interactive)
     (if (member "-w" magit-diff-options)
@@ -101,11 +97,11 @@
     (setq magit-diff-options (remove "-w" magit-diff-options))
     (magit-refresh))
 
-  (define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
+  (bind-key "W" 'magit-toggle-whitespace magit-status-mode-map)
 
   ;; Don't bother me with flyspell keybindings
   (eval-after-load "flyspell"
-    '(define-key flyspell-mode-map (kbd "C-.") nil))
+   '(bind-key "C-." nil flyspell-mode-map))
   (use-package  magit-topgit :ensure t)
   )
 
