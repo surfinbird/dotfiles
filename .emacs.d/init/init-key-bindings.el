@@ -66,9 +66,6 @@
 ;; Replace rectangle-text with string-rectangle
 (global-set-key (kbd "C-x r t") 'string-rectangle)
 
-;; Quickly jump in document with ace-jump-mode
-(define-key global-map (kbd "C-ø") 'ace-jump-mode)
-
 ;; highlight-symbol
 (global-set-key (kbd "<f10>") 'highlight-symbol-at-point)
 (global-set-key (kbd "<f11>") 'highlight-symbol-prev)

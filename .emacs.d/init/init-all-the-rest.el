@@ -1,8 +1,3 @@
-
-;; Install extensions if they're missing
-
-(use-package  ace-isearch :ensure t)
-(use-package  ace-jump-mode :ensure t)
 (use-package  adaptive-wrap :ensure t)
 (use-package  bm :ensure t)
 (use-package  browse-kill-ring :ensure t)
@@ -70,9 +65,6 @@
 
 (load-library "flymake")
 (load-library "flymake-cursor")
-
-;; ace-isearch
-;(global-ace-isearch-mode 1)
 
 ;; Enable company in all modes
 (add-hook 'after-init-hook 'global-company-mode)
