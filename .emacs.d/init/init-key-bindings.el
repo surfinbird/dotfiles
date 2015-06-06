@@ -19,14 +19,9 @@
 ;; Revert without any fuss
 (global-set-key (kbd "M-<escape>") (λ (revert-buffer t t)))
 
-
-;; Copy file path to kill ring
-(global-set-key (kbd "C-x M-w") 'copy-current-file-path)
-
 ;; Window switching
 (windmove-default-keybindings) ;; Shift+direction
 (global-unset-key (kbd "C-x C-+")) ;; don't zoom like this
-
 
 ;; Bookmarks
 (global-set-key (kbd "<f2>")        'bm-toggle)
@@ -141,15 +136,6 @@
 (global-set-key (kbd "<s-left>") 'windmove-left)
 (global-set-key (kbd "<s-up>") 'windmove-up)
 (global-set-key (kbd "<s-down>") 'windmove-down)
-
-;; Line movement
-(global-set-key (kbd "<C-S-down>") 'move-text-down)
-(global-set-key (kbd "<C-S-up>") 'move-text-up)
-
-;; Fold the active region
-(global-set-key (kbd "C-c C-f") 'fold-this-all)
-(global-set-key (kbd "C-c C-F") 'fold-this)
-(global-set-key (kbd "C-c M-f") 'fold-this-unfold-all)
 
 ;; Yank and indent
 (global-set-key (kbd "C-S-y") 'yank-unindented)
