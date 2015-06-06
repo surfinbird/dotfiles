@@ -14,15 +14,15 @@
 (use-package  fill-column-indicator :ensure t)
 (use-package  find-file-in-project :ensure t)
 (use-package  flymake-cursor :ensure t)
-(use-package  git-timemachine :ensure t)
-(use-package  highlight-escape-sequences :ensure t)
+(use-package  highlight-escape-sequences
+  :ensure t
+  :config
+  (hes-mode)
+  (put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face))
 (use-package  highlight-symbol :ensure t)
-(use-package  hydra :ensure t)
-(use-package  idomenu :ensure t)
 (use-package  jump-char :ensure t)
 (use-package  nose :ensure t)
 (use-package  pkg-info :ensure t)
-(use-package  qml-mode :ensure t)
 (use-package  rainbow-mode :ensure t)
 (use-package  smart-forward :ensure t)
 (use-package  smooth-scrolling :ensure t)
@@ -45,11 +45,6 @@
 
 ;; Fasd
 (unless is-win (global-fasd-mode 1))
-
-;; Highlight escape sequences
-(require 'highlight-escape-sequences)
-(hes-mode)
-(put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face)
 
 ;; Visual regexp
 (require 'visual-regexp)

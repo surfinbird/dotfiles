@@ -13,6 +13,9 @@
 (use-package nsis-mode
   :ensure t
   :defer t)
+(use-package qml-mode
+  :ensure t
+  :defer t)
 
 ;; Emacs lisp
 (add-to-list 'auto-mode-alist '("Carton$" . emacs-lisp-mode))
