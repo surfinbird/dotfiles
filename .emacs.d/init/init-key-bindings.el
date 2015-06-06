@@ -66,7 +66,7 @@
 (global-set-key (kbd "C-c C-c o") 'copy-outer)
 
 ;; Expand region (increases selected region by semantic units)
-(global-set-key (if is-mac (kbd "C-@") (kbd "C-'")) 'er/expand-region)
+(global-set-key (when (eq system-type 'darwin) (kbd "C-@") (kbd "C-'")) 'er/expand-region)
 
 ;; Remap back-to-indentation
 (global-set-key (kbd "M-i")         'back-to-indentation)

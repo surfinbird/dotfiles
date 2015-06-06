@@ -1,7 +1,7 @@
-(when is-mac
+(when (eq system-type 'darwin)
+  (message "init--mac")
+  
   (use-package dash :ensure t)
-
-  (setq default-frame-alist '((font . "Monaco-12")))
 
   ;; change command to meta, and ignore option to use weird Norwegian keyboard
   (setq mac-option-modifier 'super)
@@ -9,7 +9,6 @@
   (setq ns-function-modifier 'hyper)
   (setq ns-alternate-modifier 'none)
 
-  (setq cscope-program "/usr/local/bin/cscope")
   (setq magit-git-executable "/usr/bin/git")
 
   ;; Norwegian mac-keyboard alt-keys)
@@ -73,16 +72,13 @@
                   (error "Non-character input-event")))
             (when timer (cancel-timer timer)))))))
 
-  ;; keybinding to toggle full screen mode
-  (global-set-key (quote [M-f10]) (quote ns-toggle-fullscreen))
-
   ;; Move to trash when deleting stuff
   (setq delete-by-moving-to-trash t
         trash-directory "~/.Trash/emacs")
 
   ;; Don't open files from the workspace in a new frame
   (setq ns-pop-up-frames nil)
-  
+
   (use-package exec-path-from-shell
     :ensure t
     :config

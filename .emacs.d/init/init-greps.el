@@ -1,3 +1,4 @@
+(message "init--greps")
 (use-package s :ensure t)
 
 (defun rgrep-fullscreen (regexp &optional files dir confirm)

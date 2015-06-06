@@ -1,3 +1,4 @@
+(message "init--appearance")
 (setq visible-bell t
       font-lock-maximum-decoration t
       color-theme-is-global t
@@ -12,9 +13,7 @@
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
-(setq is-mac (equal system-type 'darwin))
-
-(when is-mac
+(when (eq system-type 'darwin)
   (set-default-font "Source Code Pro-14:antialias=1")
   (add-to-list 'default-frame-alist '(font . "Source Code Pro-14:antialias=1")))
 
@@ -34,9 +33,9 @@
   (tooltip-mode -1)
   (blink-cursor-mode -1))
 
-(use-package  twilight-theme :ensure t)
-(use-package  solarized-theme :ensure t)
-
-(load-theme 'twilight t)
+(use-package solarized-theme
+  :ensure t
+  :config
+  (load-theme 'solarized-light t))
 
 (anr78:provide)
