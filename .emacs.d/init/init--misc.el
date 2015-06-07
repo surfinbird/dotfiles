@@ -300,7 +300,9 @@ Including indent-buffer, which should not be called automatically on save."
 ;; Expand region (increases selected region by semantic units)
 (use-package  expand-region :ensure t)
 (require 'expand-region)
-(global-set-key (when (eq system-type 'darwin) (kbd "C-@") (kbd "C-'")) 'er/expand-region)
+(if (eq system-type 'darwin)
+    (global-set-key (kbd "C-@") 'er/expand-region)
+  (global-set-key (kbd "C-'") 'er/expand-region))
 
 ;; Visual regexp
 (use-package visual-regexp
