@@ -42,4 +42,9 @@
   (helm-mode 1)
 )
 
+(use-package imenu-anywhere
+  :ensure t
+  :bind (("C-." . helm-imenu-anywhere))
+  )
+
 (anr78:provide)
