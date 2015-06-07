@@ -104,7 +104,6 @@ Including indent-buffer, which should not be called automatically on save."
     (backward-kill-word 1)))
 
 (global-set-key (kbd "C-w") 'kill-region-or-backward-word)
-
 (global-set-key (kbd "M-h") 'kill-region-or-backward-word)
 
 (defun kill-to-beginning-of-line ()
@@ -198,7 +197,17 @@ Including indent-buffer, which should not be called automatically on save."
 (use-package  fasd
   :ensure t
   :bind (("C-c f" . fasd-find-file))
+  :config
+  (global-fasd-mode 1)
   )
+
+;; Save point position between sessions
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name ".places" user-emacs-directory))
+
+;; <dead-tilde> stopped working on Ubuntu 14.04, this fixes it
+(require 'iso-transl)
 
 ;; Multi-occur
 (global-set-key (kbd "M-s m") 'multi-occur)
@@ -210,6 +219,9 @@ Including indent-buffer, which should not be called automatically on save."
 (define-key occur-mode-map (kbd "p") 'previous-line)
 
 ;; Browse the kill ring
+(use-package  browse-kill-ring :ensure t)
+(require 'browse-kill-ring)
+(setq browse-kill-ring-quit-action 'save-and-restore)
 (global-set-key (kbd "C-x C-y") 'browse-kill-ring)
 
 (global-set-key (kbd "<f1>")         'goto-line)
@@ -230,10 +242,13 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
 
-(global-set-key (kbd "M-<up>") 'smart-up)
-(global-set-key (kbd "M-<down>") 'smart-down)
-(global-set-key (kbd "M-<left>") 'smart-backward)
-(global-set-key (kbd "M-<right>") 'smart-forward)
+(use-package  smart-forward
+  :ensure t
+  :bind (("M-<up>" . smart-up)
+         ("M-<down>" . smart-down)
+         ("M-<left>" . smart-backward)
+         ("M-<right>" . smart-forward))
+  )
 
 (use-package  highlight-symbol
   :ensure t
@@ -249,20 +264,30 @@ Including indent-buffer, which should not be called automatically on save."
   (hes-mode)
   (put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face))
 
-(require 'bm)
-(global-set-key (kbd "<f2>")        'bm-toggle)
-(global-set-key (kbd "C-<f2>")      'bm-next)
-(global-set-key (kbd "S-<f2>")      'bm-previous)
+(use-package  bm
+  :ensure t
+  :bind (("<f2>" . bm-toggle)
+         ("C-<f2>" . bm-next)
+         ("S-<f2>" . bm-previous))
+  )
 
 ;; iy-go-to-char - like f in Vim
-(global-set-key (kbd "M-m") 'jump-char-forward)
-(global-set-key (kbd "M-M") 'jump-char-backward)
-(global-set-key (kbd "s-m") 'jump-char-backward)
+(use-package  jump-char
+  :ensure t
+  :bind (("M-m" . jump-char-forward)
+         ("M-M" . jump-char-backward)
+         ("s-m" . jump-char-backward))
+  )
+
+;; Fill column indicator
+(use-package  fill-column-indicator :ensure t)
+(require 'fill-column-indicator)
+(setq fci-rule-color "#111122")
 
 ;; vim's ci and co commands
+(require 'change-inner)
 (global-set-key (kbd "C-c i")         'change-inner)
 (global-set-key (kbd "C-c o")         'change-outer)
-
 (global-set-key (kbd "C-c C-c i") 'copy-inner)
 (global-set-key (kbd "C-c C-c o") 'copy-outer)
 
@@ -273,6 +298,38 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "C-x r t") 'string-rectangle)
 
 ;; Expand region (increases selected region by semantic units)
+(use-package  expand-region :ensure t)
+(require 'expand-region)
 (global-set-key (when (eq system-type 'darwin) (kbd "C-@") (kbd "C-'")) 'er/expand-region)
+
+;; Visual regexp
+(use-package visual-regexp
+  :ensure t
+  :bind (("M-&" . vr/query-replace)
+         ("M-/" . vr/replace))
+  )
+
+(use-package  rainbow-mode :ensure t)
+
+;; Enable company in all modes
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0)
+
+;; Flymake
+(use-package  flymake-cursor :ensure t)
+(load-library "flymake")
+(load-library "flymake-cursor")
+(global-set-key (kbd "C-<f9>")      'flymake-goto-prev-error)
+(global-set-key (kbd "C-<f10>")     'flymake-goto-next-error)
+
+(use-package  dos :ensure t)
+
+;; stuff I am not sure I need ...
+;; (use-package  adaptive-wrap :ensure t)
+;; (use-package  dash :ensure t)
+;; (use-package  epl :ensure t)
+;; (use-package  nose :ensure t)
+;; (use-package  pkg-info :ensure t)
+
 
 (anr78:provide)
