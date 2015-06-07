@@ -5,17 +5,11 @@
 (use-package  dos :ensure t)
 (use-package  epl :ensure t)
 (use-package  expand-region :ensure t)
-(use-package  fasd :ensure t)
+
 (use-package  fill-column-indicator :ensure t)
 (use-package  find-file-in-project :ensure t)
 (use-package  flymake-cursor :ensure t)
 
-(use-package  highlight-escape-sequences
-  :ensure t
-  :config
-  (hes-mode)
-  (put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face))
-(use-package  highlight-symbol :ensure t)
 (use-package  jump-char :ensure t)
 (use-package  nose :ensure t)
 (use-package  pkg-info :ensure t)

@@ -9,6 +9,12 @@
      (interactive)
      ,@body))
 
+;; Windmove
+(global-set-key (kbd "<s-right>") 'windmove-right)
+(global-set-key (kbd "<s-left>") 'windmove-left)
+(global-set-key (kbd "<s-up>") 'windmove-up)
+(global-set-key (kbd "<s-down>") 'windmove-down)
+
 (defun split-window-right-and-move-there-dammit ()
   (interactive)
   (split-window-right)
@@ -186,5 +192,59 @@ Including indent-buffer, which should not be called automatically on save."
      (defadvice terminal-init-screen
          (around fix-terminal-init-screen first () activate)
        (terminal-init-xterm))))
+
+(use-package  fasd
+  :ensure t
+  :bind (("C-c f" . fasd-find-file))
+  )
+
+;; Multi-occur
+(global-set-key (kbd "M-s m") 'multi-occur)
+(global-set-key (kbd "M-s M") 'multi-occur-in-matching-buffers)
+
+;; View occurrence in occur mode
+(define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)
+(define-key occur-mode-map (kbd "n") 'next-line)
+(define-key occur-mode-map (kbd "p") 'previous-line)
+
+;; Browse the kill ring
+(global-set-key (kbd "C-x C-y") 'browse-kill-ring)
+
+(global-set-key (kbd "<f1>")         'goto-line)
+(global-set-key (kbd "M-<return>")  'toggle-fullscreen)
+(global-set-key (kbd "C-<tab>")     'other-window)
+
+(global-set-key [(control x) (control c)]
+                (function
+                 (lambda () (interactive)
+                   (cond ((y-or-n-p "Quit? ")
+                          (save-buffers-kill-emacs))))))
+
+;; Comment/uncomment block
+(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-c u") 'uncomment-region)
+
+;; Navigation bindings
+(global-set-key (kbd "M-p") 'backward-paragraph)
+(global-set-key (kbd "M-n") 'forward-paragraph)
+
+(global-set-key (kbd "M-<up>") 'smart-up)
+(global-set-key (kbd "M-<down>") 'smart-down)
+(global-set-key (kbd "M-<left>") 'smart-backward)
+(global-set-key (kbd "M-<right>") 'smart-forward)
+
+(use-package  highlight-symbol
+  :ensure t
+  :bind (("<f10>" . highlight-symbol-at-point)
+         ("<f11>" . highlight-symbol-prev)
+         ("<f12>" . highlight-symbol-next)
+         ("<f9>" . highlight-symbol-query-replace))
+)
+
+(use-package  highlight-escape-sequences
+  :ensure t
+  :config
+  (hes-mode)
+  (put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face))
 
 (anr78:provide)
