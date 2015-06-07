@@ -1,8 +1,5 @@
 ;; Global key bindings
 
-;; Easy-mode fullscreen rgrep
-(global-set-key (kbd "M-s s")       'git-grep-fullscreen)
-(global-set-key (kbd "M-s S")       'rgrep-fullscreen)
 
 ;; File finding
 (global-set-key (kbd "C-c y") 'bury-buffer)
@@ -27,10 +24,6 @@
 (global-set-key (kbd "<f2>")        'bm-toggle)
 (global-set-key (kbd "C-<f2>")      'bm-next)
 (global-set-key (kbd "S-<f2>")      'bm-previous)
-
-;; Flymake
-(global-set-key (kbd "C-<f9>")      'flymake-goto-prev-error)
-(global-set-key (kbd "C-<f10>")     'flymake-goto-next-error)
 
 ;; iy-go-to-char - like f in Vim
 (global-set-key (kbd "M-m") 'jump-char-forward)

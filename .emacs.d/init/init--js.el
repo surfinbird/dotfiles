@@ -1,8 +1,10 @@
+(use-package tern :ensure t)
+(use-package tern-auto-complete :ensure t)
+(use-package flymake-jshint :ensure t)
+
 (setq js-indent-level 2)
 (setq js2-basic-offset 2)
 (setq js2-bounce-indent-p nil)
-
-(use-package  flymake-jshint :ensure t)
 
 (add-hook 'js2-mode-hook
      (lambda () (flymake-mode t)))

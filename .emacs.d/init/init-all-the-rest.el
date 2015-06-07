@@ -22,12 +22,8 @@
 (use-package  rainbow-mode :ensure t)
 (use-package  smart-forward :ensure t)
 (use-package  smooth-scrolling :ensure t)
-(use-package  tern :ensure t)
 (use-package  undo-tree :ensure t)
 (use-package  visual-regexp :ensure t)
-(use-package  wgrep :ensure t)
-(use-package  tern-auto-complete :ensure t)
-(use-package  s :ensure t)
 
 ;; Save point position between sessions
 (require 'saveplace)
@@ -50,7 +46,6 @@
 (require 'expand-region)
 (require 'jump-char)
 (require 'change-inner)
-(require 'wgrep)
 (require 'smart-forward)
 
 ;; Fill column indicator
@@ -64,8 +59,12 @@
 (require 'bm)
 (setq bookmark-default-file "~/.emacs.d/bookmarks" bookmark-save-flag 1)
 
+;; Flymake
 (load-library "flymake")
 (load-library "flymake-cursor")
+
+(global-set-key (kbd "C-<f9>")      'flymake-goto-prev-error)
+(global-set-key (kbd "C-<f10>")     'flymake-goto-next-error)
 
 ;; Enable company in all modes
 (add-hook 'after-init-hook 'global-company-mode)
