@@ -55,4 +55,11 @@
      (define-key wdired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
      (define-key wdired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
 
+;; Jump from file to containing directory
+(global-set-key (kbd "C-x C-j") 'dired-jump) (autoload 'dired-jump "dired")
+(global-set-key (kbd "C-x M-j") '(λ (dired-jump 1)))
+
+;; Find files by name and display results in dired
+(global-set-key (kbd "M-s f") 'find-name-dired)
+
 (anr78:provide)

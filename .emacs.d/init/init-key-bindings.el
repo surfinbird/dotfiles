@@ -50,11 +50,6 @@
 ;; Remap back-to-indentation
 (global-set-key (kbd "M-i")         'back-to-indentation)
 
-;; Compilation
-(global-set-key (kbd "S-<f7>")      'compile)
-(global-set-key (kbd "S-<f4>")      'next-error)
-(global-set-key (kbd "C-S-<f4>")    'previous-error)
-(global-set-key (kbd "S-M-<f4>")    'first-error)
 
 ;; Set anchor to start rectangular-region-mode
 (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
@@ -91,9 +86,6 @@
 (global-set-key (kbd "C-S-f") (λ (ignore-errors (forward-char 5))))
 (global-set-key (kbd "C-S-b") (λ (ignore-errors (backward-char 5))))
 
-(global-set-key (kbd "H-*") 'beginning-of-buffer) ;; H-p
-(global-set-key (kbd "H-n") 'end-of-buffer)
-
 ;; Query replace regex key binding
 ;(global-set-key (kbd "M-&") 'query-replace-regexp)
 
@@ -122,9 +114,6 @@
 ;; Browse the kill ring
 (global-set-key (kbd "C-x C-y") 'browse-kill-ring)
 
-;; Jump from file to containing directory
-(global-set-key (kbd "C-x C-j") 'dired-jump) (autoload 'dired-jump "dired")
-(global-set-key (kbd "C-x M-j") '(λ (dired-jump 1)))
 
 ;; Multi-occur
 (global-set-key (kbd "M-s m") 'multi-occur)
@@ -132,9 +121,6 @@
 
 ;; Display and edit occurances of regexp in buffer
 (global-set-key (kbd "C-o") 'occur)
-
-;; Find files by name and display results in dired
-(global-set-key (kbd "M-s f") 'find-name-dired)
 
 ;; Fasd
 (global-set-key (kbd "C-c f") 'fasd-find-file)
