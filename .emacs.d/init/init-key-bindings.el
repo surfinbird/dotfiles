@@ -32,10 +32,6 @@
 (global-set-key (kbd "C-<f9>")      'flymake-goto-prev-error)
 (global-set-key (kbd "C-<f10>")     'flymake-goto-next-error)
 
-;; Zap to char
-(global-set-key (kbd "M-z") 'zap-up-to-char)
-(global-set-key (kbd "C-M-z") (lambda (char) (interactive "cZap up to char backwards: ") (zap-up-to-char -1 char)))
-
 ;; iy-go-to-char - like f in Vim
 (global-set-key (kbd "M-m") 'jump-char-forward)
 (global-set-key (kbd "M-M") 'jump-char-backward)
@@ -72,26 +68,9 @@
 (global-set-key (kbd "<f12>") 'highlight-symbol-next)
 (global-set-key (kbd "<f9>") 'highlight-symbol-query-replace)
 
-;; Evil
-(global-set-key (kbd "C-*") 'evil-search-symbol-forward)
-(global-set-key (kbd "C-#") 'evil-search-symbol-backward)
-(global-set-key (kbd "C-c +") 'evil-numbers/inc-at-pt)
-(global-set-key (kbd "C-c -") 'evil-numbers/dec-at-pt)
-
 ;; Change next underscore with a camel case
 (global-set-key (kbd "C-c C--") 'replace-next-underscore-with-camel)
 (global-set-key (kbd "M-s M--") 'snakeify-current-word)
-
-
-;; Killing text
-(global-set-key (kbd "C-S-k") 'kill-and-retry-line)
-(global-set-key (kbd "C-w") 'kill-region-or-backward-word)
-
-
-;; Use M-w for copy-line if no active region
-(global-set-key (kbd "M-w") 'save-region-or-current-line)
-(global-set-key (kbd "s-w") 'save-region-or-current-line)
-(global-set-key (kbd "M-W") (λ (save-region-or-current-line 1)))
 
 ;; Indentation help
 (global-set-key (kbd "M-j") (λ (join-line -1)))

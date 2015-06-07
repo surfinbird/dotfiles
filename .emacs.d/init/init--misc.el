@@ -94,6 +94,8 @@ Including indent-buffer, which should not be called automatically on save."
       (kill-region (region-beginning) (region-end))
     (backward-kill-word 1)))
 
+(global-set-key (kbd "C-w") 'kill-region-or-backward-word)
+
 (global-set-key (kbd "M-h") 'kill-region-or-backward-word)
 
 (defun kill-to-beginning-of-line ()
@@ -151,5 +153,25 @@ Including indent-buffer, which should not be called automatically on save."
     See `sort-regexp-fields'."
   (interactive "*P\nr")
   (sort-regexp-fields reverse "\\w+" "\\&" beg end))
+
+(defun save-region-or-current-line (arg)
+  (interactive "P")
+  (if (region-active-p)
+      (kill-ring-save (region-beginning) (region-end))
+    (copy-line arg)))
+
+;; Use M-w for copy-line if no active region
+(global-set-key (kbd "M-w") 'save-region-or-current-line)
+(global-set-key (kbd "s-w") 'save-region-or-current-line)
+(global-set-key (kbd "M-W") (λ (save-region-or-current-line 1)))
+
+(autoload 'zap-up-to-char "misc"
+  "Kill up to, but not including ARGth occurrence of CHAR.")
+
+;; Zap to char
+(global-set-key (kbd "M-z") 'zap-up-to-char)
+(global-set-key (kbd "C-M-z")
+                (lambda (char) (interactive "cZap up to char backwards: ") (zap-up-to-char -1 char)))
+
 
 (anr78:provide)

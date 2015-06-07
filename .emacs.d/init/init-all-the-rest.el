@@ -9,6 +9,7 @@
 (use-package  fill-column-indicator :ensure t)
 (use-package  find-file-in-project :ensure t)
 (use-package  flymake-cursor :ensure t)
+
 (use-package  highlight-escape-sequences
   :ensure t
   :config

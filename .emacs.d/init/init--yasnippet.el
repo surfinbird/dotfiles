@@ -5,7 +5,7 @@
   (yas/global-mode 1)
 
   ;; Jump to end of snippet definition
-  (define-key yas-keymap (kbd "<return>") 'yas/exit-all-snippets)
+  (bind-key "<return>" 'yas/exit-all-snippets yas-keymap)
 
   ;; Inter-field navigation
   (defun yas/goto-end-of-active-field ()
@@ -24,9 +24,9 @@
           (move-beginning-of-line 1)
         (goto-char position))))
 
-  (define-key yas-keymap (kbd "C-e") 'yas/goto-end-of-active-field)
-  (define-key yas-keymap (kbd "C-a") 'yas/goto-start-of-active-field)
-
+  (bind-key "C-e" 'yas/goto-end-of-active-field yas-keymap)
+  (bind-key "C-a" 'yas/goto-start-of-active-field yas-keymap)
+  
   ;; No dropdowns please, yas
   (setq yas-prompt-functions '(yas/ido-prompt yas/completing-prompt))
 
