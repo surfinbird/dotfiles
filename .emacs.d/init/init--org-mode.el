@@ -1,3 +1,5 @@
+(message "** init--org-mode **")
+
 (use-package org
   :ensure t
   :defer t

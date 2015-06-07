@@ -1,3 +1,5 @@
+(message "** init--auto-minor-mode **")
+
 (defvar auto-minor-mode-alist ()
   "Alist of filename patterns vs correpsonding minor mode functions, see `auto-mode-alist'.  
 All elements of this alist are checked, meaning you can enable

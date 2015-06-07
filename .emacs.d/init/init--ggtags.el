@@ -1,3 +1,5 @@
+(message "** init--ggtags **")
+
 (use-package ggtags
              :ensure t
              :config

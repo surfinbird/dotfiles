@@ -1,3 +1,5 @@
+(message "** init--mac **")
+
 (when (eq system-type 'darwin)
   (message "init--mac")
   

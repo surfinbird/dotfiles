@@ -1,4 +1,5 @@
-(message "init--greps")
+(message "** init--greps **")
+
 (use-package s :ensure t)
 (use-package wgrep :ensure t)
 

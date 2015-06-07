@@ -1,3 +1,5 @@
+(message "** init--python **")
+
 (defun python-compile ()
   "Use compile to run python programs"
   (interactive)

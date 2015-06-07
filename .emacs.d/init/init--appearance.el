@@ -1,4 +1,5 @@
-(message "init--appearance")
+(message "** init--appearance **")
+
 (setq visible-bell t
       font-lock-maximum-decoration t
       color-theme-is-global t

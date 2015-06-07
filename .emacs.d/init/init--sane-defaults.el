@@ -1,3 +1,5 @@
+(message "** init--sane-defaults **")
+
 ;; Allow pasting selection outside of Emacs
 (setq x-select-enable-clipboard t)
 

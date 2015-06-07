@@ -1,3 +1,5 @@
+(message "** init--plantuml **")
+
 (use-package plantuml-mode
   :ensure t
   :defer t

@@ -1,3 +1,5 @@
+(message "** init--dired **")
+
 (require 'dired)
 (require 'dash)
 

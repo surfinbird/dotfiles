@@ -1,3 +1,5 @@
+(message "** init--mode-mappings **")
+
 (use-package sws-mode
   :ensure t
   :defer t)

@@ -1,4 +1,5 @@
-(message "init--magit")
+(message "** init--magit **")
+
 (use-package  magit
   :ensure t
   :bind (("C-x g" . magit-status))

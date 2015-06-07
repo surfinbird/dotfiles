@@ -1,3 +1,5 @@
+(message "** init--python **")
+
 (use-package elpy
   :ensure t
   :bind (("S-<f8>" . python-compile))

@@ -1,3 +1,5 @@
+(message "** init--ace **")
+
 (use-package  ace-isearch
   :ensure t
   :config

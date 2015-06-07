@@ -1,3 +1,5 @@
+(message "** init **")
+
 (when
     (functionp 'list-packages)          ; auto-loaded somewhere
  

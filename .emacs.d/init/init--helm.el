@@ -1,3 +1,5 @@
+(message "** init--helm **")
+
 (use-package helm
   :ensure t
   :commands (helm-execute-persistent-action helm-select-action)

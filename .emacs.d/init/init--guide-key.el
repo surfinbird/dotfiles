@@ -1,3 +1,5 @@
+(message "** init--guide-key **")
+
 (use-package  guide-key
   :ensure t
   :config

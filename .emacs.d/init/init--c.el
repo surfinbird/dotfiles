@@ -1,3 +1,5 @@
+(message "** init--c **")
+
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook
       (lambda()

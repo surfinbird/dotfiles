@@ -1,4 +1,5 @@
-(message "init--misc")
+(message "** init--misc **")
+
 (use-package s
   :ensure t)
 
@@ -185,6 +186,5 @@ Including indent-buffer, which should not be called automatically on save."
      (defadvice terminal-init-screen
          (around fix-terminal-init-screen first () activate)
        (terminal-init-xterm))))
-
 
 (anr78:provide)

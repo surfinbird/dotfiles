@@ -1,3 +1,5 @@
+(message "** init--js **")
+
 (use-package tern :ensure t)
 (use-package tern-auto-complete :ensure t)
 (use-package flymake-jshint :ensure t)

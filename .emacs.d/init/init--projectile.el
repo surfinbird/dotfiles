@@ -1,3 +1,5 @@
+(message "** init--projectile **")
+
 (use-package projectile
   :ensure t
   :config
