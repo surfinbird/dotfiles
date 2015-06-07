@@ -50,9 +50,6 @@
 (require 'browse-kill-ring)
 (setq browse-kill-ring-quit-action 'save-and-restore)
 
-(require 'bm)
-(setq bookmark-default-file "~/.emacs.d/bookmarks" bookmark-save-flag 1)
-
 ;; Flymake
 (load-library "flymake")
 (load-library "flymake-cursor")

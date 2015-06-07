@@ -10,6 +10,8 @@
      ,@body))
 
 ;; Windmove
+(windmove-default-keybindings) ;; Shift+direction
+(global-unset-key (kbd "C-x C-+")) ;; don't zoom like this
 (global-set-key (kbd "<s-right>") 'windmove-right)
 (global-set-key (kbd "<s-left>") 'windmove-left)
 (global-set-key (kbd "<s-up>") 'windmove-up)
@@ -246,5 +248,31 @@ Including indent-buffer, which should not be called automatically on save."
   :config
   (hes-mode)
   (put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face))
+
+(require 'bm)
+(global-set-key (kbd "<f2>")        'bm-toggle)
+(global-set-key (kbd "C-<f2>")      'bm-next)
+(global-set-key (kbd "S-<f2>")      'bm-previous)
+
+;; iy-go-to-char - like f in Vim
+(global-set-key (kbd "M-m") 'jump-char-forward)
+(global-set-key (kbd "M-M") 'jump-char-backward)
+(global-set-key (kbd "s-m") 'jump-char-backward)
+
+;; vim's ci and co commands
+(global-set-key (kbd "C-c i")         'change-inner)
+(global-set-key (kbd "C-c o")         'change-outer)
+
+(global-set-key (kbd "C-c C-c i") 'copy-inner)
+(global-set-key (kbd "C-c C-c o") 'copy-outer)
+
+;; Remap back-to-indentation
+(global-set-key (kbd "M-i")         'back-to-indentation)
+
+;; Replace rectangle-text with string-rectangle
+(global-set-key (kbd "C-x r t") 'string-rectangle)
+
+;; Expand region (increases selected region by semantic units)
+(global-set-key (when (eq system-type 'darwin) (kbd "C-@") (kbd "C-'")) 'er/expand-region)
 
 (anr78:provide)
