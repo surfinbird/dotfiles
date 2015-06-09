@@ -2,8 +2,9 @@
 
 (use-package  ace-isearch
   :ensure t
-  :config
-  (global-ace-isearch-mode 1))
+;  :config
+;  (global-ace-isearch-mode 1)
+  )
 
 (use-package  ace-jump-mode
   :ensure t
