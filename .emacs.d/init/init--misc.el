@@ -326,6 +326,9 @@ Including indent-buffer, which should not be called automatically on save."
 
 (use-package  dos :ensure t)
 
+;; join line
+(global-set-key (kbd "M-j") (λ (join-line -1)))
+
 ;; stuff I am not sure I need ...
 ;; (use-package  adaptive-wrap :ensure t)
 ;; (use-package  dash :ensure t)
