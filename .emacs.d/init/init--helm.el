@@ -25,8 +25,7 @@
     :ensure t
     :config
     (setq projectile-switch-project-action 'helm-projectile)
-    (helm-projectile-on)
-    )
+    (helm-projectile-on))
 
   (require 'helm-config)
   (when (executable-find "curl")
@@ -42,9 +41,15 @@
   (helm-mode 1)
 )
 
+(use-package helm-git-grep
+  :ensure t
+  :bind (("C-c g" . helm-git-grep)) ;; Invoke `helm-git-grep' from isearch.
+  :init
+  (bind-key "C-c g" 'helm-git-grep-from-isearch isearch-mode-map)
+  (bind-key "C-c g" 'helm-git-grep-from-helm helm-map))
+
 (use-package imenu-anywhere
   :ensure t
-  :bind (("C-." . helm-imenu-anywhere))
-  )
+  :bind (("C-." . helm-imenu-anywhere)))
 
 (anr78:provide)
