@@ -5,6 +5,7 @@
   :defer t
   :config
   (setq
+   org-startup-folded nil
   ; agenda
    org-agenda-files "~/org/agenda-files"  
    org-agenda-start-on-weekday 1
