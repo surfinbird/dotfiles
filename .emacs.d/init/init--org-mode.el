@@ -13,6 +13,10 @@
    org-clock-into-drawer	"CLOCK"
    org-clock-out-when-done t
    org-clock-in-switch-to-state nil
+   ; log
+   org-log-note-clock-out t
+   ; time
+   org-time-clocksum-use-fractional t
   ; todo
    org-todo-keywords
    '((sequence "TODO(t)" "INPROGRESS(i@)" "|" "DONE(f@)" "DELEGATED(d@)" "CANCELLED(c@)"))
