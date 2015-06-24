@@ -29,6 +29,9 @@
 (use-package solarized-theme
   :ensure t
   :config
-  (load-theme 'solarized-dark t))
+                                        ;  (load-theme 'solarized-dark t)
+  )
+
+(load-theme 'wombat t)
 
 (anr78:provide)
