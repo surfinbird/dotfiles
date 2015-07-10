@@ -105,7 +105,6 @@
   ;; Don't bother me with flyspell keybindings
   (eval-after-load "flyspell"
    '(bind-key "C-." nil flyspell-mode-map))
-  (use-package  magit-topgit :ensure t)
   )
 
 (anr78:provide)
