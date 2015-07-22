@@ -3,6 +3,9 @@
 (use-package helm
   :ensure t
   :commands (helm-execute-persistent-action helm-select-action)
+  :preface
+  (require 'helm)
+  (require 'helm-config)
   :bind (
          ("C-c h" . helm-command-prefix)
          ("C-c h /" . helm-find)
@@ -27,7 +30,13 @@
     (setq projectile-switch-project-action 'helm-projectile)
     (helm-projectile-on))
 
-  (require 'helm-config)
+  (use-package helm-git-grep
+    :ensure t
+    :bind (("C-c g" . helm-git-grep)) ;; Invoke `helm-git-grep' from isearch.
+    :init
+    (bind-key "C-c g" 'helm-git-grep-from-isearch isearch-mode-map)
+    (bind-key "C-c g" 'helm-git-grep-from-helm helm-map))
+  
   (when (executable-find "curl")
     (setq helm-google-suggest-use-curl-p t))
 
@@ -40,13 +49,6 @@
   
   (helm-mode 1)
 )
-
-(use-package helm-git-grep
-  :ensure t
-  :bind (("C-c g" . helm-git-grep)) ;; Invoke `helm-git-grep' from isearch.
-  :init
-  (bind-key "C-c g" 'helm-git-grep-from-isearch isearch-mode-map)
-  (bind-key "C-c g" 'helm-git-grep-from-helm helm-map))
 
 (use-package imenu-anywhere
   :ensure t
