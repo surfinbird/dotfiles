@@ -3,3 +3,5 @@
 	name = Anders Rønningen
 [color]
 	ui = auto
+[grep]                                                                                                                           
+  linenumber = true     
