@@ -151,6 +151,7 @@ main = do
   -- start xmonad
   xmonad $
     withUrgencyHook NoUrgencyHook $
+    ewmh
     sessionConfig
     { modMask            = mod4Mask
     , borderWidth        = 2
