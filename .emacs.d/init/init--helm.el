@@ -30,6 +30,14 @@
     (setq projectile-switch-project-action 'helm-projectile)
     (helm-projectile-on))
 
+  (use-package helm-flycheck
+    :ensure t
+    :init
+    (eval-after-load 'flycheck
+      '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
+    )
+  
+    
   (use-package helm-git-grep
     :ensure t
     :bind (("C-c g" . helm-git-grep)) ;; Invoke `helm-git-grep' from isearch.

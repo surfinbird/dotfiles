@@ -317,14 +317,13 @@ Including indent-buffer, which should not be called automatically on save."
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-idle-delay 0)
 
-;; Flymake
-(use-package  flymake-cursor :ensure t)
-(load-library "flymake")
-(load-library "flymake-cursor")
-(global-set-key (kbd "C-<f9>")      'flymake-goto-prev-error)
-(global-set-key (kbd "C-<f10>")     'flymake-goto-next-error)
-
 (use-package  dos :ensure t)
+
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode)
+  )
 
 ;; join line
 (global-set-key (kbd "M-j") (λ (join-line -1)))
