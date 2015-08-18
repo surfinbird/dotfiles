@@ -8,7 +8,8 @@
   (use-package pylint
     :config
     :bind (("C-<f7>" . pylint))
-  )
+    )
+  (remove-hook 'elpy-modules 'elpy-module-flymake)    
 )
 
 (anr78:provide)
