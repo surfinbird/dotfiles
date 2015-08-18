@@ -68,6 +68,7 @@
 ;; Python
 (add-to-list 'auto-mode-alist '("SConstruct$" . python-mode))
 (add-to-list 'auto-mode-alist '("SConscript$" . python-mode))
+(add-to-list 'auto-mode-alist '("SConscript.*$" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.bb$" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.bbappend$" . python-mode))
 
