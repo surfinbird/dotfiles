@@ -75,4 +75,8 @@
 ;; QML
 (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
 
+;; DTS
+(add-to-list 'auto-mode-alist '("\\.dts$" . dts-mode))
+(add-to-list 'auto-mode-alist '("\\.dtsi$" . dts-mode))
+
 (anr78:provide)
