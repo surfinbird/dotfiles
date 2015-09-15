@@ -315,6 +315,8 @@ Including indent-buffer, which should not be called automatically on save."
 
 (use-package  dts-mode :ensure t)
 
+(use-package  systemd :ensure t)
+
 ;; Enable company in all modes
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-idle-delay 0)
