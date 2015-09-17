@@ -285,8 +285,8 @@ Including indent-buffer, which should not be called automatically on save."
 (use-package fill-column-indicator
   :ensure t
   :init
-  (setq fci-rule-width 1)
-  (setq fci-rule-color "grey10")
+  (setq fci-rule-width 2)
+  (setq fci-rule-color "grey15")
   (setq fci-rule-column 100)    
   )
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
@@ -295,8 +295,8 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; vim's ci and co commands
 (require 'change-inner)
-(global-set-key (kbd "C-c i") 'change-inner)
-(global-set-key (kbd "C-c o") 'change-outer)
+(global-set-key (kbd "C-c i")         'change-inner)
+(global-set-key (kbd "C-c o")         'change-outer)
 (global-set-key (kbd "C-c C-c i") 'copy-inner)
 (global-set-key (kbd "C-c C-c o") 'copy-outer)
 
