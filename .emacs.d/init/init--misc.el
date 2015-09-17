@@ -280,9 +280,18 @@ Including indent-buffer, which should not be called automatically on save."
   )
 
 ;; Fill column indicator
-(use-package  fill-column-indicator :ensure t)
-(require 'fill-column-indicator)
-(setq fci-rule-color "#111122")
+(setq fill-column 80)
+
+(use-package fill-column-indicator
+  :ensure t
+  :init
+  (setq fci-rule-width 1)
+  (setq fci-rule-color "grey10")
+  (setq fci-rule-column 100)    
+  )
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
+
 
 ;; vim's ci and co commands
 (require 'change-inner)
