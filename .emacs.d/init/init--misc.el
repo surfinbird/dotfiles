@@ -295,13 +295,13 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; vim's ci and co commands
 (require 'change-inner)
-(global-set-key (kbd "C-c i")         'change-inner)
-(global-set-key (kbd "C-c o")         'change-outer)
+(global-set-key (kbd "C-c i") 'change-inner)
+(global-set-key (kbd "C-c o") 'change-outer)
 (global-set-key (kbd "C-c C-c i") 'copy-inner)
 (global-set-key (kbd "C-c C-c o") 'copy-outer)
 
 ;; Remap back-to-indentation
-(global-set-key (kbd "M-i")         'back-to-indentation)
+(global-set-key (kbd "M-i") 'back-to-indentation)
 
 ;; Replace rectangle-text with string-rectangle
 (global-set-key (kbd "C-x r t") 'string-rectangle)
