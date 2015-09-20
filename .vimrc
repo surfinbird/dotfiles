@@ -75,10 +75,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " ==========================================================
 " Pathogen - Allows us to organize our vim plugins
 " ==========================================================
-" Load pathogen with docs for all plugins
-filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+execute pathogen#infect()
 
 " ==========================================================
 " Basic Settings
@@ -200,19 +197,14 @@ set grepprg=git\ grep\ -nH\ $*
 " ==========================================================
 " Syntastic
 " ==========================================================
-let g:syntastic_enable_signs=1
-let g:syntastic_enable_highlighting=1
-let g:syntastic_check_on_open       = 0
-let g:syntastic_enable_balloons     = 0
-let g:syntastic_auto_jump           = 0
-let g:syntastic_auto_loc_list       = 0
-let g:syntastic_mode_map = {
-            \ 'mode': 'active',
-            \ 'active_filetypes': ['python', 'js', 'javascript'],
-            \ 'passive_filetypes':['css', 'c', 'html', 'php']}
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " ==========================================================
 " Javascript
