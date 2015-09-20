@@ -25,3 +25,6 @@
 [submodule ".emacs.d/site-lisp/dash"]
 	path = .emacs.d/site-lisp/dash
 	url = https://github.com/magnars/dash.el.git
+[submodule ".vim/bundle/vim-snippets"]
+	path = .vim/bundle/vim-snippets
+	url = https://github.com/honza/vim-snippets.git
