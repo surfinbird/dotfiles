@@ -247,24 +247,6 @@ au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\
 let g:pyflakes_use_quickfix = 0
 let g:pymode_indent = 0
 
-""" cscope
-if has('cscope')
-    set cscopetag cscopeverbose
-
-    if has('quickfix')
-        set cscopequickfix=s-,c-,d-,i-,t-,e-
-    endif
-
-    cnoreabbrev csa cs add
-    cnoreabbrev csf cs find
-    cnoreabbrev csk cs kill
-    cnoreabbrev csr cs reset
-    cnoreabbrev css cs show
-    cnoreabbrev csh cs help
-
-    "command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
-endif
-
 " tmux related setup
 
 if &term =~ '^screen'
