@@ -194,7 +194,7 @@ Including indent-buffer, which should not be called automatically on save."
          (around fix-terminal-init-screen first () activate)
        (terminal-init-xterm))))
 
-(use-package  fasd
+(use-package fasd
   :ensure t
   :bind (("C-c f" . fasd-find-file))
   :config
@@ -337,6 +337,8 @@ Including indent-buffer, which should not be called automatically on save."
   :init
   (global-flycheck-mode)
   )
+
+(use-package hydra :ensure t)
 
 ;; join line
 (global-set-key (kbd "M-j") (λ (join-line -1)))
