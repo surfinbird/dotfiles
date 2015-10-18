@@ -340,6 +340,11 @@ Including indent-buffer, which should not be called automatically on save."
 
 (use-package hydra :ensure t)
 
+(use-package key-chord
+  :ensure t
+  :init (key-chord-mode 1)
+  :config (setq key-chord-two-keys-delay 0.075))
+
 ;; join line
 (global-set-key (kbd "M-j") (λ (join-line -1)))
 

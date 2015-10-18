@@ -35,9 +35,17 @@
     :init
     (eval-after-load 'flycheck
       '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
+    :config
+    (define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck)
+    (key-chord-define-global "qf"
+                             (defhydra flycheck-hydra ()
+                               "errors"
+                               ("n" flycheck-next-error "next")
+                               ("p" flycheck-previous-error "previous")
+                               ("h" helm-flycheck "helm" :color blue)
+                               ("q" nil "quit")))
     )
-  
-    
+   
   (use-package helm-git-grep
     :ensure t
     :bind (("C-c g" . helm-git-grep)) ;; Invoke `helm-git-grep' from isearch.

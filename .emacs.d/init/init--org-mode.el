@@ -27,9 +27,19 @@
      ("CANCELLED" . (:foreground "red" :wigth bold))
      )   
    )
+  
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((plantuml . t)))
+  
+  (defhydra hydra-org (:color red :columns 3)
+    "Org Mode Movements"
+    ("n" outline-next-visible-heading "next heading")
+    ("p" outline-previous-visible-heading "prev heading")
+    ("N" org-forward-heading-same-level "next heading at same level")
+    ("P" org-backward-heading-same-level "prev heading at same level")
+    ("u" outline-up-heading "up heading")
+    ("g" org-goto "goto" :exit t))
   )
 
 (anr78:provide)
