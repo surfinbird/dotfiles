@@ -37,7 +37,7 @@
       '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
     :config
     (define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck)
-    (key-chord-define-global "qf"
+    (key-chord-define-global "qw"
                              (defhydra flycheck-hydra ()
                                "errors"
                                ("n" flycheck-next-error "next")
