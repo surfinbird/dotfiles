@@ -25,7 +25,15 @@
     ;; load package list if none loaded (typical first run)
     (when (not package-archive-contents)
       (package-refresh-contents))
- 
+
+    (defvar anr78:package-refresh-done nil
+      "True if package-refresh has been done")
+    (defadvice package-install (before anr78:package-install-do-refresh activate)
+      (when (or (not anr78:package-refresh-done)
+		(not package-archive-contents))
+	(setq anr78:package-refresh-done t)
+	(package-refresh-contents)))
+    
     ;; Bootstrap `use-package'
     (unless (package-installed-p 'use-package)
       (package-refresh-contents)
