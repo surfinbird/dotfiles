@@ -99,13 +99,13 @@ selectedFg = "'#eeeeee'"
 barHeight = "24"
 
 --  font intended to match Ubuntu default application font
-appFontXft = "xft:Inconsolata:size=12:antialias=true"
+appFontXft = "xft:DejaVu Sans Mono:size=10:antialias=true"
 
 -- GridSelect config
 myGSConfig = (buildDefaultGSConfig myColorizer)
   { gs_font       = appFontXft
-  , gs_cellwidth  = 240
-  , gs_cellheight = 40
+  , gs_cellwidth  = 400
+  , gs_cellheight = 80
   , gs_navigate   = navNSearch
   }
 
@@ -129,8 +129,9 @@ myDmenuTitleBar =
     "exec `dmenu_run\
         \ -p 'Run:'\
         \ -i\
-        \ -fn Inconsolata:size=12:antialias=true\
     \`"
+
+-- \ -fn DejaVu Sans Mono:size=10:antialias=true\
 
 -- bind it all together
 main :: IO ()
@@ -223,7 +224,7 @@ myGestures = M.fromList
 
 barCreator :: DynamicStatusBar
 barCreator (S sid) = do trace ("CREATING " ++ show sid)
-                        spawnPipe ("xmobar ~/.xmobarrc --screen " ++ show sid)
+                        spawnPipe ("~/.cabal/bin/xmobar ~/.xmobarrc --screen " ++ show sid)
 
 barDestroyer :: DynamicStatusBarCleanup
 barDestroyer = trace "DESTROYING"
