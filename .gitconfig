@@ -1,7 +1,6 @@
 [user]
-	email = anders@ronningen.priv.no
-	name = Anders Rønningen
+  name = Anders Rønningen
 [color]
-	ui = auto
+  ui = auto
 [grep]                                                                                                                           
   linenumber = true     
