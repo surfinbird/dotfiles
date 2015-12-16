@@ -9,4 +9,4 @@
   (setq projectile-use-git-grep 1)  
   )
 
-(anr78:provide)
+(torpeanders:provide)

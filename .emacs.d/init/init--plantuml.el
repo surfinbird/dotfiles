@@ -8,4 +8,4 @@
         (setq plantuml-jar-path (expand-file-name "~/.emacs.d/resources/plantuml.jar")))
   )
 
-(anr78:provide)
+(torpeanders:provide)

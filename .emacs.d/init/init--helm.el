@@ -70,4 +70,4 @@
   :ensure t
   :bind (("C-." . helm-imenu-anywhere)))
 
-(anr78:provide)
+(torpeanders:provide)

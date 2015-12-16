@@ -26,5 +26,5 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
 (add-hook 'find-file-hook
 	  'enable-minor-mode-based-on-extension)
 
-(anr78:provide)
+(torpeanders:provide)
 

@@ -28,5 +28,5 @@ Null prefix argument turns off the mode."
 
 (add-to-list 'auto-minor-mode-alist '("\\.gpg\\'" . sensitive-mode))
 
-(anr78:provide)
+(torpeanders:provide)
 

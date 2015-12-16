@@ -26,4 +26,4 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-(anr78:provide)
+(torpeanders:provide)

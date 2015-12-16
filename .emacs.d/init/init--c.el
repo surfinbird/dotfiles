@@ -13,4 +13,4 @@
   (interactive)
   (setq c-basic-offset 8))
 
-(anr78:provide)
+(torpeanders:provide)

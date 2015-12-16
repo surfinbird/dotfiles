@@ -28,4 +28,4 @@
   ("C-S-<mouse-1>" . mc/add-cursor-on-click))
   )
 
-(anr78:provide)
+(torpeanders:provide)

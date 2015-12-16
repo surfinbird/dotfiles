@@ -26,12 +26,12 @@
     (when (not package-archive-contents)
       (package-refresh-contents))
 
-    (defvar anr78:package-refresh-done nil
+    (defvar torpeanders:package-refresh-done nil
       "True if package-refresh has been done")
-    (defadvice package-install (before anr78:package-install-do-refresh activate)
-      (when (or (not anr78:package-refresh-done)
+    (defadvice package-install (before torpeanders:package-install-do-refresh activate)
+      (when (or (not torpeanders:package-refresh-done)
 		(not package-archive-contents))
-	(setq anr78:package-refresh-done t)
+	(setq torpeanders:package-refresh-done t)
 	(package-refresh-contents)))
     
     ;; Bootstrap `use-package'
@@ -55,7 +55,7 @@
     (message "Warning: Setup of %s ignored due to missing use-package" name)))
 
 ;; useful function used in each init-*.el
-(defun anr78:provide ()
+(defun torpeanders:provide ()
   "Generate symbol based on filename and provide it"
   (provide (intern (file-name-sans-extension
                     (file-name-nondirectory load-file-name)))))

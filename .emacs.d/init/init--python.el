@@ -15,4 +15,4 @@
     :bind (("C-<f7>" . pylint)))
 )
 
-(anr78:provide)
+(torpeanders:provide)

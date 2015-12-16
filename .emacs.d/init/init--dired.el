@@ -64,4 +64,4 @@
 ;; Find files by name and display results in dired
 (global-set-key (kbd "M-s f") 'find-name-dired)
 
-(anr78:provide)
+(torpeanders:provide)

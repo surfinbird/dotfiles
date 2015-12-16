@@ -12,4 +12,4 @@
    '(bind-key "C-." nil flyspell-mode-map))
   )
 
-(anr78:provide)
+(torpeanders:provide)

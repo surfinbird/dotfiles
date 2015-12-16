@@ -9,4 +9,4 @@
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 
-(anr78:provide)
+(torpeanders:provide)

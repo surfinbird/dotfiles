@@ -84,4 +84,4 @@
 (eval-after-load "wgrep"
   '(define-key wgrep-mode-map (kbd "C-c C-æ") 'mc/add-cursors-to-all-matches))
 
-(anr78:provide)
+(torpeanders:provide)
