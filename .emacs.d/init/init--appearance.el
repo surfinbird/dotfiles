@@ -28,9 +28,7 @@
 
 (use-package twilight-theme
   :ensure t
-  :config
-                                        ;  (load-theme 'solarized-dark t)
-  )
+  :config)
 
 (load-theme 'twilight t)
 
