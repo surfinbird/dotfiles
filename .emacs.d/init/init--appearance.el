@@ -26,10 +26,10 @@
   (tooltip-mode -1)
   (blink-cursor-mode -1))
 
-(use-package twilight-theme
+(use-package ample-zen-theme
   :ensure t
   :config)
 
-(load-theme 'twilight t)
+(load-theme 'ample-zen t)
 
 (torpeanders:provide)
