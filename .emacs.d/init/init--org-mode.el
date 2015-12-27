@@ -2,10 +2,12 @@
 
 (use-package org
   :ensure t
+  :pin org
   :defer t
   :config
   (use-package org-plus-contrib
     :ensure t
+    :pin org
     :defer t)
   (require 'ox-confluence)
   (setq
