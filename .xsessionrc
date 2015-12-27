@@ -1,2 +1,2 @@
 export QT_DEVICE_PIXEL_RATIO=auto
-STARTUP="/home/anr/.scripts/start_session $STARTUP"
+STARTUP="$HOME/.scripts/start_session $STARTUP"

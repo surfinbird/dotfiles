@@ -1,5 +1,6 @@
 [user]
-  name = Anders Rønningen
+	name = Anders Ronningen
+	email = anders@ronningen.priv.no
 [color]
   ui = auto
 [grep]                                                                                                                           
