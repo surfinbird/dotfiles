@@ -28,9 +28,9 @@
    '((sequence "TODO(t)" "INPROGRESS(i@)" "|" "DONE(f@)" "DELEGATED(d@)" "CANCELLED(c@)"))
    org-todo-keyword-faces
    '(("TODO" . org-warning)
-     ("DONE" . (:foreground "green" :wigth bold))
-     ("DELEGATED" . (:foreground "yellow" :wigth bold))
-     ("CANCELLED" . (:foreground "red" :wigth bold))
+     ("DONE" . (:foreground "green" :weight bold))
+     ("DELEGATED" . (:foreground "yellow" :weight bold))
+     ("CANCELLED" . (:foreground "red" :weight bold))
      )
    )
   
