@@ -27,4 +27,3 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
 	  'enable-minor-mode-based-on-extension)
 
 (torpeanders:provide)
-

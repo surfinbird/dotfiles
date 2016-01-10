@@ -120,10 +120,6 @@
     (dotimes (i 10)
       (when (= p (point)) ad-do-it))))
 
-;; Wind Move
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
-
 ;; Write backup files to own directory
 (setq backup-directory-alist
       `(("." . ,(expand-file-name

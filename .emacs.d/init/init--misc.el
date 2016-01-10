@@ -162,17 +162,6 @@ Including indent-buffer, which should not be called automatically on save."
   (interactive "*P\nr")
   (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 
-(defun save-region-or-current-line (arg)
-  (interactive "P")
-  (if (region-active-p)
-      (kill-ring-save (region-beginning) (region-end))
-    (copy-line arg)))
-
-;; Use M-w for copy-line if no active region
-(global-set-key (kbd "M-w") 'save-region-or-current-line)
-(global-set-key (kbd "s-w") 'save-region-or-current-line)
-(global-set-key (kbd "M-W") (λ (save-region-or-current-line 1)))
-
 (autoload 'zap-up-to-char "misc"
   "Kill up to, but not including ARGth occurrence of CHAR.")
 
@@ -256,7 +245,7 @@ Including indent-buffer, which should not be called automatically on save."
          ("<f11>" . highlight-symbol-prev)
          ("<f12>" . highlight-symbol-next)
          ("<f9>" . highlight-symbol-query-replace))
-)
+  )
 
 (use-package  highlight-escape-sequences
   :ensure t
@@ -287,11 +276,10 @@ Including indent-buffer, which should not be called automatically on save."
   :init
   (setq fci-rule-width 2)
   (setq fci-rule-color "grey15")
-  (setq fci-rule-column 100)    
+  (setq fci-rule-column 100)
   )
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 (global-fci-mode 1)
-
 
 ;; vim's ci and co commands
 (require 'change-inner)
@@ -332,14 +320,14 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; Company colors more suited to a dark theme
 (require 'color)
-  
-  (let ((bg (face-attribute 'default :background)))
-    (custom-set-faces
-     `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-     `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
-     `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
-     `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-     `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+
+(let ((bg (face-attribute 'default :background)))
+  (custom-set-faces
+   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 (use-package  dos :ensure t)
 

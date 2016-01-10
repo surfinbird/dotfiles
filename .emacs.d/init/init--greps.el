@@ -44,7 +44,7 @@
      ;; Use same keybinding as occur
      (setq wgrep-enable-key "e")))
 
-(global-set-key (kbd "M-s s")       'git-grep-fullscreen)
+(global-set-key (kbd "M-s s") 'git-grep-fullscreen)
 
 (require 'dash)
 
@@ -69,19 +69,5 @@
 (eval-after-load "grep"
   '(defadvice grep-mode (after grep-register-match-positions activate)
      (add-hook 'compilation-filter-hook 'grep-register-match-positions nil t)))
-
-(defun mc/add-cursors-to-all-matches ()
-  (interactive)
-  (--each grep-match-positions
-    (unless (= 0 it-index)
-      (mc/create-fake-cursor-at-point))
-    (goto-char it))
-  (mc/maybe-multiple-cursors-mode))
-
-(eval-after-load "multiple-cursors"
-  '(add-to-list mc--default-cmds-to-run-once 'mc/add-cursors-to-all-matches))
-
-(eval-after-load "wgrep"
-  '(define-key wgrep-mode-map (kbd "C-c C-æ") 'mc/add-cursors-to-all-matches))
 
 (torpeanders:provide)
