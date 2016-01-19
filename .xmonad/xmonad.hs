@@ -32,6 +32,7 @@ import XMonad.Layout.IM		    -- withIM
 import XMonad.Layout.Reflect        -- reflectHoriz
 import XMonad.Layout.MultiToggle    -- mkToggle, Toggle
 import XMonad.Layout.MultiToggle.Instances -- MIRROR, NBFULL
+import XMonad.Layout.ThreeColumns
 
 import XMonad.Util.EZConfig         -- additionalKeysP
 import XMonad.Util.Loggers          --
@@ -72,6 +73,7 @@ myManageHook = composeOne
   , title     =? "PD-100 Remote" -?> doFloat
   ]
 
+
 myLayoutHook = lessBorders Screen $
                avoidStruts $
                onWorkspace "chat" imLayout $
@@ -79,7 +81,7 @@ myLayoutHook = lessBorders Screen $
                mkToggle (single REFLECTY) $
                mkToggle (single NBFULL) $
                mkToggle (single MIRROR) $
-               tall ||| Mirror tall ||| Full ||| Grid
+               tall ||| ThreeCol 1 (3/100) (1/2) ||| ThreeColMid 1 (3/100) (1/2) ||| Mirror tall ||| Full ||| Grid
   where
     tall = Tall 1 (3/100) (1/2) -- Windows-in-master (increment) (master-ratio)
     imLayout = mkToggle (single NBFULL) $ reflectHoriz $ withIM (1/5) (Role "buddy_list") Grid
