@@ -88,6 +88,8 @@
  '(custom-safe-themes
    (quote
     ("1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" "51e228ffd6c4fff9b5168b31d5927c27734e82ec61f414970fc6bcce23bc140d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "e56f1b1c1daec5dbddc50abd00fcd00f6ce4079f4a7f66052cf16d96412a09a9" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "4a60f0178f5cfd5eafe73e0fc2699a03da90ddb79ac6dbc73042a591ae216f03" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e24180589c0267df991cf54bf1a795c07d00b24169206106624bb844292807b9" default)))
+ '(helm-grep-git-grep-command
+   "git mygrep -n%cH --color=always --exclude-standard --no-index --full-name -e %p -- %f")
  '(magit-pull-arguments nil)
  '(safe-local-variable-values
    (quote
@@ -100,4 +102,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(company-scrollbar-bg ((t (:background "#3a3a3a"))))
+ '(company-scrollbar-fg ((t (:background "#2d2d2d"))))
+ '(company-tooltip ((t (:inherit default :background "#262626"))))
+ '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-selection ((t (:inherit font-lock-function-name-face)))))

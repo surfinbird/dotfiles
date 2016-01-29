@@ -4,4 +4,7 @@
 [color]
   ui = auto
 [grep]                                                                                                                           
-  linenumber = true     
+  linenumber = true
+[alias]
+  mygrep = !git grep \"$@\" -- \":/\" \":!/toexclude\" || :
+
