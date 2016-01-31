@@ -33,6 +33,66 @@
 (cond ((file-exists-p "~/.emacs-this-pc.el")
        (load "~/.emacs-this-pc.el")))
 
+;; Defuns
+
+;; shorthand for interactive lambdas
+(defmacro λ (&rest body)
+  `(lambda ()
+     (interactive)
+     ,@body))
+
+(defvar auto-minor-mode-alist ()
+  "Alist of filename patterns vs correpsonding minor mode functions, see `auto-mode-alist'.  
+All elements of this alist are checked, meaning you can enable
+multiple minor modes for the same regexp.")
+
+(defun enable-minor-mode-based-on-extension ()
+  "Check file name against `auto-minor-mode-alist' to enable minor modes.
+The checking happens for all pairs in `auto-minor-mode-alist'"
+  (when buffer-file-name
+    (let ((name buffer-file-name)
+          (remote-id (file-remote-p buffer-file-name))
+          (alist auto-minor-mode-alist))
+      ;; Remove backup-suffixes from file name.
+      (setq name (file-name-sans-versions name))
+      ;; Remove remote file name identification.
+      (when (and (stringp remote-id)
+                 (string-match-p (regexp-quote remote-id) name))
+        (setq name (substring name (match-end 0))))
+      (while (and alist (caar alist) (cdar alist))
+        (if (string-match (caar alist) name)
+            (funcall (cdar alist) 1))
+        (setq alist (cdr alist))))))
+
+(add-hook 'find-file-hook
+	  'enable-minor-mode-based-on-extension)
+
+(define-minor-mode sensitive-mode
+  "For sensitive files like password lists.
+It disables backup creation and auto saving.
+
+With no argument, this command toggles the mode.
+Non-null prefix argument turns on the mode.
+Null prefix argument turns off the mode."
+  ;; The initial value.
+  nil
+  ;; The indicator for the mode line.
+  " Sensitive"
+  ;; The minor mode bindings.
+  nil
+  (if (symbol-value sensitive-mode)
+      (progn
+	;; disable backups
+	(set (make-local-variable 'backup-inhibited) t)	
+	;; disable auto-save
+	(if auto-save-default
+	    (auto-save-mode -1)))
+    ;; resort to default value of backup-inhibited
+    (kill-local-variable 'backup-inhibited)
+    ;; resort to default auto save setting
+    (if auto-save-default
+	(auto-save-mode 1))))
+
 ;; Some sane defaults
 (show-paren-mode 1)
 (global-hl-line-mode 1)
@@ -62,6 +122,116 @@
 (defun no-backslash-today ()
   (replace-string "\\" "/" nil (point-min) (point-max)))
 (add-hook 'compilation-filter-hook 'no-backslash-today)
+
+;; Auto minor modes
+(add-to-list 'auto-minor-mode-alist '("\\.gpg\\'" . sensitive-mode))
+(add-to-list 'auto-mode-alist '("Carton$" . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '("Cask$" . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.tag$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.vm$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.watchr$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("capfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.erb$" . rhtml-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . javascript-mode))
+(add-to-list 'auto-mode-alist '("\\.jshintrc$" . javascript-mode))
+(add-to-list 'magic-mode-alist '("#!/usr/bin/env node" . js2-mode))
+(add-to-list 'auto-mode-alist '("yasnippet/snippets" . snippet-mode))
+(add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
+(add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  . apache-mode))
+(add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
+(add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
+(add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
+(add-to-list 'auto-mode-alist '("SConstruct$" . python-mode))
+(add-to-list 'auto-mode-alist '("SConscript$" . python-mode))
+(add-to-list 'auto-mode-alist '("SConscript.*$" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.bb$" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.bbappend$" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
+(add-to-list 'auto-mode-alist '("\\.dts$" . dts-mode))
+(add-to-list 'auto-mode-alist '("\\.dtsi$" . dts-mode))
+
+;; C mode
+(use-package google-c-style
+  :ensure t
+  :defer t)
+
+(defun linux-c-mode-offset ()
+  "C mode with adjusted defaults for use with the Linux kernel."
+  (interactive)
+  (setq c-basic-offset 8))
+
+;; JS mode
+(use-package tern
+  :ensure t
+  :defer t)
+
+(use-package tern-auto-complete
+  :ensure t
+  :defer t)
+
+(setq js-indent-level 2)
+(setq js2-basic-offset 2)
+(setq js2-bounce-indent-p nil)
+
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+
+;; Misc modes
+(use-package sws-mode
+  :ensure t
+  :defer t)
+
+(use-package haskell-mode
+  :ensure t
+  :defer t)
+
+(use-package js2-mode
+  :ensure t
+  :defer t)
+
+(use-package jade-mode
+  :ensure t
+  :defer t)
+
+(use-package nsis-mode
+  :ensure t
+  :defer t)
+
+(use-package qml-mode
+  :ensure t
+  :defer t)
+
+(use-package dts-mode
+  :ensure t
+  :defer t)
+
+(use-package systemd
+  :ensure t
+  :defer t)
+
+(use-package rainbow-mode
+  :ensure t
+  :defer t)
+
+(use-package dos
+  :ensure t
+  :defer t)
 
 ;; Some things are different on mac
 (when (eq system-type 'darwin)
@@ -215,7 +385,272 @@
   (setq-default dired-details-hidden-string "--- ")
   (dired-details-install))
 
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+  (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-use-git-grep 1))
 
+(use-package org
+  :ensure t
+  :pin org
+  :defer t
+  :config
+  (use-package org-plus-contrib
+    :ensure t
+    :pin org
+    :defer t)
+  (require 'ox-confluence)
+  (setq
+   org-startup-folded nil
+  ; agenda
+   org-agenda-files "~/org/agenda-files"  
+   org-agenda-start-on-weekday 1
+  ; clock
+   org-clock-into-drawer	"CLOCK"
+   org-clock-out-when-done t
+   org-clock-in-switch-to-state nil
+   ; log
+   org-log-note-clock-out t
+   ; time
+   org-time-clocksum-use-fractional t
+  ; todo
+   org-todo-keywords
+   '((sequence "TODO(t)" "INPROGRESS(i@)" "|" "DONE(f@)" "DELEGATED(d@)" "CANCELLED(c@)"))
+   org-todo-keyword-faces
+   '(("TODO" . org-warning)
+     ("DONE" . (:foreground "green" :weight bold))
+     ("DELEGATED" . (:foreground "yellow" :weight bold))
+     ("CANCELLED" . (:foreground "red" :weight bold))
+     )
+   )
+  
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((plantuml . t)))
+
+  (key-chord-define-global "OM"
+                           (defhydra hydra-org (:color red :columns 3)
+                             "Org Mode Movements"
+                             ("n" outline-next-visible-heading "next heading")
+                             ("p" outline-previous-visible-heading "prev heading")
+                             ("N" org-forward-heading-same-level "next heading at same level")
+                             ("P" org-backward-heading-same-level "prev heading at same level")
+                             ("u" outline-up-heading "up heading")
+                             ("g" org-goto "goto" :exit t))
+                           ))
+
+(use-package smart-mode-line
+  :ensure t
+  :config
+  ;; These two lines are just examples
+  (setq powerline-arrow-shape 'curve)
+  (setq powerline-default-separator-dir '(right . left))
+  (setq sml/theme 'dark)
+  ;; These two lines you really need.
+  (setq sml/no-confirm-load-theme t)
+  (sml/setup))
+
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode))
+
+(use-package hydra :ensure t)
+
+(use-package key-chord
+  :ensure t
+  :init (key-chord-mode 1)
+  :config (setq key-chord-two-keys-delay 0.075))
+
+(use-package  highlight-escape-sequences
+  :ensure t
+  :config
+  (hes-mode)
+  (put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face))
+
+(use-package  bm
+  :ensure t
+  :bind (("<f2>" . bm-toggle)
+         ("C-<f2>" . bm-next)
+         ("S-<f2>" . bm-previous)))
+
+(use-package  smart-forward
+  :ensure t
+  :bind (("M-<up>" . smart-up)
+         ("M-<down>" . smart-down)
+         ("M-<left>" . smart-backward)
+         ("M-<right>" . smart-forward)))
+
+(use-package  highlight-symbol
+  :ensure t
+  :bind (("<f10>" . highlight-symbol-at-point)
+         ("<f11>" . highlight-symbol-prev)
+         ("<f12>" . highlight-symbol-next)
+         ("<f9>" . highlight-symbol-query-replace)))
+
+(use-package browse-kill-ring
+  :ensure t)
+(setq browse-kill-ring-quit-action 'save-and-restore)
+(global-set-key (kbd "C-x C-y") 'browse-kill-ring)
+
+(use-package fasd
+  :ensure t
+  :bind (("C-c f" . fasd-find-file))
+  :config
+  (global-fasd-mode 1))
+
+;; Misc key bindings
+(global-set-key (kbd "<f1>")         'goto-line)
+(global-set-key (kbd "M-<return>")  'toggle-fullscreen)
+(global-set-key (kbd "C-<tab>")     'other-window)
+
+;; View occurrence in occur mode
+(define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)
+(define-key occur-mode-map (kbd "n") 'next-line)
+(define-key occur-mode-map (kbd "p") 'previous-line)
+
+;; Misc setup
+
+(defun create-scratch-buffer nil
+  "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
+  (interactive)
+  (let ((n 0)
+        bufname)
+    (while (progn
+             (setq bufname (concat "*scratch"
+                                   (if (= n 0) "" (int-to-string n))
+                                   "*"))
+             (setq n (1+ n))
+             (get-buffer bufname)))
+    (switch-to-buffer (get-buffer-create bufname))
+    (emacs-lisp-mode)
+    ))
+
+(global-set-key (kbd "C-c b") 'create-scratch-buffer)
+
+(defun cleanup-buffer ()
+  "Perform a bunch of operations on the whitespace content of a buffer.
+Including indent-buffer, which should not be called automatically on save."
+  (interactive)
+  (untabify-buffer)
+  (delete-trailing-whitespace)
+  (indent-buffer))
+
+(global-set-key (kbd "C-c n") 'cleanup-buffer)
+
+(defun split-window-right-and-move-there-dammit ()
+  (interactive)
+  (split-window-right)
+  (windmove-right))
+
+(global-set-key (kbd "C-x 3") 'split-window-right-and-move-there-dammit)
+
+(windmove-default-keybindings) ;; Shift+direction
+
+(defun goto-line-with-feedback ()
+  "Show line numbers temporarily, while prompting for the line number input"
+  (interactive)
+  (unwind-protect
+      (progn
+        (linum-mode 1)
+        (call-interactively 'goto-line))
+    (linum-mode -1)))
+
+(global-set-key [remap goto-line] 'goto-line-with-feedback)
+
+(autoload 'zap-up-to-char "misc"
+  "Kill up to, but not including ARGth occurrence of CHAR.")
+
+;; Zap to char
+(global-set-key (kbd "M-z") 'zap-up-to-char)
+(global-set-key (kbd "C-M-z")
+                (lambda (char) (interactive "cZap up to char backwards: ") (zap-up-to-char -1 char)))
+
+(global-set-key (kbd "M-s e") 'sudo-edit)
+
+;; Edit file with sudo
+(defun sudo-edit (&optional arg)
+  (interactive "p")
+  (if (or arg (not buffer-file-name))
+      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+;; Fixes from Peder to make emacs in a terminal behave better (key and colorwise)
+(eval-after-load "xterm"
+  '(progn
+     (define-key xterm-function-map "\e[27;4;13~" [S-M-return])
+     (define-key xterm-function-map "\e[27;8;13~" [C-M-S-return])
+     ))
+(eval-after-load "screen"
+  '(progn
+     ;; override screens init to just use xterms
+     (defadvice terminal-init-screen
+         (around fix-terminal-init-screen first () activate)
+       (terminal-init-xterm))))
+
+;; <dead-tilde> stopped working on Ubuntu 14.04, this fixes it
+(require 'iso-transl)
+
+(global-set-key [(control x) (control c)]
+                (function
+                 (lambda () (interactive)
+                   (cond ((y-or-n-p "Quit? ")
+                          (save-buffers-kill-emacs))))))
+
+(use-package fill-column-indicator
+  :ensure t
+  :init
+  (setq fci-rule-width 2)
+  (setq fci-rule-color "grey15")
+  (setq fci-rule-column 100))
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
+
+;; Comment/uncomment block
+(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-c u") 'uncomment-region)
+
+;; Navigation bindings
+(global-set-key (kbd "M-p") 'backward-paragraph)
+(global-set-key (kbd "M-n") 'forward-paragraph)
+
+;; vim's ci and co commands
+(require 'change-inner)
+(global-set-key (kbd "C-c i") 'change-inner)
+(global-set-key (kbd "C-c o") 'change-outer)
+(global-set-key (kbd "C-c C-c i") 'copy-inner)
+(global-set-key (kbd "C-c C-c o") 'copy-outer)
+
+;; Remap back-to-indentation
+(global-set-key (kbd "M-i") 'back-to-indentation)
+
+;; Expand region (increases selected region by semantic units)
+(use-package  expand-region :ensure t)
+(require 'expand-region)
+(if (eq system-type 'darwin)
+    (global-set-key (kbd "C-@") 'er/expand-region)
+  (global-set-key (kbd "C-'") 'er/expand-region))
+
+;; join line
+(global-set-key (kbd "M-j") (λ (join-line -1)))
+
+;; Enable company in all modes
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0)
+
+;; Company colors more suited to a dark theme
+(require 'color)
+
+(let ((bg (face-attribute 'default :background)))
+  (custom-set-faces
+   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 ;; useful function used in each init-*.el
 (defun torpeanders:provide ()
