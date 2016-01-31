@@ -1,5 +1,6 @@
 (message "** init **")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup package management
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
@@ -11,11 +12,13 @@
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 (package-initialize)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Some important variables
 (setq user-emacs-directory "~/.emacs.d/")
 (setq user-full-name "Anders Rønningen"
       user-mail-address "anders@ronningen.priv.no")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package is mandatory
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
@@ -23,17 +26,70 @@
 
 (use-package dash :ensure t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup load path
 (message "*** Setting load paths")
 (setq site-lisp-dir
       (expand-file-name "site-lisp" user-emacs-directory))
 (add-to-list 'load-path site-lisp-dir)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Machine specific, loaded early for possible proxy setup
 (cond ((file-exists-p "~/.emacs-this-pc.el")
        (load "~/.emacs-this-pc.el")))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Defuns
+
+(defun create-scratch-buffer nil
+  "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
+  (interactive)
+  (let ((n 0)
+        bufname)
+    (while (progn
+             (setq bufname (concat "*scratch"
+                                   (if (= n 0) "" (int-to-string n))
+                                   "*"))
+             (setq n (1+ n))
+             (get-buffer bufname)))
+    (switch-to-buffer (get-buffer-create bufname))
+    (emacs-lisp-mode)
+    ))
+
+(defun cleanup-buffer ()
+  "Perform a bunch of operations on the whitespace content of a buffer.
+Including indent-buffer, which should not be called automatically on save."
+  (interactive)
+  (untabify-buffer)
+  (delete-trailing-whitespace)
+  (indent-buffer))
+
+
+(defun split-window-right-and-move-there-dammit ()
+  (interactive)
+  (split-window-right)
+  (windmove-right))
+
+(defun goto-line-with-feedback ()
+  "Show line numbers temporarily, while prompting for the line number input"
+  (interactive)
+  (unwind-protect
+      (progn
+        (linum-mode 1)
+        (call-interactively 'goto-line))
+    (linum-mode -1)))
+
+;; Edit file with sudo
+(defun sudo-edit (&optional arg)
+  (interactive "p")
+  (if (or arg (not buffer-file-name))
+      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+(defun linux-c-mode-offset ()
+  "C mode with adjusted defaults for use with the Linux kernel."
+  (interactive)
+  (setq c-basic-offset 8))
 
 ;; shorthand for interactive lambdas
 (defmacro λ (&rest body)
@@ -93,10 +149,96 @@ Null prefix argument turns off the mode."
     (if auto-save-default
 	(auto-save-mode 1))))
 
-;; Some sane defaults
-(show-paren-mode 1)
-(global-hl-line-mode 1)
-(blink-cursor-mode 0)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+(defun no-backslash-today ()
+  (replace-string "\\" "/" nil (point-min) (point-max)))
+(add-hook 'compilation-filter-hook 'no-backslash-today)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Keyboard shortcuts
+
+(global-set-key (kbd "<f1>")         'goto-line)
+(global-set-key (kbd "M-<return>")  'toggle-fullscreen)
+(global-set-key (kbd "C-<tab>")     'other-window)
+
+;; View occurrence in occur mode
+(define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)
+(define-key occur-mode-map (kbd "n") 'next-line)
+(define-key occur-mode-map (kbd "p") 'previous-line)
+
+(global-set-key (kbd "C-c b") 'create-scratch-buffer)
+(global-set-key (kbd "C-c n") 'cleanup-buffer)
+(global-set-key (kbd "C-x 3") 'split-window-right-and-move-there-dammit)
+
+(global-set-key [remap goto-line] 'goto-line-with-feedback)
+
+(autoload 'zap-up-to-char "misc"
+  "Kill up to, but not including ARGth occurrence of CHAR.")
+
+;; Zap to char
+(global-set-key (kbd "M-z") 'zap-up-to-char)
+(global-set-key (kbd "C-M-z")
+                (lambda (char) (interactive "cZap up to char backwards: ") (zap-up-to-char -1 char)))
+
+(global-set-key (kbd "M-s e") 'sudo-edit)
+
+(global-set-key [(control x) (control c)]
+                (function
+                 (lambda () (interactive)
+                   (cond ((y-or-n-p "Quit? ")
+                          (save-buffers-kill-emacs))))))
+
+(global-set-key (kbd "M-j") (λ (join-line -1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Misc setup
+
+;; Some things are different on mac
+(when (eq system-type 'darwin)
+  (set-frame-font "Source Code Pro-14:antialias=1")
+  (add-to-list 'default-frame-alist '(font . "Source Code Pro-14:antialias=1"))
+  
+  ;; change command to meta, and ignore option to use weird Norwegian keyboard
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta)
+  (setq ns-function-modifier 'hyper)
+  (setq ns-alternate-modifier 'none)
+
+  (setq magit-git-executable "/usr/bin/git")
+
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize)))  
+
+;; Fixes from Peder to make emacs in a terminal behave better (key and colorwise)
+(eval-after-load "xterm"
+  '(progn
+     (define-key xterm-function-map "\e[27;4;13~" [S-M-return])
+     (define-key xterm-function-map "\e[27;8;13~" [C-M-S-return])
+     ))
+(eval-after-load "screen"
+  '(progn
+     ;; override screens init to just use xterms
+     (defadvice terminal-init-screen
+         (around fix-terminal-init-screen first () activate)
+       (terminal-init-xterm))))
+
+;; <dead-tilde> stopped working on Ubuntu 14.04, this fixes it
+(require 'iso-transl)
+
+(windmove-default-keybindings) ;; Shift+direction
+
+(show-paren-mode 1) ;; show matching paren
+(global-hl-line-mode 1) ;; highlight current line
+(blink-cursor-mode 0) ;; do not blink the cursor
+
+;; remove visual noise
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -163,9 +305,6 @@ Null prefix argument turns off the mode."
 ;; Don't break lines for me, please
 (setq-default truncate-lines t)
 
-;; Keep cursor away from edges when scrolling up/down
-(use-package  smooth-scrolling :ensure t)
-
 ;; Fontify org-mode code blocks
 (setq org-src-fontify-natively t)
 
@@ -188,18 +327,6 @@ Null prefix argument turns off the mode."
 (global-set-key (kbd "S-<f4>")      'next-error)
 (global-set-key (kbd "C-S-<f4>")    'previous-error)
 (global-set-key (kbd "S-M-<f4>")    'first-error)
-
-(use-package ansi-color :ensure t)
-
-(defun colorize-compilation-buffer ()
-  (toggle-read-only)
-  (ansi-color-apply-on-region (point-min) (point-max))
-  (toggle-read-only))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-
-(defun no-backslash-today ()
-  (replace-string "\\" "/" nil (point-min) (point-max)))
-(add-hook 'compilation-filter-hook 'no-backslash-today)
 
 ;; Auto minor modes
 (add-to-list 'auto-minor-mode-alist '("\\.gpg\\'" . sensitive-mode))
@@ -240,25 +367,6 @@ Null prefix argument turns off the mode."
 (add-to-list 'auto-mode-alist '("\\.dts$" . dts-mode))
 (add-to-list 'auto-mode-alist '("\\.dtsi$" . dts-mode))
 
-;; C mode
-(use-package google-c-style
-  :ensure t
-  :defer t)
-
-(defun linux-c-mode-offset ()
-  "C mode with adjusted defaults for use with the Linux kernel."
-  (interactive)
-  (setq c-basic-offset 8))
-
-;; JS mode
-(use-package tern
-  :ensure t
-  :defer t)
-
-(use-package tern-auto-complete
-  :ensure t
-  :defer t)
-
 (setq js-indent-level 2)
 (setq js2-basic-offset 2)
 (setq js2-bounce-indent-p nil)
@@ -270,7 +378,41 @@ Null prefix argument turns off the mode."
       (require 'tern-auto-complete)
       (tern-ac-setup)))
 
-;; Misc modes
+;; Enable company in all modes
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0)
+
+;; Company colors more suited to a dark theme
+(require 'color)
+
+(let ((bg (face-attribute 'default :background)))
+  (custom-set-faces
+   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Packages
+
+;; Keep cursor away from edges when scrolling up/down
+(use-package  smooth-scrolling :ensure t)
+
+(use-package ansi-color :ensure t)
+
+(use-package google-c-style
+  :ensure t
+  :defer t)
+
+(use-package tern
+  :ensure t
+  :defer t)
+
+(use-package tern-auto-complete
+  :ensure t
+  :defer t)
+
 (use-package sws-mode
   :ensure t
   :defer t)
@@ -311,25 +453,6 @@ Null prefix argument turns off the mode."
   :ensure t
   :defer t)
 
-;; Some things are different on mac
-(when (eq system-type 'darwin)
-  (set-frame-font "Source Code Pro-14:antialias=1")
-  (add-to-list 'default-frame-alist '(font . "Source Code Pro-14:antialias=1"))
-  
-  ;; change command to meta, and ignore option to use weird Norwegian keyboard
-  (setq mac-option-modifier 'super)
-  (setq mac-command-modifier 'meta)
-  (setq ns-function-modifier 'hyper)
-  (setq ns-alternate-modifier 'none)
-
-  (setq magit-git-executable "/usr/bin/git")
-
-  (use-package exec-path-from-shell
-    :ensure t
-    :config
-    (exec-path-from-shell-initialize)))
-
-;; Install and configure packages
 (use-package ample-zen-theme
   :ensure t
   :config
@@ -586,104 +709,6 @@ Null prefix argument turns off the mode."
   (setq undo-tree-mode-lighter "")
   (global-undo-tree-mode))
 
-;; Misc key bindings
-(global-set-key (kbd "<f1>")         'goto-line)
-(global-set-key (kbd "M-<return>")  'toggle-fullscreen)
-(global-set-key (kbd "C-<tab>")     'other-window)
-
-;; View occurrence in occur mode
-(define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)
-(define-key occur-mode-map (kbd "n") 'next-line)
-(define-key occur-mode-map (kbd "p") 'previous-line)
-
-;; Misc setup
-
-(defun create-scratch-buffer nil
-  "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
-  (interactive)
-  (let ((n 0)
-        bufname)
-    (while (progn
-             (setq bufname (concat "*scratch"
-                                   (if (= n 0) "" (int-to-string n))
-                                   "*"))
-             (setq n (1+ n))
-             (get-buffer bufname)))
-    (switch-to-buffer (get-buffer-create bufname))
-    (emacs-lisp-mode)
-    ))
-
-(global-set-key (kbd "C-c b") 'create-scratch-buffer)
-
-(defun cleanup-buffer ()
-  "Perform a bunch of operations on the whitespace content of a buffer.
-Including indent-buffer, which should not be called automatically on save."
-  (interactive)
-  (untabify-buffer)
-  (delete-trailing-whitespace)
-  (indent-buffer))
-
-(global-set-key (kbd "C-c n") 'cleanup-buffer)
-
-(defun split-window-right-and-move-there-dammit ()
-  (interactive)
-  (split-window-right)
-  (windmove-right))
-
-(global-set-key (kbd "C-x 3") 'split-window-right-and-move-there-dammit)
-
-(windmove-default-keybindings) ;; Shift+direction
-
-(defun goto-line-with-feedback ()
-  "Show line numbers temporarily, while prompting for the line number input"
-  (interactive)
-  (unwind-protect
-      (progn
-        (linum-mode 1)
-        (call-interactively 'goto-line))
-    (linum-mode -1)))
-
-(global-set-key [remap goto-line] 'goto-line-with-feedback)
-
-(autoload 'zap-up-to-char "misc"
-  "Kill up to, but not including ARGth occurrence of CHAR.")
-
-;; Zap to char
-(global-set-key (kbd "M-z") 'zap-up-to-char)
-(global-set-key (kbd "C-M-z")
-                (lambda (char) (interactive "cZap up to char backwards: ") (zap-up-to-char -1 char)))
-
-(global-set-key (kbd "M-s e") 'sudo-edit)
-
-;; Edit file with sudo
-(defun sudo-edit (&optional arg)
-  (interactive "p")
-  (if (or arg (not buffer-file-name))
-      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
-
-;; Fixes from Peder to make emacs in a terminal behave better (key and colorwise)
-(eval-after-load "xterm"
-  '(progn
-     (define-key xterm-function-map "\e[27;4;13~" [S-M-return])
-     (define-key xterm-function-map "\e[27;8;13~" [C-M-S-return])
-     ))
-(eval-after-load "screen"
-  '(progn
-     ;; override screens init to just use xterms
-     (defadvice terminal-init-screen
-         (around fix-terminal-init-screen first () activate)
-       (terminal-init-xterm))))
-
-;; <dead-tilde> stopped working on Ubuntu 14.04, this fixes it
-(require 'iso-transl)
-
-(global-set-key [(control x) (control c)]
-                (function
-                 (lambda () (interactive)
-                   (cond ((y-or-n-p "Quit? ")
-                          (save-buffers-kill-emacs))))))
-
 (use-package fill-column-indicator
   :ensure t
   :init
@@ -712,29 +737,12 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "M-i") 'back-to-indentation)
 
 ;; Expand region (increases selected region by semantic units)
-(use-package  expand-region :ensure t)
-(require 'expand-region)
-(if (eq system-type 'darwin)
-    (global-set-key (kbd "C-@") 'er/expand-region)
-  (global-set-key (kbd "C-'") 'er/expand-region))
-
-;; join line
-(global-set-key (kbd "M-j") (λ (join-line -1)))
-
-;; Enable company in all modes
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-idle-delay 0)
-
-;; Company colors more suited to a dark theme
-(require 'color)
-
-(let ((bg (face-attribute 'default :background)))
-  (custom-set-faces
-   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
-   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
-   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+(use-package  expand-region
+  :ensure t
+  :config
+  (if (eq system-type 'darwin)
+      (global-set-key (kbd "C-@") 'er/expand-region)
+    (global-set-key (kbd "C-'") 'er/expand-region)))
 
 ;; Customize
 (custom-set-variables
