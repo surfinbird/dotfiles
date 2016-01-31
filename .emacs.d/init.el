@@ -1,46 +1,27 @@
 (message "** init **")
 
-(when
-    (functionp 'list-packages)          ; auto-loaded somewhere
- 
-  (setq
-   package-enable-at-startup    t       ; load packages installed at startup
-   package-load-list            '(all)  ; all of them (latest of each)
-   )
- 
-  (eval-after-load "package"
-    '(progn
-       (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-       (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-       (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-       (add-to-list 'package-archives '("elpy" . "http://jorgenschaefer.github.io/packages/"))       
-       (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-       ))
- 
-  ;; do this before any local package init
-  (when user-init-file
-    (message "Initializing ELPA packages...")
-    (package-initialize)
- 
-    ;; load package list if none loaded (typical first run)
-    (when (not package-archive-contents)
-      (package-refresh-contents))
+;; Setup package management
+(require 'package)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("elpy" . "http://jorgenschaefer.github.io/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;; keep the installed packages in .emacs.d
+(setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
+(package-initialize)
 
-    (defvar torpeanders:package-refresh-done nil
-      "True if package-refresh has been done")
-    (defadvice package-install (before torpeanders:package-install-do-refresh activate)
-      (when (or (not torpeanders:package-refresh-done)
-		(not package-archive-contents))
-	(setq torpeanders:package-refresh-done t)
-	(package-refresh-contents)))
-    
-    ;; Bootstrap `use-package'
-    (unless (package-installed-p 'use-package)
-      (package-refresh-contents)
-      (package-install 'use-package))
-    ))
-
+;; Some important variables
 (setq user-emacs-directory "~/.emacs.d/")
+(setq user-full-name "Anders Rønningen"
+      user-mail-address "anders@ronningen.priv.no")
+
+;; use-package is mandatory
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
+
+(use-package dash :ensure t)
 
 ;; Setup load path
 (message "*** Setting load paths")
@@ -48,22 +29,59 @@
       (expand-file-name "site-lisp" user-emacs-directory))
 (add-to-list 'load-path site-lisp-dir)
 
-;; make sure we have a use-package macro available at all times
-(when (not (require 'use-package nil t))
-  (defmacro use-package (name &rest args)
-    "Just a dummy, since use-package wasn't loaded"
-    (message "Warning: Setup of %s ignored due to missing use-package" name)))
+;; Machine specific, loaded early for possible proxy setup
+(cond ((file-exists-p "~/.emacs-this-pc.el")
+       (load "~/.emacs-this-pc.el")))
+
+;; Some sane defaults
+(show-paren-mode 1)
+(global-hl-line-mode 1)
+(blink-cursor-mode 0)
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(setq initial-scratch-message "")
+(setq inhibit-startup-message t)
+
+;; Install and configure packages
+(use-package ample-zen-theme
+  :ensure t
+  :config
+  (load-theme 'ample-zen t))
+
+(use-package avy
+  :ensure t
+  :config
+  (avy-setup-default)
+  (defhydra hydra-avy (global-map "M-g" :color blue)
+    "avy-goto"
+    ("c" avy-goto-char "char")
+    ("C" avy-goto-char-2 "char-2")
+    ("w" avy-goto-word-1 "word")
+    ("s" avy-goto-subword-1 "subword")
+    ("u" link-hint-open-link "open-URI")
+    ("U" link-hint-copy-link "copy-URI")))
+
+(use-package ggtags
+  :ensure t
+  :config
+  (setq ggtags-completing-read-function nil)
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                (ggtags-mode 1))))
+  )
+
+
+
+
+
 
 ;; useful function used in each init-*.el
 (defun torpeanders:provide ()
   "Generate symbol based on filename and provide it"
   (provide (intern (file-name-sans-extension
                     (file-name-nondirectory load-file-name)))))
-
-;; Machine specific, loaded early for possible proxy setup
-(cond (
-       (file-exists-p "~/.emacs-this-pc.el")
-       (load "~/.emacs-this-pc.el")))
 
 ;; Load all init-*.el-files in ~/.emacs.d/init
 (let (

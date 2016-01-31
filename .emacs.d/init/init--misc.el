@@ -354,5 +354,16 @@ Including indent-buffer, which should not be called automatically on save."
 ;; (use-package  nose :ensure t)
 ;; (use-package  pkg-info :ensure t)
 
+(defun torpeanders/align-whitespace (start end)
+  "Align columns by whitespace"
+  (interactive "r")
+  (align-regexp start end
+                "\\(\\s-*\\)\\s-" 1 0 t))
+
+(defun torpeanders/align-comma (start end)
+  "Align columns by ampersand"
+  (interactive "r")
+  (align-regexp start end
+                "\\(\\s-*\\)\\," 1 1 t))
 
 (torpeanders:provide)

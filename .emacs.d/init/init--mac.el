@@ -5,6 +5,10 @@
   
   (use-package dash :ensure t)
 
+  (set-frame-font "Source Code Pro-14:antialias=1")
+  (add-to-list 'default-frame-alist '(font . "Source Code Pro-14:antialias=1"))
+
+  
   ;; change command to meta, and ignore option to use weird Norwegian keyboard
   (setq mac-option-modifier 'super)
   (setq mac-command-modifier 'meta)
