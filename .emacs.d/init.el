@@ -103,6 +103,84 @@ Null prefix argument turns off the mode."
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 
+;; Auto refresh buffers
+(global-auto-revert-mode 1)
+
+;; Also auto refresh dired, but be quiet about it
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+
+;; Move files to trash when deleting
+(setq delete-by-moving-to-trash t)
+
+;; Real emacs knights don't use shift to mark things
+(setq shift-select-mode nil)
+
+;; Transparently open compressed files
+(auto-compression-mode t)
+
+;; Enable syntax highlighting for older Emacsen that have it off
+(global-font-lock-mode t)
+
+;; Answering just 'y' or 'n' will do
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; UTF-8 please
+(setq locale-coding-system 'utf-8) ; pretty
+(set-terminal-coding-system 'utf-8) ; pretty
+(set-keyboard-coding-system 'utf-8) ; pretty
+(set-selection-coding-system 'utf-8) ; please
+(prefer-coding-system 'utf-8) ; with sugar on top
+
+;; Show active region
+(transient-mark-mode 1)
+(make-variable-buffer-local 'transient-mark-mode)
+(put 'transient-mark-mode 'permanent-local t)
+(setq-default transient-mark-mode t)
+
+;; Remove text in active region if inserting text
+(delete-selection-mode 1)
+
+;; Don't highlight matches with jump-char - it's distracting
+(setq jump-char-lazy-highlight-face nil)
+
+;; Always display line and column numbers
+(setq line-number-mode t)
+(setq column-number-mode t)
+
+;; Undo/redo window configuration with C-c <left>/<right>
+(winner-mode 1)
+
+;; Never insert tabs
+(set-default 'indent-tabs-mode nil)
+
+;; Show me empty lines after buffer end
+(set-default 'indicate-empty-lines t)
+
+;; Easily navigate sillycased words
+(global-subword-mode 1)
+
+;; Don't break lines for me, please
+(setq-default truncate-lines t)
+
+;; Keep cursor away from edges when scrolling up/down
+(use-package  smooth-scrolling :ensure t)
+
+;; Fontify org-mode code blocks
+(setq org-src-fontify-natively t)
+
+;; Sentences do not need double spaces to end. Period.
+(set-default 'sentence-end-double-space nil)
+
+;; Add parts of each file's directory to the buffer name if not unique
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+;; Run at full power please
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
 ;; Compilation
 (setq compilation-scroll-output t)
 
@@ -502,6 +580,12 @@ Null prefix argument turns off the mode."
   :config
   (global-fasd-mode 1))
 
+(use-package  undo-tree
+  :ensure t
+  :config
+  (setq undo-tree-mode-lighter "")
+  (global-undo-tree-mode))
+
 ;; Misc key bindings
 (global-set-key (kbd "<f1>")         'goto-line)
 (global-set-key (kbd "M-<return>")  'toggle-fullscreen)
@@ -651,23 +735,6 @@ Including indent-buffer, which should not be called automatically on save."
    `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
-
-;; useful function used in each init-*.el
-(defun torpeanders:provide ()
-  "Generate symbol based on filename and provide it"
-  (provide (intern (file-name-sans-extension
-                    (file-name-nondirectory load-file-name)))))
-
-;; Load all init-*.el-files in ~/.emacs.d/init
-(let (
-      (init-dir (concat user-emacs-directory "init")))
-  (add-to-list 'load-path init-dir)
-  (message "Loading init files...")
-  (mapcar
-   (lambda (file)
-     (let ((base (file-name-base file)))
-       (require (intern base))))
-   (directory-files init-dir nil "^init-.*\\.elc?$")))
 
 ;; Customize
 (custom-set-variables
