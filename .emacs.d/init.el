@@ -43,6 +43,26 @@
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 
+;; Compilation
+(setq compilation-scroll-output t)
+
+(global-set-key (kbd "S-<f7>")      'compile)
+(global-set-key (kbd "S-<f4>")      'next-error)
+(global-set-key (kbd "C-S-<f4>")    'previous-error)
+(global-set-key (kbd "S-M-<f4>")    'first-error)
+
+(use-package ansi-color :ensure t)
+
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+(defun no-backslash-today ()
+  (replace-string "\\" "/" nil (point-min) (point-max)))
+(add-hook 'compilation-filter-hook 'no-backslash-today)
+
 ;; Some things are different on mac
 (when (eq system-type 'darwin)
   (set-frame-font "Source Code Pro-14:antialias=1")
@@ -183,8 +203,17 @@
 
   (helm-mode 1))
 
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode)
+  (which-key-setup-side-window-bottom))
 
-
+(use-package  dired-details
+  :ensure t
+  :config
+  (setq-default dired-details-hidden-string "--- ")
+  (dired-details-install))
 
 
 
