@@ -43,6 +43,24 @@
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 
+;; Some things are different on mac
+(when (eq system-type 'darwin)
+  (set-frame-font "Source Code Pro-14:antialias=1")
+  (add-to-list 'default-frame-alist '(font . "Source Code Pro-14:antialias=1"))
+  
+  ;; change command to meta, and ignore option to use weird Norwegian keyboard
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta)
+  (setq ns-function-modifier 'hyper)
+  (setq ns-alternate-modifier 'none)
+
+  (setq magit-git-executable "/usr/bin/git")
+
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize)))
+
 ;; Install and configure packages
 (use-package ample-zen-theme
   :ensure t
@@ -71,6 +89,99 @@
               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
                 (ggtags-mode 1))))
   )
+
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status))
+  :config
+  (set-default 'magit-stage-all-confirm nil)
+  (set-default 'magit-unstage-all-confirm nil))
+
+(use-package elpy
+  :ensure t
+  :init
+  (with-eval-after-load 'python (elpy-enable)))
+
+(use-package multiple-cursors
+  :ensure t
+  :config
+  :bind (("C-S-c C-S-c"   . mc/edit-lines)
+         ("C-S-c C-e"     . mc/edit-ends-of-lines)
+         ("C-S-c C-a"     . mc/edit-beginnings-of-lines)))
+
+(use-package imenu-anywhere
+  :ensure t
+  :bind (("C-." . helm-imenu-anywhere)))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20160122.1056/snippets")
+  (yas-global-mode 1))
+
+(use-package helm
+  :ensure t
+  :commands (helm-execute-persistent-action helm-select-action)
+  :preface
+  (require 'helm)
+  (require 'helm-config)
+  :bind (
+         ("C-c h" . helm-command-prefix)
+         ("C-c h /" . helm-find)
+         ("C-c h i" . helm-semantic-or-imenu)
+         ("C-c h l" . helm-locate)
+         ("C-c h m" . helm-man-woman)
+         ("C-c h o" . helm-occur)
+         ("C-x C-f" . helm-find-files)
+         ("C-x b" . helm-mini)
+         ("M-x" . helm-M-x)
+         ("M-y" . helm-show-kill-ring)
+         ("C-h SPC" . helm-all-mark-rings)
+         )
+  :init
+  (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
+  (bind-key "C-i" 'helm-execute-persistent-action helm-map)
+  (bind-key "C-z" 'helm-select-action helm-map)  
+  :config
+  (use-package helm-projectile
+    :ensure t
+    :config
+    (setq projectile-switch-project-action 'helm-projectile)
+    (helm-projectile-on))
+
+  (use-package helm-flycheck
+    :ensure t
+    :init
+    (eval-after-load 'flycheck
+      '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
+    :config
+    (define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck)
+    (key-chord-define-global "qw"
+                             (defhydra flycheck-hydra ()
+                               "errors"
+                               ("n" flycheck-next-error "next")
+                               ("p" flycheck-previous-error "previous")
+                               ("h" helm-flycheck "helm" :color blue)
+                               ("q" nil "quit")))
+    )
+   
+  (use-package helm-git-grep
+    :ensure t
+    :bind (("C-c g" . helm-git-grep)) ;; Invoke `helm-git-grep' from isearch.
+    :init
+    (bind-key "C-c g" 'helm-git-grep-from-isearch isearch-mode-map)
+    (bind-key "C-c g" 'helm-git-grep-from-helm helm-map))
+  
+  (when (executable-find "curl")
+    (setq helm-google-suggest-use-curl-p t))
+
+  (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+        helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+        helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+        helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+        helm-ff-file-name-history-use-recentf t)
+
+  (helm-mode 1))
 
 
 
