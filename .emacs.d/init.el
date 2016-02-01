@@ -21,6 +21,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package is mandatory
 (unless (package-installed-p 'use-package)
+  (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
 
@@ -378,23 +379,16 @@ Null prefix argument turns off the mode."
       (require 'tern-auto-complete)
       (tern-ac-setup)))
 
-;; Enable company in all modes
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-idle-delay 0)
-
-;; Company colors more suited to a dark theme
-(require 'color)
-
-(let ((bg (face-attribute 'default :background)))
-  (custom-set-faces
-   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
-   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
-   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Packages
+
+(use-package hydra :ensure t)
+
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-idle-delay 0))
 
 ;; Keep cursor away from edges when scrolling up/down
 (use-package  smooth-scrolling :ensure t)
@@ -540,6 +534,11 @@ Null prefix argument turns off the mode."
     (setq projectile-switch-project-action 'helm-projectile)
     (helm-projectile-on))
 
+  (use-package key-chord
+    :ensure t
+    :init (key-chord-mode 1)
+    :config (setq key-chord-two-keys-delay 0.075))
+  
   (use-package helm-flycheck
     :ensure t
     :init
@@ -658,13 +657,6 @@ Null prefix argument turns off the mode."
   :ensure t
   :init
   (global-flycheck-mode))
-
-(use-package hydra :ensure t)
-
-(use-package key-chord
-  :ensure t
-  :init (key-chord-mode 1)
-  :config (setq key-chord-two-keys-delay 0.075))
 
 (use-package  highlight-escape-sequences
   :ensure t
