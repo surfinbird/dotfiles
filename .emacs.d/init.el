@@ -57,6 +57,14 @@
     (emacs-lisp-mode)
     ))
 
+(defun untabify-buffer ()
+  (interactive)
+  (untabify (point-min) (point-max)))
+
+(defun indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
 (defun cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer.
 Including indent-buffer, which should not be called automatically on save."
@@ -397,7 +405,13 @@ Null prefix argument turns off the mode."
 
 (use-package google-c-style
   :ensure t
-  :defer t)
+  :config
+  (add-hook 'c-mode-common-hook
+            (lambda()
+              (subword-mode)
+              (google-set-c-style)
+              (google-make-newline-indent)
+              (setq c-basic-offset 4))))
 
 (use-package tern
   :ensure t
@@ -501,7 +515,7 @@ Null prefix argument turns off the mode."
 (use-package yasnippet
   :ensure t
   :config
-  (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20160122.1056/snippets")
+  (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20160129.1057/snippets")
   (yas-global-mode 1))
 
 (use-package helm
