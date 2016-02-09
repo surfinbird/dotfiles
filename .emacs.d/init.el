@@ -470,7 +470,7 @@ Null prefix argument turns off the mode."
   :ensure t
   :config
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-  (add-hook 'cc-mode-hook #'aggressive-indent-mode))
+  (add-hook 'c-mode-common-hook #'aggressive-indent-mode))
   
 (use-package avy
   :ensure t
