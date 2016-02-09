@@ -466,6 +466,12 @@ Null prefix argument turns off the mode."
   :config
   (load-theme 'ample-zen t))
 
+(use-package aggressive-indent
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+  (add-hook 'cc-mode-hook #'aggressive-indent-mode))
+  
 (use-package avy
   :ensure t
   :config
