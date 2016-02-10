@@ -567,14 +567,18 @@ Null prefix argument turns off the mode."
     :config
     (define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck)
     (key-chord-define-global "qw"
-                             (defhydra flycheck-hydra ()
-                               "errors"
-                               ("n" flycheck-next-error "next")
-                               ("p" flycheck-previous-error "previous")
-                               ("h" helm-flycheck "helm" :color blue)
-                               ("q" nil "quit")))
-    )
-   
+                             (defhydra flycheck-hydra
+                               (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+                                     :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+                                     :hint nil)
+                               "Errors"
+                               ("n" flycheck-next-error "Next")
+                               ("p" flycheck-previous-error "Previous")
+                               ("gg" flycheck-first-error "First")
+                               ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+                               ("h" helm-flycheck "Helm" :color blue)
+                               ("q" nil "Quit"))))
+  
   (use-package helm-git-grep
     :ensure t
     :bind (("C-c g" . helm-git-grep)) ;; Invoke `helm-git-grep' from isearch.
