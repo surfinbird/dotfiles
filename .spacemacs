@@ -269,6 +269,16 @@ layers configuration. You are free to put any user code."
                 (google-set-c-style)
                 (google-make-newline-indent)
                 (setq c-basic-offset 4))))
+
+  (setq
+   org-todo-keywords
+   '((sequence "TODO(t)" "INPROGRESS(i@)" "|" "DONE(f@)" "DELEGATED(d@)" "CANCELLED(c@)"))
+   org-todo-keyword-faces
+   '(("TODO" . org-warning)
+     ("DONE" . (:foreground "green" :weight bold))
+     ("DELEGATED" . (:foreground "yellow" :weight bold))
+     ("CANCELLED" . (:foreground "red" :weight bold))
+     ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
