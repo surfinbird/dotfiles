@@ -259,6 +259,16 @@ layers configuration. You are free to put any user code."
 
   (setq-default dotspacemacs-configuration-layers
                   '((c-c++ :variables c-c++-enable-clang-support t)))
+
+  (use-package google-c-style
+    :ensure t
+    :config
+    (add-hook 'c-mode-common-hook
+              (lambda()
+                (subword-mode)
+                (google-set-c-style)
+                (google-make-newline-indent)
+                (setq c-basic-offset 4))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
