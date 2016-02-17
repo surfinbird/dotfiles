@@ -13,5 +13,6 @@ alias ec='f -e emacsclient'
 alias ecd='d -e emacsclient'
 alias sec='sf -e emacsclient'
 alias secd='sd -e emacsclient'
+alias spacemacs='$HOME=~/spacemacs emacs'
 
 alias fuck='sudo $(fc -ln -1)'
