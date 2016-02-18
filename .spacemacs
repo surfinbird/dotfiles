@@ -254,11 +254,20 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+
+  (setq user-full-name "Anders Rønningen"
+        user-mail-address "anders@ronningen.priv.no")
+
   (setq-default dotspacemacs-configuration-layers '(
      (colors :variables colors-enable-rainbow-identifiers t)))
 
   (setq-default dotspacemacs-configuration-layers
                   '((c-c++ :variables c-c++-enable-clang-support t)))
+
+  (defun linux-c-mode-offset ()
+    "C mode with adjusted defaults for use with the Linux kernel."
+    (interactive)
+    (setq c-basic-offset 8))
 
   (use-package google-c-style
     :ensure t
@@ -269,6 +278,26 @@ layers configuration. You are free to put any user code."
                 (google-set-c-style)
                 (google-make-newline-indent)
                 (setq c-basic-offset 4))))
+
+  (use-package bm
+    :ensure t
+    :bind (("<f2>" . bm-toggle)
+           ("C-<f2>" . bm-next)
+           ("S-<f2>" . bm-previous)))
+
+  (use-package multiple-cursors
+    :ensure t
+    :config
+    :bind (("C-S-c C-S-c"   . mc/edit-lines)
+           ("C-S-c C-e"     . mc/edit-ends-of-lines)
+           ("C-S-c C-a"     . mc/edit-beginnings-of-lines)))
+
+  (use-package helm-git-grep
+    :ensure t
+    :bind (("C-c g" . helm-git-grep)) ;; Invoke `helm-git-grep' from isearch.
+    :init
+    (bind-key "C-c g" 'helm-git-grep-from-isearch isearch-mode-map)
+    (bind-key "C-c g" 'helm-git-grep-from-helm helm-map))
 
   (setq
    org-todo-keywords
