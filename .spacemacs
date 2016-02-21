@@ -264,6 +264,10 @@ layers configuration. You are free to put any user code."
   (setq-default dotspacemacs-configuration-layers
                   '((c-c++ :variables c-c++-enable-clang-support t)))
 
+  (setq-default dotspacemacs-configuration-layers
+                '((auto-completion :variables
+                                   auto-completion-enable-snippets-in-popup t)))
+
   (defun linux-c-mode-offset ()
     "C mode with adjusted defaults for use with the Linux kernel."
     (interactive)
@@ -308,6 +312,16 @@ layers configuration. You are free to put any user code."
      ("DELEGATED" . (:foreground "yellow" :weight bold))
      ("CANCELLED" . (:foreground "red" :weight bold))
      ))
+
+
+  ;; Some things are different on mac
+  (when (eq system-type 'darwin)
+    ;; change command to meta, and ignore option to use weird Norwegian keyboard
+    (setq mac-option-modifier 'super)
+    (setq mac-command-modifier 'meta)
+    (setq ns-function-modifier 'hyper)
+    (setq ns-alternate-modifier 'none)
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
