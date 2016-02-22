@@ -313,6 +313,16 @@ layers configuration. You are free to put any user code."
      ("CANCELLED" . (:foreground "red" :weight bold))
      ))
 
+  (defun colorize-compilation-buffer ()
+    (toggle-read-only)
+    (ansi-color-apply-on-region (point-min) (point-max))
+    (toggle-read-only))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+  (defun no-backslash-today ()
+    (replace-string "\\" "/" nil (point-min) (point-max)))
+  (add-hook 'compilation-filter-hook 'no-backslash-today)
+
 
   ;; Some things are different on mac
   (when (eq system-type 'darwin)
