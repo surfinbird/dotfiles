@@ -332,6 +332,8 @@ layers configuration. You are free to put any user code."
     (setq ns-function-modifier 'hyper)
     (setq ns-alternate-modifier 'none)
     )
+
+  (windmove-default-keybindings)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
