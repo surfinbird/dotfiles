@@ -1,0 +1,7 @@
+* Emacs stuff that needs fixing
+** TODO Fix proxy setup for anaconda.
+- Currently I have to set export no_proxy="localhost,127.0.0.1" in the shell before starting Emacs.
+** TODO Open multiple files in ido-find-file
+- Wildcards are not working.
+** TODO Edit matches from occur or grep buffer
+- Need to support searching in only one dir, not entire repo/project.
