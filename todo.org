@@ -5,3 +5,5 @@
 - Wildcards are not working.
 ** TODO Edit matches from occur or grep buffer
 - Need to support searching in only one dir, not entire repo/project.
+** TODO Set minor modes
+- Need to force mode for some file types, like bb/bbappend
