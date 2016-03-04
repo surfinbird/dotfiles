@@ -53,26 +53,6 @@ if filereadable("~/.ctrlp_custom_ignore.vim")
 endif
 
 " ==========================================================
-" Jedi - python completion
-" ==========================================================
-let g:jedi#goto_assignments_command = "<leader>j"
-let g:jedi#goto_definition_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#popup_select_first = 0 " do not select first completion from list
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#popup_on_dot = 0
-"let g:jedi#autocompletion_command = "<C-Space>"
-"let g:jedi#show_function_definition = "0"
-
-" ==========================================================
-" Ultisnips
-" ==========================================================
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-" ==========================================================
 " Pathogen - Allows us to organize our vim plugins
 " ==========================================================
 execute pathogen#infect()
@@ -195,21 +175,6 @@ nmap <leader>r :exec("grep " . expand("<cword>"))<CR>
 set grepprg=git\ grep\ -nH\ $*
 
 " ==========================================================
-" Syntastic
-" ==========================================================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
-
-
-" ==========================================================
 " Javascript
 " ==========================================================
 au BufRead *.js set makeprg=jslint\ %
@@ -219,7 +184,6 @@ au BufRead *.js set makeprg=jslint\ %
 "autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
 
 let g:acp_completeoptPreview=1
-
 
 " ===========================================================
 " FileType specific changes

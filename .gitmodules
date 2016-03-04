@@ -1,30 +1,12 @@
 [submodule ".zprezto"]
 	path = .zprezto
 	url = git@github.com:torpeanders/prezto.git
-[submodule ".vim/bundle/YouCompleteMe"]
-	path = .vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
-[submodule ".vim/bundle/ultisnips"]
-	path = .vim/bundle/ultisnips
-	url = https://github.com/SirVer/ultisnips
-[submodule ".vim/bundle/jedi-vim"]
-	path = .vim/bundle/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
 [submodule ".vim/bundle/ctrlp"]
 	path = .vim/bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
-[submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
-[submodule ".vim/bundle/buffalo"]
-	path = .vim/bundle/buffalo
-	url = https://github.com/Raimondi/vim-buffalo.git
 [submodule ".emacs.d/site-lisp/browse-kill-ring.git"]
 	path = .emacs.d/site-lisp/browse-kill-ring.git
 	url = https://github.com/T-J-Teru/browse-kill-ring.git
 [submodule ".emacs.d/site-lisp/dash"]
 	path = .emacs.d/site-lisp/dash
 	url = https://github.com/magnars/dash.el.git
-[submodule ".vim/bundle/vim-snippets"]
-	path = .vim/bundle/vim-snippets
-	url = https://github.com/honza/vim-snippets.git
