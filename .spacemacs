@@ -40,6 +40,7 @@ values."
      javascript
      ;; markdown
      org
+     pandoc
      python
      ruby
      (shell :variables
