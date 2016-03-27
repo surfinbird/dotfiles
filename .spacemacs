@@ -56,7 +56,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(bm
+                                      google-c-style
+                                      helm-git-grep  
+                                      key-chord
+                                      multiple-cursors)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -308,6 +312,17 @@ layers configuration. You are free to put any user code."
     :init
     (bind-key "C-c g" 'helm-git-grep-from-isearch isearch-mode-map)
     (bind-key "C-c g" 'helm-git-grep-from-helm helm-map))
+
+  (use-package key-chord
+    :ensure t
+    :init (key-chord-mode 1)
+    :config
+    (setq key-chord-two-keys-delay 0.075)
+    (key-chord-define-global "--"
+     (lambda ()
+       "Insert an underscore."
+       (interactive)
+       (insert "_"))))
 
   (setq
    org-todo-keywords
