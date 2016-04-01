@@ -1,5 +1,6 @@
 #! /bin/bash
 
+echo "== Running xsettingsd.sh =="
 DPI=$(xrandr --current | perl -ne '/connected primary (\d+)x(\d+).* (\d+)mm x (\d+)mm/ && printf "%d\n", 1024*sqrt($1**2+$2**2)*25.4/sqrt($3**2+$4**2)')
 
 file=$HOME/.xsettingsd
