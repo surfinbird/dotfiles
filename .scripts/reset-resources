@@ -18,6 +18,11 @@ esac
 
 ostype=`uname -s | tr A-Z a-z`
 export REAL_DPI=$(xrandr --current | perl -ne '/connected primary (\d+)x(\d+).* (\d+)mm x (\d+)mm/ && printf "%d\n", sqrt($1**2+$2**2)*25.4/sqrt($3**2+$4**2)')
+if [ -z "$REAL_DPI" ]; then
+    echo "REAL_DPI was empty. Using 157"
+    export REAL_DPI=157
+fi
+
 export STEP_DPI=$[REAL_DPI/24*24]
 
 if [ -f $HOME/.Xresources ]; then 
