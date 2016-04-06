@@ -453,11 +453,11 @@ Null prefix argument turns off the mode."
   :ensure t
   :defer t)
 
-(use-package rainbow-mode
+(use-package dos
   :ensure t
   :defer t)
 
-(use-package dos
+(use-package rainbow-mode
   :ensure t
   :defer t)
 
