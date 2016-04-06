@@ -23,6 +23,4 @@ shopt -s nullglob
 
 msg "Starting session [%s]" "$DESKTOP_SESSION"
 
-
-msg "= Running session [$*]..."
 exec "$@"
