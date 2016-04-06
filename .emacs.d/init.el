@@ -733,6 +733,12 @@ Null prefix argument turns off the mode."
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 (global-fci-mode 1)
 
+
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
+
 ;; Comment/uncomment block
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-c u") 'uncomment-region)
