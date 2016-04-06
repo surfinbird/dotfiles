@@ -6,7 +6,7 @@ function doIt() {
     stuff=(".aliases .emacs.d .scripts .vim .xmonad .zprezto \
         .ackrc .bash_profile .bashrc .conkyrc .functions \
         .gitconfig .rtorrent.rc .screenrc .tmux.conf .vimrc \
-        .Xmodmap .Xresources .Xresources.d .xsessionrc .xmobarrc \
+        .Xmodmap .Xresources .xsessionrc .xmobarrc \
         .spacemacs")
     
     for el in $stuff; do
