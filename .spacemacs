@@ -58,8 +58,17 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(bm
                                       google-c-style
-                                      helm-git-grep  
+                                      helm-git-grep
                                       key-chord
+                                      sws-mode
+                                      haskell-mode
+                                      js2-mode
+                                      jade-mode
+                                      nsis-mode
+                                      qml-mode
+                                      dts-mode
+                                      systemd
+                                      dos
                                       multiple-cursors)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -278,6 +287,131 @@ layers configuration. You are free to put any user code."
                 '((auto-completion :variables
                                    auto-completion-enable-snippets-in-popup t)))
 
+  (defun create-scratch-buffer nil
+    "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
+    (interactive)
+    (let ((n 0)
+          bufname)
+      (while (progn
+               (setq bufname (concat "*scratch"
+                                     (if (= n 0) "" (int-to-string n))
+                                     "*"))
+               (setq n (1+ n))
+               (get-buffer bufname)))
+      (switch-to-buffer (get-buffer-create bufname))
+      (emacs-lisp-mode)
+      ))
+
+  (global-set-key (kbd "C-c b") 'create-scratch-buffer)
+
+  (global-set-key (kbd "C-c f") 'fasd-find-file)
+
+  (defvar auto-minor-mode-alist ()
+  "Alist of filename patterns vs correpsonding minor mode functions, see `auto-mode-alist'.
+All elements of this alist are checked, meaning you can enable
+multiple minor modes for the same regexp.")
+
+  (defun enable-minor-mode-based-on-extension ()
+    "Check file name against `auto-minor-mode-alist' to enable minor modes.
+The checking happens for all pairs in `auto-minor-mode-alist'"
+    (when buffer-file-name
+      (let ((name buffer-file-name)
+            (remote-id (file-remote-p buffer-file-name))
+            (alist auto-minor-mode-alist))
+        ;; Remove backup-suffixes from file name.
+        (setq name (file-name-sans-versions name))
+        ;; Remove remote file name identification.
+        (when (and (stringp remote-id)
+                   (string-match-p (regexp-quote remote-id) name))
+          (setq name (substring name (match-end 0))))
+        (while (and alist (caar alist) (cdar alist))
+          (if (string-match (caar alist) name)
+              (funcall (cdar alist) 1))
+          (setq alist (cdr alist))))))
+
+  (add-hook 'find-file-hook
+            'enable-minor-mode-based-on-extension)
+
+  (use-package sws-mode
+    :ensure t
+    :defer t)
+
+  (use-package haskell-mode
+    :ensure t
+    :defer t)
+
+  (use-package js2-mode
+    :ensure t
+    :defer t)
+
+  (use-package jade-mode
+    :ensure t
+    :defer t)
+
+  (use-package nsis-mode
+    :ensure t
+    :defer t)
+
+  (use-package qml-mode
+    :ensure t
+    :defer t)
+
+  (use-package dts-mode
+    :ensure t
+    :defer t)
+
+  (use-package systemd
+    :ensure t
+    :defer t)
+
+  (use-package dos
+    :ensure t
+    :defer t)
+
+  ;; Auto minor modes
+  (add-to-list 'auto-minor-mode-alist '("\\.gpg\\'" . sensitive-mode))
+  (add-to-list 'auto-mode-alist '("Carton$" . emacs-lisp-mode))
+  (add-to-list 'auto-mode-alist '("Cask$" . emacs-lisp-mode))
+  (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
+  (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+  (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
+  (add-to-list 'auto-mode-alist '("\\.tag$" . html-mode))
+  (add-to-list 'auto-mode-alist '("\\.vm$" . html-mode))
+  (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.watchr$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("capfile" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb$" . rhtml-mode))
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.json$" . javascript-mode))
+  (add-to-list 'auto-mode-alist '("\\.jshintrc$" . javascript-mode))
+  (add-to-list 'magic-mode-alist '("#!/usr/bin/env node" . js2-mode))
+  (add-to-list 'auto-mode-alist '("yasnippet/snippets" . snippet-mode))
+  (add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
+  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+  (add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
+  (add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  . apache-mode))
+  (add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
+  (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
+  (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
+  (add-to-list 'auto-mode-alist '("SConstruct$" . python-mode))
+  (add-to-list 'auto-mode-alist '("SConscript$" . python-mode))
+  (add-to-list 'auto-mode-alist '("SConscript.*$" . python-mode))
+  (add-to-list 'auto-mode-alist '("\\.bb$" . python-mode))
+  (add-to-list 'auto-mode-alist '("\\.bbappend$" . python-mode))
+  (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
+  (add-to-list 'auto-mode-alist '("\\.dts$" . dts-mode))
+  (add-to-list 'auto-mode-alist '("\\.dtsi$" . dts-mode))
+
+  ;; Shortcuts for error navigation
+  (global-set-key (kbd "S-<f4>")      'next-error)
+  (global-set-key (kbd "C-S-<f4>")    'previous-error)
+  (global-set-key (kbd "S-M-<f4>")    'first-error)
+
   (defun linux-c-mode-offset ()
     "C mode with adjusted defaults for use with the Linux kernel."
     (interactive)
@@ -325,6 +459,15 @@ layers configuration. You are free to put any user code."
        (insert "_"))))
 
   (setq
+   org-agenda-start-on-weekday 1
+   ; clock
+   org-clock-into-drawer	"CLOCK"
+   org-clock-out-when-done t
+   org-clock-in-switch-to-state nil
+   ; log
+   org-log-note-clock-out t
+   ; time
+   org-time-clocksum-use-fractional t
    org-todo-keywords
    '((sequence "TODO(t)" "INPROGRESS(i@)" "|" "DONE(f@)" "DELEGATED(d@)" "CANCELLED(c@)"))
    org-todo-keyword-faces
