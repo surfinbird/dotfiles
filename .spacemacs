@@ -369,7 +369,6 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
     :defer t)
 
   ;; Auto minor modes
-  (add-to-list 'auto-minor-mode-alist '("\\.gpg\\'" . sensitive-mode))
   (add-to-list 'auto-mode-alist '("Carton$" . emacs-lisp-mode))
   (add-to-list 'auto-mode-alist '("Cask$" . emacs-lisp-mode))
   (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
