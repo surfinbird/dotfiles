@@ -375,6 +375,7 @@ Null prefix argument turns off the mode."
 (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
 (add-to-list 'auto-mode-alist '("\\.dts$" . dts-mode))
 (add-to-list 'auto-mode-alist '("\\.dtsi$" . dts-mode))
+(add-to-list 'auto-mode-alist '("\\.robot$" . robot-mode))
 
 (setq js-indent-level 2)
 (setq js2-basic-offset 2)
