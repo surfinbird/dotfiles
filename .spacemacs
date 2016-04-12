@@ -411,6 +411,24 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
   (global-set-key (kbd "C-S-<f4>")    'previous-error)
   (global-set-key (kbd "S-M-<f4>")    'first-error)
 
+  (defun untabify-buffer ()
+    (interactive)
+    (untabify (point-min) (point-max)))
+
+  (defun indent-buffer ()
+    (interactive)
+    (indent-region (point-min) (point-max)))
+
+  (defun cleanup-buffer ()
+    "Perform a bunch of operations on the whitespace content of a buffer.
+Including indent-buffer, which should not be called automatically on save."
+    (interactive)
+    (untabify-buffer)
+    (delete-trailing-whitespace)
+    (indent-buffer))
+
+  (global-set-key (kbd "C-c n") 'cleanup-buffer)
+  
   (defun linux-c-mode-offset ()
     "C mode with adjusted defaults for use with the Linux kernel."
     (interactive)
