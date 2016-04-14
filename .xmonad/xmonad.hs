@@ -69,7 +69,7 @@ myManageHook = composeOne
   [ isFullscreen                 -?> doFullFloat
   , isDialog                     -?> doFloat
   , className =? "Firefox"       -?> doMakeShift "web"
-  , className =? "Google-chrome" -?> doMakeShift "web"
+  , className =? "google-chrome" -?> doMakeShift "web"
   , className =? "Thunderbird"   -?> doMakeShift "web"
   , className =? "Geary"         -?> doMakeShift "web"
   , className =? "Pidgin"        -?> doMakeShift "chat"
@@ -80,6 +80,7 @@ myManageHook = composeOne
   , className =? "Fldiff"        -?> doFloat
   , title     =? "Ediff"         -?> doFloat
   , title     =? "PD-100 Remote" -?> doFloat
+  , title =? "Robot Framework" -?> doFloat
   ]
 
 
