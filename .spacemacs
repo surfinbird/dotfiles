@@ -125,12 +125,12 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(monokai
+                         zenburn
                          spacemacs-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
-                         leuven
-                         zenburn)
+                         leuven)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -389,6 +389,7 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
   (add-to-list 'auto-mode-alist '("\\.json$" . javascript-mode))
   (add-to-list 'auto-mode-alist '("\\.jshintrc$" . javascript-mode))
   (add-to-list 'magic-mode-alist '("#!/usr/bin/env node" . js2-mode))
+  (add-to-list 'magic-mode-alist '("# -*-robot-*" . robot-mode))
   (add-to-list 'auto-mode-alist '("yasnippet/snippets" . snippet-mode))
   (add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -515,6 +516,7 @@ Including indent-buffer, which should not be called automatically on save."
     )
 
   (windmove-default-keybindings)
+  (global-company-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
