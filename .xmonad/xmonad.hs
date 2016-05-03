@@ -70,6 +70,7 @@ myManageHook = composeOne
   , isDialog                     -?> doFloat
   , className =? "Firefox"       -?> doMakeShift "web"
   , className =? "google-chrome" -?> doMakeShift "web"
+  , className =? "vivaldi-stable" -?> doMakeShift "web"
   , className =? "Thunderbird"   -?> doMakeShift "web"
   , className =? "Geary"         -?> doMakeShift "web"
   , className =? "Pidgin"        -?> doMakeShift "chat"
