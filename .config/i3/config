@@ -15,10 +15,10 @@
 #     - fonts
 #     - gtkapps, lxappearance will fix this
 #     - i3blocks
+#     - i3lock background
 #     - wallpaper (feh?)
 #  - better i3blocks config. control volume. perhaps network-manager applet?
 #  - named workspaces(?)
-#  - setup i3lock
 #  - quickly switch to application by name. something like gridselect?
 
 set $mod Mod1
@@ -193,3 +193,6 @@ exec thunderbird
 assign [class="emacs"] 1
 assign [class="Firefox"] 3
 assign [class="Thunderbird"] 4
+
+# Lock screen
+bindsym Control+mod1+l exec i3lock -c 242424
