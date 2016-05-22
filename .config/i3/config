@@ -9,18 +9,6 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# TODO:
-#  - learn how to work with multiple monitors
-#  - make stuff pretty. fonts, title bars and i3blocks.
-#     - fonts
-#     - gtkapps, lxappearance / gtk-chtheme / qt4-qtconfig
-#     - i3blocks
-#     - i3lock background => place in ~/Pictures/.lockscreen.png
-#     - wallpaper (feh?) => place in ~/Pictures/.wallpaper.png
-#  - control volume in i3blocks
-#  - named workspaces(?)
-#  - quickly switch to application by name. something like gridselect?
-
 set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
