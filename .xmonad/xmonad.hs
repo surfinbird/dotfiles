@@ -176,7 +176,7 @@ main = do
                            -- >> fadeInactiveLogHook 0.75
     , startupHook        = startupHook sessionConfig
                            <+> setWMName "LG3D" -- for JAVA borkenness
-    , terminal           = "xterm"
+    , terminal           = "gnome-terminal"
     } `additionalKeysP` (
       [ ("M-y",                    focusUrgent)
       , ("M-g",                    goToSelected myGSConfig)
