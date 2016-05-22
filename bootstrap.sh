@@ -17,13 +17,14 @@ create_symlinks() {
         .ackrc .bash_profile .bashrc .conkyrc .functions \
         .gitconfig .tmux.conf .vimrc \
         .Xmodmap .Xresources .Xresources.d .xsessionrc .xmobarrc \
-        .spacemacs .i3blocks.conf")
+        .spacemacs")
 
     for el in $stuff; do
         ln -fsv $(pwd)/$el ~
     done
 
     for el in $(ls .config); do
+        rm -f ~/.config/$el
         ln -fsv $(pwd)/.config/$el ~/.config/$el
     done
 }
