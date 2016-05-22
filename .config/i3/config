@@ -153,5 +153,6 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3blocks
+        position top
         tray_output primary
 }
