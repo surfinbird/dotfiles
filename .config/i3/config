@@ -17,7 +17,7 @@
 #     - i3blocks
 #     - i3lock background => place in ~/Pictures/.lockscreen.png
 #     - wallpaper (feh?) => place in ~/Pictures/.wallpaper.png
-#  - better i3blocks config. control volume. 
+#  - control volume in i3blocks
 #  - named workspaces(?)
 #  - quickly switch to application by name. something like gridselect?
 
