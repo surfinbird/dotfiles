@@ -17,10 +17,9 @@
 #     - i3blocks
 #     - i3lock background => place in ~/Pictures/.lockscreen.png
 #     - wallpaper (feh?) => place in ~/Pictures/.wallpaper.png
-#  - better i3blocks config. control volume. perhaps network-manager applet?
+#  - better i3blocks config. control volume. 
 #  - named workspaces(?)
 #  - quickly switch to application by name. something like gridselect?
-#  - must have nm applet
 
 set $mod Mod1
 
