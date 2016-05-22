@@ -2,15 +2,17 @@
 cd "$(dirname "${BASH_SOURCE}")"
 
 update_repos() {
+    echo "-- Update repositories --"
     git pull origin master
     git submodule update --init --recursive
-    
+
     if [ ! -d ~/.emacs.d ]; then
         git clone git@github.com:syl20bnr/spacemacs.git ~/.emacs.d
     fi
 }
 
 create_symlinks() {
+    echo "-- Create symlinks to config files --"
     stuff=(".aliases .scripts .vim .xmonad .zprezto \
         .ackrc .bash_profile .bashrc .conkyrc .functions \
         .gitconfig .rtorrent.rc .screenrc .tmux.conf .vimrc \
@@ -24,6 +26,30 @@ create_symlinks() {
     for el in $(ls .config); do
         ln -fsv $(pwd)/.config/$el ~/.config/$el
     done
+}
+
+install_packages() {
+    if ! which apt 2>&1 > /dev/null; then
+        # not on ubuntu/debian
+        return
+    fi
+
+    echo "-- Checking Apt packages --"
+    apt_dep=(build-essential zsh emacs tmux vim scrot i3 suckless-tools conky)
+    missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))
+    if [ -n "$missing" ]; then
+        echo "Missing apt packages:" "${missing[@]}"
+        sudo apt-get update
+        sudo apt-get install -y "${missing[@]}"
+    fi
+
+    echo "-- Checking for FASD --"
+    if ! which fasd 2>&1 > /dev/null; then
+        rm -rf /tmp/fasd
+        git clone https://github.com/clvv/fasd.git /tmp/fasd
+        cd /tmp/fasd
+        sudo make install
+    fi
 }
 
 case $1 in
@@ -41,4 +67,5 @@ esac
 
 update_repos
 create_symlinks
-
+install_packages
+echo "-- Done --"
