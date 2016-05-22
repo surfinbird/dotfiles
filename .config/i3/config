@@ -13,7 +13,7 @@
 #  - learn how to work with multiple monitors
 #  - make stuff pretty. fonts, title bars and i3blocks.
 #     - fonts
-#     - gtkapps, lxappearance will fix this
+#     - gtkapps, lxappearance / gtk-chtheme / qt4-qtconfig
 #     - i3blocks
 #     - i3lock background => place in ~/Pictures/.lockscreen.png
 #     - wallpaper (feh?) => place in ~/Pictures/.wallpaper.png
@@ -188,6 +188,9 @@ mode "$mode_launcher" {
 exec emacs
 exec firefox
 exec thunderbird
+
+#exec --no-startup-id mate-settings-daemon
+#exec --no-startup-id nm-applet
 
 # Force some applications to certain workspaces
 assign [class="emacs"] 1
