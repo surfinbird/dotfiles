@@ -13,7 +13,9 @@ function doIt() {
         ln -fsv $(pwd)/$el ~
     done
 
-    cp -vR .config ~/
+    for el in $(ls .config); do
+        ln -fsv $(pwd)/.config/$el ~/.config/$el
+    done
 
 #    rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
 #        --exclude "README.md" --exclude "*.swp" --exclude ".gitmodules" \
