@@ -7,7 +7,7 @@ function doIt() {
         .ackrc .bash_profile .bashrc .conkyrc .functions \
         .gitconfig .rtorrent.rc .screenrc .tmux.conf .vimrc \
         .Xmodmap .Xresources .Xresources.d .xsessionrc .xmobarrc \
-        .spacemacs")
+        .spacemacs .i3blocks.conf")
     
     for el in $stuff; do
         ln -fsv $(pwd)/$el ~
