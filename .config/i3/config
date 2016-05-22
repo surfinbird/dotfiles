@@ -167,7 +167,6 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3blocks
         position top
-        tray_output primary
 }
 
 # Press $mod+o followed by either f, t, Esc or Return to launch firefox,
@@ -191,7 +190,7 @@ exec firefox
 exec thunderbird
 
 #exec --no-startup-id mate-settings-daemon
-#exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 
 # Force some applications to certain workspaces
 assign [class="emacs"] 1
