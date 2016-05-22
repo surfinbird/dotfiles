@@ -13,11 +13,9 @@ update_repos() {
 
 create_symlinks() {
     echo "-- Create symlinks to config files --"
-    stuff=(".aliases .scripts .vim .xmonad .zprezto \
-        .ackrc .bash_profile .bashrc .conkyrc .functions \
-        .gitconfig .tmux.conf .vimrc \
-        .Xmodmap .Xresources .Xresources.d .xsessionrc .xmobarrc \
-        .spacemacs")
+    stuff=(".aliases .scripts .vim .zprezto .ackrc .bash_profile \
+        .bashrc .conkyrc .functions .gitconfig .tmux.conf .vimrc \
+        .Xmodmap .Xresources .Xresources.d .xsessionrc .spacemacs")
 
     for el in $stuff; do
         ln -fsv $(pwd)/$el ~
