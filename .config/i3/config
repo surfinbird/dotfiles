@@ -20,6 +20,7 @@
 #  - better i3blocks config. control volume. perhaps network-manager applet?
 #  - named workspaces(?)
 #  - quickly switch to application by name. something like gridselect?
+#  - must have nm applet
 
 set $mod Mod1
 

@@ -15,7 +15,7 @@ create_symlinks() {
     echo "-- Create symlinks to config files --"
     stuff=(".aliases .scripts .vim .xmonad .zprezto \
         .ackrc .bash_profile .bashrc .conkyrc .functions \
-        .gitconfig .rtorrent.rc .screenrc .tmux.conf .vimrc \
+        .gitconfig .tmux.conf .vimrc \
         .Xmodmap .Xresources .Xresources.d .xsessionrc .xmobarrc \
         .spacemacs .i3blocks.conf")
 
