@@ -24,7 +24,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/share/i3blocks/$BLOCK_NAME
+command=~/.config/i3blocks/dispatcher 
 separator_block_width=15
 markup=none
 
@@ -91,7 +91,7 @@ interval=5
 [cpu_usage]
 label=CPU
 interval=10
-min_width=CPU: 100.00%
+#min_width=CPU: 100.00%
 #separator=false
 
 #[load_average]
@@ -101,16 +101,21 @@ min_width=CPU: 100.00%
 #
 # The battery instance defaults to 0.
 [battery]
-label=BAT
+#label=BAT
 #label=⚡
 #instance=1
-interval=30
+interval=5
+format=json
 
 # Date Time
 #
-[time]
-command=date '+%Y-%m-%d %H:%M:%S'
-interval=5
+#[time]
+#command=date '+%Y-%m-%d %H:%M:%S'
+#interval=5
+
+[datetime]
+interval=persist
+format=json
 
 # Generic media player support
 #

@@ -1,0 +1,244 @@
+#! /usr/bin/perl -CASDL
+
+use strict;
+use utf8;
+
+use File::Glob ':bsd_glob';
+
+use Data::Dumper;
+$Data::Dumper::Sortkeys = $Data::Dumper::Indent = 1;
+
+chdir "/sys/class/power_supply";
+
+my %state;
+my %cell;
+
+for my $ps (glob "*") {
+    my($ps_fh,$d);
+    my $kl = 0;
+
+    open $ps_fh, "<", "$ps/type";
+    while (<$ps_fh>) {
+	chomp;
+	$d->{TYPE} = $_;
+	last;
+    }
+    close $ps_fh;
+    
+    open $ps_fh, "<", "$ps/uevent";
+    while (<$ps_fh>) {
+	chomp;
+	if (/^([^=]*)=(.*)/) {
+	    $d->{$1} = $2;
+	    $kl = length $1 if $kl < length $1;
+	}
+    }
+    close $ps_fh;
+
+    if ($d->{TYPE} eq 'Mains') {
+	$state{ONLINE} = $d->{POWER_SUPPLY_ONLINE} ? 1 : 0;
+    }
+    elsif ($d->{TYPE} eq 'Battery') {
+	# ENERGY (µWh), POWER (µW), CHARGE (µAh), CURRENT (µA)
+
+	my($cap_t, $use_t);
+	if (exists $d->{POWER_SUPPLY_POWER_NOW}) {
+	    $cap_t = 'ENERGY';
+	    $use_t = 'POWER';
+	}
+	elsif (exists $d->{POWER_SUPPLY_CURRENT_NOW}) {
+	    $cap_t = 'CHARGE';
+	    $use_t = 'CURRENT';
+	}
+	else {
+	    # No current or power rating present? then we skip this battery
+	    next;
+	}
+
+	# Just to make sure things are sane
+	if ($d->{"POWER_SUPPLY_${cap_t}_FULL"} < $d->{"POWER_SUPPLY_${cap_t}_NOW"}) {
+	    $cell{$ps}{"${cap_t}_FULL_ORIG"} = $d->{"POWER_SUPPLY_${cap_t}_FULL"};
+	    $d->{"POWER_SUPPLY_${cap_t}_FULL"} = $d->{"POWER_SUPPLY_${cap_t}_NOW"};
+	}
+	
+	for (qw(FULL FULL_DESIGN NOW)) {
+	    $cell{"_TOTAL"}{"CAP_$_"} += $cell{$ps}{"CAP_$_"} = $d->{"POWER_SUPPLY_${cap_t}_$_"};
+	}
+	
+	for (qw(STATUS NAME)) {
+	    $cell{$ps}{$_} = $d->{"POWER_SUPPLY_$_"};
+	}
+	
+	if ($d->{POWER_SUPPLY_STATUS} eq 'Discharging') {
+	    $cell{$ps}{DISCHARGING} = 1;
+	    $cell{"_TOTAL"}{"USE_NOW"} += $cell{$ps}{"USE_NOW"} = -$d->{"POWER_SUPPLY_${use_t}_NOW"};
+	}
+	elsif ($d->{POWER_SUPPLY_STATUS} eq 'Charging') {
+	    $cell{$ps}{CHARGING} = 1;
+	    $cell{"_TOTAL"}{"USE_NOW"} += $cell{$ps}{"USE_NOW"} = $d->{"POWER_SUPPLY_${use_t}_NOW"};
+	}
+
+    }
+
+    printf STDERR "%s: %s\n", $ps, Dumper $d;
+    
+}
+
+for my $c (values %cell) {
+    my $cap_t = $c->{_CAP};
+    
+    $c->{CAP_MAX} = $c->{CAP_FULL}; # or ENERGY_FULL_DESIGN
+
+    if ($c->{CAP_MAX}) {
+	$c->{PERCENT} = 100 * $c->{CAP_NOW} / $c->{CAP_MAX};
+    }
+
+    if ($c->{USE_NOW}) {
+	
+	if ($c->{USE_NOW} > 0) {
+	    $c->{CHARGING}++;
+	    $c->{CAP_LEFT} = $c->{CAP_MAX} - $c->{CAP_NOW};
+	}
+	elsif ($c->{USE_NOW} < 0) {
+	    $c->{DISCHARGING}++;
+	    $c->{CAP_LEFT} = $c->{CAP_NOW};
+	}
+
+	my $tl = $c->{TIME_LEFT} = $c->{CAP_LEFT} / abs($c->{USE_NOW});
+
+	my $ts = sprintf "%d", int($tl);
+	$tl = ($tl-int($tl))*60;
+	$ts .= sprintf ":%02d", int($tl);
+	#$tl = ($tl-int($tl))*60;
+	#$ts .= sprintf ":%02d", int($tl);
+
+	$c->{TIME_STRING} = $ts;
+    }
+    
+}
+
+printf STDERR "%s\n", join "", Dumper \%state, \%cell;
+
+my %json = ( # color => $opt_color,
+	     # urgent => "true",
+	     markup => "pango",
+	   );
+
+my $t = delete $cell{"_TOTAL"};
+
+if ($t->{DISCHARGING}) {
+    $json{urgent} = "true" if $t->{PERCENT} <= 5;
+}
+
+my($icon_color,$icon_text);
+if ($state{ONLINE}) {
+    $icon_text  = "\N{ELECTRIC PLUG}";
+    $icon_text  = qq{<span font_desc='FontAwesome'>\x{f1e6}</span>};
+    $icon_color = "#ffff00";
+}
+else {
+    $icon_text  = ""; # \N{BATTERY}";
+    if ($t->{PERCENT} > 85) {
+	$icon_color = "#00ff00";
+    }
+    elsif ($t->{PERCENT} > 60) {
+	$icon_color = "#a8ff00";
+    }
+    elsif ($t->{PERCENT} > 40) {
+	$icon_color = "#fff600";
+    }
+    elsif ($t->{PERCENT} > 20) {
+	$icon_color = "#ffae00";
+    }
+    else {
+	$icon_color = "#ff0000";
+    }
+}
+if ($icon_color) {
+    $json{full_text} .= length $icon_text ? "<span color='$icon_color'>$icon_text</span>" : "";
+}
+else {
+    $json{full_text} .= "$icon_text";
+}
+
+for my $c (sort { $a->{NAME} cmp $b->{NAME} } values %cell) {
+    my($b_color,$b_icon);
+
+    if ($c->{PERCENT} > 85) {
+	$b_color = "#00FF00";
+	# fa-battery-full
+	$b_icon = "<span font_desc='FontAwesome'>\x{F240}</span>";
+    }
+    elsif ($c->{PERCENT} > 60) {
+	$b_color = "#A8FF00";
+	# fa-battery-three-quarters
+	$b_icon = "<span font_desc='FontAwesome'>\x{F241}</span>";
+    }
+    elsif ($c->{PERCENT} > 40) {
+	$b_color = "#FFF600";
+	# fa-battery-half
+	$b_icon = "<span font_desc='FontAwesome'>\x{F242}</span>";
+    }
+    elsif ($c->{PERCENT} > 20) {
+	$b_color = "#FFAE00";
+	# fa-battery-quarter
+	$b_icon = "<span font_desc='FontAwesome'>\x{F243}</span>";
+    }
+    else {
+	$b_color = "#FF0000";
+	# fa-battery-empty
+	$b_icon = "<span font_desc='FontAwesome'>\x{F244}</span>";
+    }
+
+    my $b_text = $b_icon ." ". sprintf "%.0f%%", $c->{PERCENT};
+    
+    if ($c->{CHARGING}) {
+	$b_color = "#FFFF00";
+    }
+    elsif ($c->{DISCHARGING}) {
+	# keep the one above
+    }
+    else {
+	$b_color = '';
+    }
+    
+    if ($b_color) {
+	$json{full_text} .= " <span color='$b_color'>$b_text</span>";
+    }
+    else {
+	$json{full_text} .= " $b_text";
+    }
+
+}
+
+$json{full_text} .= sprintf " (%s)", $t->{TIME_STRING} if $t->{TIME_STRING};
+
+for (qw{full_text}) {
+    for ($json{$_}) {
+	s/^\s*//;
+	s/\s*$//;
+    }
+}
+
+printf "%s\n", json(%json);
+
+exit 0;
+
+sub json {
+    my(%json) = @_;
+    for (values %json) {
+	s/"/\\"/g;
+	s/\n/\\n/g;
+	$_ = qq{"$_"} if /\D/;
+    }
+    return "{".join(",",map {qq{"$_":$json{$_}}} sort keys %json)."}";
+}
+
+__END__
+use Getopt::Long qw(GetOptionsFromString);
+
+GetOptionsFromString($ENV{BLOCK_INSTANCE},
+		     "color=s" => \$opt_color,
+		     "full=s" => \$opt_full,
+		     "short=s" => \$opt_short,
+		    );
