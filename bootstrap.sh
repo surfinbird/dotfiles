@@ -34,7 +34,7 @@ install_packages() {
     fi
 
     echo "-- Checking Apt packages --"
-    apt_dep=(build-essential zsh emacs tmux vim i3 i3blocks suckless-tools tig fonts-font-awesome)
+    apt_dep=(build-essential zsh emacs tmux vim i3 i3blocks suckless-tools tig fonts-font-awesome lxappearance gtk-chteme)
     # lxappearance gtk-chtheme qt4-qtconfig qt5-qtconfig scrot conky
     missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))
     if [ -n "$missing" ]; then
