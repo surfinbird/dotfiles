@@ -12,6 +12,9 @@ case "$DESKTOP_SESSION" in
     xmonad)
         gnome-settings-daemon &
         ;;
+    i3)
+        ;
+        ;;
 esac
 
 msg() {
