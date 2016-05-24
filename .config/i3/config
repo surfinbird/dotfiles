@@ -188,7 +188,8 @@ assign [class="Thunderbird"] 4
 assign [class="Pidgin"] 5
 
 # Lock screen
-bindsym Control+mod1+l exec i3lock -c 242424
+bindsym Control+mod1+l exec "~/.scripts/fuzzy_lock.sh"
+exec xautolock -time 15 -locker '~/.scripts/fuzzy_lock.sh' &
 
 # Move workspace to another screen
 bindsym $mod+x move workspace to output right
