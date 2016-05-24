@@ -153,7 +153,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3blocks
-        tray_output primary
+        #tray_output primary
         position top
 }
 
@@ -176,14 +176,22 @@ mode "$mode_launcher" {
 exec emacs
 exec firefox
 exec thunderbird
+exec pidgin
 
-#exec --no-startup-id mate-settings-daemon
+exec --no-startup-id unity-settings-daemon
 exec --no-startup-id nm-applet
 
 # Force some applications to certain workspaces
 assign [class="emacs"] 1
 assign [class="Firefox"] 3
 assign [class="Thunderbird"] 4
+assign [class="Pidgin"] 5
 
 # Lock screen
 bindsym Control+mod1+l exec i3lock -c 242424
+
+# Move workspace to another screen
+bindsym $mod+x move workspace to output right
+
+# Assign applications to screen
+workspace 5 output eDP1
