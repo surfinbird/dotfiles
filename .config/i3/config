@@ -182,7 +182,7 @@ exec --no-startup-id unity-settings-daemon
 exec --no-startup-id nm-applet
 
 # Force some applications to certain workspaces
-assign [class="emacs"] 1
+assign [class="Emacs24"] 1
 assign [class="Firefox"] 3
 assign [class="Thunderbird"] 4
 assign [class="Pidgin"] 5

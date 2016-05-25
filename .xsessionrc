@@ -2,6 +2,7 @@ export QT_DEVICE_PIXEL_RATIO=auto
 no_proxy="localhost,127.*,10.*,192.168.*,169.254.*"
 setxkbmap us
 xrandr --output DP2-2 --left-of eDP1 --primary
+xrandr --output HDMI2 --left-of eDP1 --primary
 STARTUP="$HOME/.scripts/start_session $STARTUP"
 
 
