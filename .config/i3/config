@@ -178,7 +178,7 @@ exec firefox
 exec thunderbird
 exec pidgin
 
-exec --no-startup-id unity-settings-daemon
+#exec --no-startup-id unity-settings-daemon
 exec --no-startup-id nm-applet
 
 # Force some applications to certain workspaces
