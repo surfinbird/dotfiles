@@ -177,6 +177,7 @@ exec emacs
 exec firefox
 exec thunderbird
 exec pidgin
+exec SpiderOakONE
 
 #exec --no-startup-id unity-settings-daemon
 exec --no-startup-id nm-applet
@@ -186,6 +187,7 @@ assign [class="Emacs24"] 1
 assign [class="Firefox"] 3
 assign [class="Thunderbird"] 4
 assign [class="Pidgin"] 5
+assign [class="SpiderOakONE"] 9
 
 # Lock screen
 bindsym Control+mod1+l exec "~/.scripts/fuzzy_lock.sh"
