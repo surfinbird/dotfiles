@@ -59,7 +59,7 @@ values."
    dotspacemacs-additional-packages '(bm
                                       google-c-style
                                       helm-git-grep
-                                      key-chord
+                                      ;;key-chord
                                       sws-mode
                                       haskell-mode
                                       js2-mode
@@ -125,18 +125,19 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(monokai
+                         solarized-dark
                          zenburn
                          spacemacs-dark
                          spacemacs-light
                          solarized-light
-                         solarized-dark
                          leuven)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               ;:size 14
+                               :size 24
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -426,7 +427,8 @@ Including indent-buffer, which should not be called automatically on save."
     (interactive)
     (untabify-buffer)
     (delete-trailing-whitespace)
-    (indent-buffer))
+    ;(indent-buffer)
+    )
 
   (global-set-key (kbd "C-c n") 'cleanup-buffer)
   
@@ -465,16 +467,16 @@ Including indent-buffer, which should not be called automatically on save."
     (bind-key "C-c g" 'helm-git-grep-from-isearch isearch-mode-map)
     (bind-key "C-c g" 'helm-git-grep-from-helm helm-map))
 
-  (use-package key-chord
-    :ensure t
-    :init (key-chord-mode 1)
-    :config
-    (setq key-chord-two-keys-delay 0.075)
-    (key-chord-define-global "--"
-     (lambda ()
-       "Insert an underscore."
-       (interactive)
-       (insert "_"))))
+  ;; (use-package key-chord
+  ;;   :ensure t
+  ;;   :init (key-chord-mode 1)
+  ;;   :config
+  ;;   (setq key-chord-two-keys-delay 0.075)
+  ;;   (key-chord-define-global "--"
+  ;;    (lambda ()
+  ;;      "Insert an underscore."
+  ;;      (interactive)
+  ;;      (insert "_"))))
 
   (setq
    org-agenda-start-on-weekday 1
