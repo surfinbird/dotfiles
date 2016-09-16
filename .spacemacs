@@ -58,7 +58,6 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(bm
                                       google-c-style
-                                      helm-git-grep
                                       ;;key-chord
                                       sws-mode
                                       haskell-mode
@@ -459,13 +458,6 @@ Including indent-buffer, which should not be called automatically on save."
     :bind (("C-S-c C-S-c"   . mc/edit-lines)
            ("C-S-c C-e"     . mc/edit-ends-of-lines)
            ("C-S-c C-a"     . mc/edit-beginnings-of-lines)))
-
-  (use-package helm-git-grep
-    :ensure t
-    :bind (("C-c g" . helm-git-grep)) ;; Invoke `helm-git-grep' from isearch.
-    :init
-    (bind-key "C-c g" 'helm-git-grep-from-isearch isearch-mode-map)
-    (bind-key "C-c g" 'helm-git-grep-from-helm helm-map))
 
   ;; (use-package key-chord
   ;;   :ensure t
