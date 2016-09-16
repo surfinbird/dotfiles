@@ -14,7 +14,7 @@ update_repos() {
 create_symlinks() {
     echo "-- Create symlinks to config files --"
     stuff=(".aliases .scripts .vim .zprezto .bash_profile \
-        .bashrc .conkyrc .functions .gitconfig .tmux.conf .vimrc \
+        .bashrc .conkyrc .functions .tmux.conf .vimrc \
         .Xmodmap .Xresources.d .xsessionrc .spacemacs")
 
     for el in $stuff; do
