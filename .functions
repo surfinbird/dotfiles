@@ -30,3 +30,9 @@ gvim ()
 {
     vim -q <(git grep $1)
 }
+
+if type ssh-wrapper > /dev/null 2>&1; then
+    ssh() {
+        ssh-wrapper "$@"
+    }
+fi
