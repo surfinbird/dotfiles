@@ -1,10 +1,10 @@
 // vim:ts=4:sw=4:et
 {
     // splitv split container with 2 children
-    "border": "pixel",
+    "border": "normal",
     "floating": "auto_off",
     "layout": "splitv",
-    "percent": 0.739130434782609,
+    "percent": 0.8,
     "type": "con",
     "nodes": [
         {
@@ -12,9 +12,9 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 540,
-               "width": 816,
-               "x": 816,
+               "height": 1016,
+               "width": 448,
+               "x": 0,
                "y": 0
             },
             "name": "torpa",
@@ -35,18 +35,18 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 540,
-               "width": 816,
-               "x": 816,
-               "y": 540
+               "height": 1016,
+               "width": 609,
+               "x": 0,
+               "y": 0
             },
-            "name": "Peder Stray",
+            "name": "Martin Korsgaard",
             "percent": 0.5,
             "swallows": [
                {
                // "class": "^Pidgin$",
                // "instance": "^Pidgin$",
-               // "title": "^Peder\\ Stray$",
+               // "title": "^Martin\\ Korsgaard$",
                // "transient_for": "^$",
                // "window_role": "^conversation$"
                }
@@ -61,13 +61,13 @@
     "current_border_width": 2,
     "floating": "auto_off",
     "geometry": {
-       "height": 1036,
-       "width": 288,
-       "x": 1632,
-       "y": 44
+       "height": 1016,
+       "width": 380,
+       "x": 769,
+       "y": 60
     },
     "name": "Buddy List",
-    "percent": 0.260869565217391,
+    "percent": 0.2,
     "swallows": [
        {
        // "class": "^Pidgin$",
@@ -78,45 +78,5 @@
        }
     ],
     "type": "con"
-}
-
-{
-    // floating_con with 1 children
-    "border": "normal",
-    "floating": "auto_off",
-    "layout": "splith",
-    "percent": null,
-    "rect": {
-       "height": 401,
-       "width": 1123,
-       "x": 4239,
-       "y": 341
-    },
-    "type": "floating_con",
-    "nodes": [
-        {
-            "border": "pixel",
-            "current_border_width": 2,
-            "floating": "user_on",
-            "geometry": {
-               "height": 397,
-               "width": 1119,
-               "x": 0,
-               "y": 0
-            },
-            "name": "Conversations with Peder Stray",
-            "percent": 1,
-            "swallows": [
-               {
-               // "class": "^Pidgin$",
-               // "instance": "^Pidgin$",
-               // "title": "^Conversations\\ with\\ Peder\\ Stray$",
-               // "transient_for": "^$",
-               // "window_role": "^log_viewer$"
-               }
-            ],
-            "type": "con"
-        }
-    ]
 }
 
