@@ -13,11 +13,11 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Source Code Pro 15
+font pango:Source Code Pro 14
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Source Code Pro 15
+font pango:Source Code Pro 14
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -173,6 +173,9 @@ mode "$mode_launcher" {
     bindsym Return mode "default"
 }
 
+# Helpers
+exec --no-startup-id ~/.config/i3/load-layouts
+
 # Always start these applications
 exec emacs
 exec firefox
@@ -199,6 +202,14 @@ bindsym $mod+x move workspace to output right
 
 # Assign applications to screen
 workspace 5 output eDP1
+workspace 1 output DP2-1
+workspace 2 output DP2-1
+workspace 3 output DP2-1
+workspace 4 output DP2-1
+workspace 1 output HDMI2
+workspace 2 output HDMI2
+workspace 3 output HDMI2
+workspace 4 output HDMI2
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
