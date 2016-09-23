@@ -13,11 +13,11 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Source Code Pro 16
+font pango:Source Code Pro 15
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Source Code Pro 16
+font pango:Source Code Pro 15
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -186,6 +186,9 @@ assign [class="Emacs24"] 1
 assign [class="Firefox"] 3
 assign [class="Thunderbird"] 4
 assign [class="Pidgin"] 5
+
+# No window title for Pidgin
+for_window [class="Pidgin"] border pixel
 
 # Lock screen
 bindsym Control+mod1+l exec "~/.scripts/fuzzy_lock.sh"
