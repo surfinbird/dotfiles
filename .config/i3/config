@@ -223,3 +223,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightnes
 # Change keyboard layouts
 bindsym $mod+n exec setxkbmap no && xmodmap ~/.Xmodmap
 bindsym $mod+u exec setxkbmap us && xmodmap ~/.Xmodmap
+
+# Helpers
+exec --no-startup-id ~/.config/i3/load-layouts
