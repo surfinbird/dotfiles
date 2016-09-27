@@ -173,9 +173,6 @@ mode "$mode_launcher" {
     bindsym Return mode "default"
 }
 
-# Helpers
-exec --no-startup-id ~/.config/i3/load-layouts
-
 # Always start these applications
 exec emacs
 exec firefox
