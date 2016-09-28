@@ -37,7 +37,7 @@ values."
      git
      gtags
      haskell
-     ivy
+     ;;ivy
      javascript
      ;; markdown
      org
