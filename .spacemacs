@@ -500,7 +500,6 @@ Including indent-buffer, which should not be called automatically on save."
 
   (windmove-default-keybindings)
   (global-company-mode)
-  (desktop-save-mode 1)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
