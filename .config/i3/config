@@ -191,8 +191,8 @@ assign [class="Pidgin"] 5
 for_window [class="Pidgin"] border pixel
 
 # Lock screen
-bindsym Control+mod1+l exec "~/.scripts/fuzzy_lock.sh"
-exec xautolock -time 15 -locker '~/.scripts/fuzzy_lock.sh' &
+bindsym Control+mod1+l exec --no-startup-id "~/.scripts/fuzzy_lock.sh lock"
+exec --no-startup-id "~/.scripts/fuzzy_lock.sh init"
 
 # Move workspace to another screen
 bindsym $mod+x move workspace to output right
