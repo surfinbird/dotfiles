@@ -40,5 +40,10 @@ for script in $HOME/.config/start-session/$DESKTOP_SESSION.d/*.sh; do
     fi
 done
 
+export QT_DEVICE_PIXEL_RATIO=auto
+no_proxy="localhost,127.*,10.*,192.168.*,169.254.*"
+setxkbmap us
+setxkbmap -option 'caps:escape'
+
 msg "= Running session [$*]..."
 exec "$@"
