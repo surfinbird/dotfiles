@@ -479,7 +479,17 @@ Including indent-buffer, which should not be called automatically on save."
      ("DELEGATED" . (:foreground "yellow" :weight bold))
      ("CANCELLED" . (:foreground "red" :weight bold))
      ))
-
+   
+  (defadvice org-archive-subtree (around my-org-archive-subtree activate)
+    (let ((org-archive-location
+           (if (save-excursion (org-back-to-heading)
+                               (> (org-outline-level) 1))
+               (concat (car (split-string org-archive-location "::"))
+                       "::* "
+                       (car (org-get-outline-path)))
+             org-archive-location)))
+      ad-do-it))
+  
   (defun colorize-compilation-buffer ()
     (toggle-read-only)
     (ansi-color-apply-on-region (point-min) (point-max))
