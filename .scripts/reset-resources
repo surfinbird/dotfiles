@@ -9,11 +9,11 @@ debug=
 
 case $1 in
     -c|--clear)
-	cat /dev/null | xrdb -load
-	;;
+	      cat /dev/null | xrdb -load
+	      ;;
     -n)
-	debug=-n
-	;;
+	      debug=-n
+	      ;;
 esac
 
 ostype=`uname -s | tr A-Z a-z`
@@ -27,71 +27,71 @@ export STEP_DPI=$[REAL_DPI/24*24]
 
 if [ -f $HOME/.Xresources ]; then 
     xrdb $debug -merge \
-	-DHOME=$HOME \
-	-DSETUPTYPE_$SETUPTYPE \
-	-DREAL_DPI=$REAL_DPI \
-	-DSTEP_DPI=$STEP_DPI \
-	-DOS_$ostype \
-	-cpp 'cpp' \
-	$HOME/.Xresources
+	       -DHOME=$HOME \
+	       -DSETUPTYPE_$SETUPTYPE \
+	       -DREAL_DPI=$REAL_DPI \
+	       -DSTEP_DPI=$STEP_DPI \
+	       -DOS_$ostype \
+	       -cpp 'cpp' \
+	       $HOME/.Xresources
 fi
 
 if [ -f $HOME/.Xresources.m4 ]; then
     xrdb $debug -merge \
-	-DHOME=$HOME \
-	-DSETUPTYPE_$SETUPTYPE \
-	-DREAL_DPI=$REAL_DPI \
-	-DSTEP_DPI=$STEP_DPI \
-	-DOS_$ostype \
-	-cpp 'm4 -P' \
-	$HOME/.Xresources.m4
+	       -DHOME=$HOME \
+	       -DSETUPTYPE_$SETUPTYPE \
+	       -DREAL_DPI=$REAL_DPI \
+	       -DSTEP_DPI=$STEP_DPI \
+	       -DOS_$ostype \
+	       -cpp 'm4 -P' \
+	       $HOME/.Xresources.m4
 fi
 
 for file in $HOME/.Xresources.d/*; do
     if [ -f "$file" ]; then
-	case $file in
-	    *~)
-		: ignore
-		;;
-	    *.m4)
-		xrdb $debug -merge \
-		    -DHOME=$HOME \
-		    -DSETUPTYPE_$SETUPTYPE \
-		    -DSETUPTYPE=$SETUPTYPE \
-		    -DREAL_DPI=$REAL_DPI \
-		    -DSTEP_DPI=$STEP_DPI \
-		    -DOS_$ostype \
-		    -DOS=$ostype \
-		    -cpp 'm4 -P' \
-		    $file
-		;;
-	    *.sh)
-		bash $file | xrdb $debug -merge \
-		    -DHOME=$HOME \
-		    -DSETUPTYPE_$SETUPTYPE \
-		    -DSETUPTYPE=$SETUPTYPE \
-		    -DREAL_DPI=$REAL_DPI \
-		    -DSTEP_DPI=$STEP_DPI \
-		    -DOS_$ostype \
-		    -DOS=$ostype \
-		    -cpp 'cpp' \
-		    -
-		;;
-	    *.cpp)
-		xrdb $debug -merge \
-		    -DHOME=$HOME \
-		    -DSETUPTYPE_$SETUPTYPE \
-		    -DSETUPTYPE=$SETUPTYPE \
-		    -DREAL_DPI=$REAL_DPI \
-		    -DSTEP_DPI=$STEP_DPI \
-		    -DOS_$ostype \
-		    -DOS=$ostype \
-		    -cpp 'cpp' \
-		    $file
-		;;
-	    *)
-		echo "reset-resources: '$file' not in known format" >&2
-		;;
-	esac
+	      case $file in
+	          *~)
+		            : ignore
+		            ;;
+	          *.m4)
+		            xrdb $debug -merge \
+		                 -DHOME=$HOME \
+		                 -DSETUPTYPE_$SETUPTYPE \
+		                 -DSETUPTYPE=$SETUPTYPE \
+		                 -DREAL_DPI=$REAL_DPI \
+		                 -DSTEP_DPI=$STEP_DPI \
+		                 -DOS_$ostype \
+		                 -DOS=$ostype \
+		                 -cpp 'm4 -P' \
+		                 $file
+		            ;;
+	          *.sh)
+		            bash $file | xrdb $debug -merge \
+		                              -DHOME=$HOME \
+		                              -DSETUPTYPE_$SETUPTYPE \
+		                              -DSETUPTYPE=$SETUPTYPE \
+		                              -DREAL_DPI=$REAL_DPI \
+		                              -DSTEP_DPI=$STEP_DPI \
+		                              -DOS_$ostype \
+		                              -DOS=$ostype \
+		                              -cpp 'cpp' \
+		                              -
+		            ;;
+	          *.cpp)
+		            xrdb $debug -merge \
+		                 -DHOME=$HOME \
+		                 -DSETUPTYPE_$SETUPTYPE \
+		                 -DSETUPTYPE=$SETUPTYPE \
+		                 -DREAL_DPI=$REAL_DPI \
+		                 -DSTEP_DPI=$STEP_DPI \
+		                 -DOS_$ostype \
+		                 -DOS=$ostype \
+		                 -cpp 'cpp' \
+		                 $file
+		            ;;
+	          *)
+		            echo "reset-resources: '$file' not in known format" >&2
+		            ;;
+	      esac
     fi
 done
