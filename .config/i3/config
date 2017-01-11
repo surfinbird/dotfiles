@@ -165,6 +165,7 @@ bindsym $mod+o mode "$mode_launcher"
 mode "$mode_launcher" {
     bindsym e exec emacs
     bindsym f exec firefox
+    bindsym g exec google-chrome
     bindsym t exec thunderbird
     bindsym p exec pidgin
     bindsym n exec nautilus --no-desktop
@@ -175,7 +176,7 @@ mode "$mode_launcher" {
 
 # Always start these applications
 exec emacs
-exec firefox
+exec google-chrome
 exec thunderbird
 exec pidgin
 exec --no-startup-id dropbox start
@@ -183,7 +184,7 @@ exec --no-startup-id nm-applet
 
 # Force some applications to certain workspaces
 assign [class="Emacs24"] 1
-assign [class="Firefox"] 3
+assign [class="Google-chrome"] 3
 assign [class="Thunderbird"] 4
 assign [class="Pidgin"] 5
 
