@@ -30,24 +30,13 @@ nmap <leader>c :copen<CR>
 nmap <leader>cc :cclose<CR>
 
 " ==========================================================
-" YCM
-" ==========================================================
-let g:ycm_confirm_extra_conf = 0
-
-" ==========================================================
 " CtrlP
 " ==========================================================
-nnoremap <leader>f :CtrlP<CR>
-nnoremap <leader>F :CtrlPCurFile<CR>
-nnoremap <leader>p :CtrlPCurWD<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>m :CtrlPMixed<CR>
-nnoremap <leader>M :CtrlPMRUFiles<CR>
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_show_hidden = 1
 
-"let g:ctrlp_max_files = 32768
-let g:ctrlp_mruf_max            = 25
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_by_filename         = 0
 if filereadable("~/.ctrlp_custom_ignore.vim")
     source ~/.ctrlp_custom_ignore.vim
 endif
