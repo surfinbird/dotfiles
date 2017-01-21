@@ -72,7 +72,6 @@ set wildmode=list:longest     " <Tab> cycles between all matching choices.
 syntax enable
 set t_Co=16
 set background=dark
-colorscheme twilight
 "
 " don't bell or blink
 set noerrorbells
