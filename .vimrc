@@ -10,6 +10,26 @@ elseif os == 'Linux'
 endif
 
 " ==========================================================
+" Vundle
+" ==========================================================
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'ctrlpvim/ctrlp.vim'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" ==========================================================
 " Shortcuts
 " ==========================================================
 set nocompatible              " Don't be compatible with vi
@@ -40,11 +60,6 @@ let g:ctrlp_show_hidden = 1
 if filereadable("~/.ctrlp_custom_ignore.vim")
     source ~/.ctrlp_custom_ignore.vim
 endif
-
-" ==========================================================
-" Pathogen - Allows us to organize our vim plugins
-" ==========================================================
-execute pathogen#infect()
 
 " ==========================================================
 " Basic Settings
