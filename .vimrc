@@ -25,6 +25,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-airline/vim-airline'
+Plugin 'crusoexia/vim-monokai'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -56,10 +59,24 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_show_hidden = 1
-
+let g:ctrlp_max_files = 0
 if filereadable("~/.ctrlp_custom_ignore.vim")
     source ~/.ctrlp_custom_ignore.vim
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe                              "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_min_num_identifier_candidate_chars = 4
+""let g:ycm_extra_conf_globlist = ['~/repos/*']
+""let g:ycm_filetype_specific_completion_to_disable = {'javascript': 1}
+""let g:ycm_rust_src_path = $HOME . '/repos/rust/src'
+
+nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
+nnoremap <leader>g :YcmCompleter GoTo<CR>
+nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
 
 " ==========================================================
 " Basic Settings
@@ -74,8 +91,10 @@ set wildmenu                  " Menu completion in command mode on <Tab>
 set wildmode=list:longest     " <Tab> cycles between all matching choices.
 
 syntax enable
-set t_Co=16
-set background=dark
+syntax on
+colorscheme monokai
+set t_Co=256  " vim-monokai now only support 256 colours in terminal.
+
 "
 " don't bell or blink
 set noerrorbells
@@ -201,9 +220,6 @@ au BufRead,BufNewFile *.bb setlocal ft=python
 au BufRead,BufNewFile SConstruct,SConscript setlocal ft=python
 au FileType python set omnifunc=pythoncomplete#Complete
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-au FileType python set makeprg=pylint\ --rcfile=/home/anr/src/pdrepos01/toolchains/scons/misc/pylint.rc\ %:p
-au FileType python set errorformat=%f:%l:\ %m,%-G
-au FileType coffee setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 " Don't let pyflakes use the quickfix window
 let g:pyflakes_use_quickfix = 0
