@@ -23,7 +23,7 @@ casedupes ()
 
 fvim ()
 {
-    vim $(find -not -path "*_build*" -name $1)
+    vim $(find -type f -and -not -path "*_build*" -name "$1*")
 }
 
 gvim ()
