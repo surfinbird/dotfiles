@@ -35,7 +35,7 @@ install_packages() {
 
     echo "-- Checking Apt packages --"
     apt_dep=(build-essential zsh emacs tmux vim i3 i3blocks suckless-tools tig
-             fonts-font-awesome lxappearance gtk-chteme xbacklight
+             fonts-font-awesome lxappearance gtk-chtheme xbacklight nitrogen
              xss-lock silversearcher-ag)
     missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))
     if [ -n "$missing" ]; then
