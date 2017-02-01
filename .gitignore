@@ -18,3 +18,7 @@
 .xmonad/xmonad.o
 .vim/bundle/YouCompleteMe/
 .vim/bundle/ctrlp.vim/
+.vim/bundle/.vundle/
+.vim/bundle/nerdtree/
+.vim/bundle/vim-airline/
+.vim/bundle/vim-monokai/
