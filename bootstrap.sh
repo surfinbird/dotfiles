@@ -14,7 +14,7 @@ update_repos() {
 create_symlinks() {
     echo "-- Create symlinks to config files --"
     stuff=(".aliases .scripts .vim .zprezto .bash_profile \
-        .bashrc .conkyrc .functions .tmux.conf .vimrc \
+        .bashrc .conkyrc .functions .tmux.conf \
         .Xresources.d .xsessionrc .spacemacs")
 
     for el in $stuff; do
@@ -35,7 +35,7 @@ install_packages() {
 
     echo "-- Checking Apt packages --"
     apt_dep=(build-essential zsh emacs tmux vim i3 i3blocks suckless-tools tig
-             fonts-font-awesome lxappearance gtk-chtheme xbacklight nitrogen
+             fonts-font-awesome lxappearance gtk-chtheme xbacklight
              xss-lock silversearcher-ag)
     missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))
     if [ -n "$missing" ]; then
@@ -50,6 +50,15 @@ install_packages() {
         git clone https://github.com/clvv/fasd.git /tmp/fasd
         cd /tmp/fasd
         sudo make install
+    fi
+    
+    echo "-- Checking for NeoVim --"
+    if ! which nvim 2>&1 > /dev/null; then
+        sudo add-apt-repository ppa:neovim-ppa/unstable
+        sudo apt-get update
+        sudo apt-get install neovim
+        sudo apt-get install python-dev python-pip python3-dev python3-pip
+        sudo pip3 install neovim
     fi
 }
 

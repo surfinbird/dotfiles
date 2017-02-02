@@ -180,9 +180,6 @@ exec pidgin
 exec --no-startup-id dropbox start
 exec --no-startup-id nm-applet
 
-# Wallpaper
-exec --no-startup-id nitrogen --restore
-
 # Force some applications to certain workspaces
 assign [class="Emacs24"] 1
 assign [class="Google-chrome"] 3
