@@ -31,3 +31,5 @@ fi
 if [ -f ~/.aliases-this-machine ]; then
     . ~/.aliases-this-machine
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

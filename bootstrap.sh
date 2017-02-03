@@ -13,7 +13,7 @@ update_repos() {
 
 create_symlinks() {
     echo "-- Create symlinks to config files --"
-    stuff=(".aliases .scripts .vim .zprezto .bash_profile \
+    stuff=(".aliases .scripts .zprezto .bash_profile \
         .bashrc .conkyrc .functions .tmux.conf \
         .Xresources.d .xsessionrc .spacemacs")
 
