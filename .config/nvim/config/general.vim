@@ -52,17 +52,14 @@ set scrolloff=3            " Keep 3 context lines above and below the cursor
 set showmatch              " Briefly jump to a paren once it's balanced
 set nowrap                 " don't wrap text
 set linebreak              " don't wrap textin the middle of a word
-set autoindent             " always set autoindenting on
 set smartindent            " use smart indent if there is no indent file
 set tabstop=4              " <tab> inserts 4 spaces 
 set shiftwidth=4           " but an indent level is 2 spaces wide.
 set softtabstop=4          " <BS> over an autoindent deletes both spaces.
 set expandtab              " Use spaces, not tabs, for autoindent/tab key.
 set shiftround             " rounds indent to a multiple of shiftwidth
-set hlsearch               " Highlight searches by default.
 set ignorecase             " Default to using case insensitive searches,
 set smartcase              " unless uppercase letters are used in the regex.
-set smarttab               " Handle tabs more intelligently 
 
 """ Fzf
 nnoremap <C-p> :FZF<CR>
