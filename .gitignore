@@ -12,13 +12,4 @@
 .emacs.d/session.*
 .emacs.d/.mc-lists.el
 .emacs.d/.places
-.xmonad/xmonad-x86_64-linux
-.xmonad/xmonad.errors
-.xmonad/xmonad.hi
-.xmonad/xmonad.o
-.vim/bundle/YouCompleteMe/
-.vim/bundle/ctrlp.vim/
-.vim/bundle/.vundle/
-.vim/bundle/nerdtree/
-.vim/bundle/vim-airline/
-.vim/bundle/vim-monokai/
+.config/nvim/plugged
