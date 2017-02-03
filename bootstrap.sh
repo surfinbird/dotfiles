@@ -33,7 +33,7 @@ install_apt() {
 
     if dpkg -l ubuntu-desktop > /dev/null 2>&1; then
         apt_dep+=(i3 i3blocks suckless-tools fonts-font-awesome
-	          lxappearance gtk-chtheme xbacklight xss-lock)
+                  lxappearance gtk-chtheme xbacklight xss-lock)
     fi
 
     missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))
@@ -42,7 +42,7 @@ install_apt() {
         sudo apt-get update
         sudo apt-get install -y "${missing[@]}"
     fi
-    
+
     echo "-- Checking for NeoVim --"
     if ! which nvim 2>&1 > /dev/null; then
         sudo add-apt-repository ppa:neovim-ppa/unstable
