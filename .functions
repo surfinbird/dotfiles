@@ -2,6 +2,7 @@
 
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 ##############################################################################
 # Some functions
