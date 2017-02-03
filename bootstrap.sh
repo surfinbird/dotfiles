@@ -7,7 +7,7 @@ update_repos() {
     git submodule update --init --recursive
 
     if [ ! -d ~/.emacs.d ]; then
-        git clone git@github.com:syl20bnr/spacemacs.git ~/.emacs.d
+        git clone git@github.com:syl20bnr/spacemacs.git ~/.emacs.d -b develop
     fi
 }
 
