@@ -29,12 +29,12 @@ create_symlinks() {
 
 install_apt() {
     echo "-- Checking Apt packages --"
+    apt_dep=(build-essential zsh emacs tmux vim tig silversearcher-ag)
+
     if dpkg -l ubuntu-desktop > /dev/null 2>&1; then
-	    apt_dep=(build-essential zsh emacs tmux vim i3 i3blocks suckless-tools tig
-			    fonts-font-awesome lxappearance gtk-chtheme xbacklight
-			    xss-lock silversearcher-ag)
-    else
-	    apt_dep=(build-essential zsh emacs tmux vim tig silversearcher-ag)
+        apt_dep+=(build-essential zsh emacs tmux vim i3 i3blocks suckless-tools tig
+		  fonts-font-awesome lxappearance gtk-chtheme xbacklight
+		  xss-lock silversearcher-ag)
     fi
 
     missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))
