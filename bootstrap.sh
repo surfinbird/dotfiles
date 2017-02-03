@@ -27,12 +27,7 @@ create_symlinks() {
     done
 }
 
-install_packages() {
-    if ! which apt 2>&1 > /dev/null; then
-        # not on ubuntu/debian
-        return
-    fi
-
+install_apt() {
     echo "-- Checking Apt packages --"
     apt_dep=(build-essential zsh emacs tmux vim i3 i3blocks suckless-tools tig
              fonts-font-awesome lxappearance gtk-chtheme xbacklight
@@ -42,6 +37,14 @@ install_packages() {
         echo "Missing apt packages:" "${missing[@]}"
         sudo apt-get update
         sudo apt-get install -y "${missing[@]}"
+    fi
+}
+
+install_packages() {
+
+    if which dpkg 2>&1 > /dev/null; then
+        install_apt
+        return
     fi
 
     echo "-- Checking for FASD --"
