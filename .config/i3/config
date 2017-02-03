@@ -217,7 +217,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 # Change keyboard layouts
-#bindsym $mod+n exec setxkbmap no
+bindsym $mod+n exec setxkbmap no
 #bindsym $mod+u exec setxkbmap us
 
 # Helpers
