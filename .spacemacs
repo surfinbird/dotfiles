@@ -85,6 +85,7 @@ values."
                                       dts-mode
                                       systemd
                                       dos
+                                      fzf
                                       multiple-cursors)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -365,6 +366,7 @@ layers configuration. You are free to put any user code."
   (global-set-key (kbd "C-c b") 'create-scratch-buffer)
 
   (global-set-key (kbd "C-c f") 'fasd-find-file)
+  (global-set-key (kbd "C-c C-f") 'fzf)
 
   (defvar auto-minor-mode-alist ()
   "Alist of filename patterns vs correpsonding minor mode functions, see `auto-mode-alist'.
