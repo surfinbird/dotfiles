@@ -21,6 +21,8 @@ create_symlinks() {
         ln -fsv $(pwd)/$el ~
     done
 
+    mkdir -p ~/.config
+
     for el in $(ls .config); do
         rm -f ~/.config/$el
         ln -fsv $(pwd)/.config/$el ~/.config/$el
