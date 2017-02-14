@@ -13,7 +13,7 @@ case "$DESKTOP_SESSION" in
         gnome-settings-daemon &
         ;;
     i3)
-        unity-settings-daemon &
+        #unity-settings-daemon &
         ;;
 esac
 
