@@ -155,12 +155,12 @@ bar {
         position top
         colors {
             background #3d3d3d
-            statusline #faebd7
+            statusline #d3d3d3
 
-            focused_workspace  #ffffff #285577
-            active_workspace   #ffffff #333333
+            focused_workspace  #d3d3d3 #285577
+            active_workspace   #d3d3d3 #333333
             inactive_workspace #888888 #222222
-            urgent_workspace   #ffffff #900000
+            urgent_workspace   #d3d3d3 #900000
         }
 }
 
