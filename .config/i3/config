@@ -154,13 +154,10 @@ bar {
         tray_output primary
         position top
   colors {
-    separator #ffffff
-    background #3c3b37
-    statusline #ffffff
-    focused_workspace #526532 #526532 #ffffff
-    active_workspace #aea79f #aea79f #3c3b37
-    inactive_workspace #3c3b37 #3c3b37 #aea79f
-    urgent_workspace #FF0000 #FF0000 #ffffff
+    statusline #AAAAAA
+    background #333333
+    focused_workspace #282828 #282828 #FFFFFF
+    inactive_workspace #333333 #333333 #AAAAAA
   }
 }
 
@@ -202,6 +199,9 @@ for_window [class="Pidgin"] border pixel
 bindsym Control+mod1+l exec --no-startup-id "~/.scripts/fuzzy_lock.sh lock"
 exec --no-startup-id "~/.scripts/fuzzy_lock.sh init"
 
+# Wallpaper
+exec --no-startup-id "sh ~/.fehbg &"
+
 # Move workspace to another screen
 bindsym $mod+x move workspace to output right
 
@@ -232,7 +232,6 @@ bindsym $mod+n exec setxkbmap no
 # Helpers
 exec --no-startup-id ~/.config/i3/load-layouts
 
-client.focused #526532 #526532 #ffffff #a4cb64
-client.focused_inactive #aea79f #aea79f #3c3b37 #aea79f
-client.unfocused #3c3b37 #3c3b37 #aea79f #3c3b37
-client.urgent #FF0000 #FF0000 #ffffff #FF0000
+client.unfocused #333333 #333333 #FFFFFF #333333
+client.focused_inactive #333333 #333333 #FFFFFF #000000
+client.focused #000000 #000000 #FFFFFF #000000
