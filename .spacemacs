@@ -65,7 +65,6 @@ values."
      shell-scripts
      ;; spell-checking
      syntax-checking
-     themes-megapack
      ;; version-control
      windows-scripts
      )
