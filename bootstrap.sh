@@ -34,8 +34,7 @@ install_apt() {
     apt_dep=(build-essential zsh emacs tmux vim tig silversearcher-ag)
 
     if dpkg -l ubuntu-desktop > /dev/null 2>&1; then
-        apt_dep+=(i3 i3blocks suckless-tools fonts-font-awesome
-                  xbacklight xss-lock)
+        apt_dep+=(i3 i3blocks fonts-font-awesome xbacklight xss-lock)
     fi
 
     missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))
