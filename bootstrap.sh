@@ -35,7 +35,7 @@ install_apt() {
 
     if dpkg -l ubuntu-desktop > /dev/null 2>&1; then
         apt_dep+=(i3 i3blocks suckless-tools fonts-font-awesome
-                  lxappearance gtk-chtheme xbacklight xss-lock)
+                  xbacklight xss-lock)
     fi
 
     missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))
