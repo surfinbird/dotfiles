@@ -2,7 +2,8 @@
 
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+#export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 ##############################################################################
 # Some functions
@@ -37,3 +38,30 @@ if type ssh-wrapper > /dev/null 2>&1; then
         ssh-wrapper "$@"
     }
 fi
+
+day()
+{
+    echo "Day"
+    curl 'http://192.168.2.35/port_3480/data_request?id=lu_action&action=Up&serviceId=urn:upnp-org:serviceId:WindowCovering1&DeviceNum=32'
+}
+
+night()
+{
+    echo "Night"
+    curl 'http://192.168.2.35/port_3480/data_request?id=lu_action&action=Down&serviceId=urn:upnp-org:serviceId:WindowCovering1&DeviceNum=32'
+}
+
+limbo()
+{
+    echo "Limbo"
+    curl 'http://192.168.2.35/port_3480/data_request?id=lu_action&action=Stop&serviceId=urn:upnp-org:serviceId:WindowCovering1&DeviceNum=32'
+}
+
+twilight()
+{
+    day
+    sleep 40
+    night
+    sleep $1
+    limbo
+}
