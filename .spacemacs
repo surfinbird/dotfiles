@@ -54,7 +54,7 @@ values."
      haskell
 ;     ivy
      javascript
-     ;; markdown
+     markdown
      org
      pandoc
      python
@@ -65,6 +65,7 @@ values."
      shell-scripts
      ;; spell-checking
      syntax-checking
+     themes-megapack
      ;; version-control
      windows-scripts
      )
@@ -79,7 +80,6 @@ values."
                                       haskell-mode
                                       js2-mode
                                       jade-mode
-                                      moe-theme
                                       nsis-mode
                                       qml-mode
                                       dts-mode
@@ -598,6 +598,20 @@ Including indent-buffer, which should not be called automatically on save."
 
   (windmove-default-keybindings)
   (global-company-mode)
+
+  ;; configure moe-theme
+  (require 'moe-theme)
+
+  ;; Show highlighted buffer-id as decoration.
+  (setq moe-theme-highlight-buffer-id t)
+
+  ;; Resize titles
+  (setq moe-theme-resize-markdown-title '(1.5 1.4 1.3 1.2 1.0 1.0))
+  (setq moe-theme-resize-org-title '(1.5 1.4 1.3 1.2 1.1 1.0 1.0 1.0 1.0))
+  (setq moe-theme-resize-rst-title '(1.5 1.4 1.3 1.2 1.1 1.0))
+
+  ;; Change mode line color
+  (moe-theme-set-color 'orange)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -681,6 +695,9 @@ This function is called at the very end of Spacemacs initialization."
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
+ '(custom-safe-themes
+   (quote
+    ("4cbec5d41c8ca9742e7c31cc13d8d4d5a18bd3a0961c18eb56d69972bbcf3071" default)))
  '(evil-want-Y-yank-to-eol t)
  '(fci-rule-color "#20240E" t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
@@ -754,5 +771,5 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Source Code Pro" :foundry "ADBE" :slant normal :weight normal :height 110 :width normal)))))
 )
