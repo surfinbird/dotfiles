@@ -31,7 +31,7 @@ create_symlinks() {
 
 install_apt() {
     echo "-- Checking Apt packages --"
-    apt_dep=(build-essential zsh emacs tmux vim tig silversearcher-ag)
+    apt_dep=(build-essential zsh emacs tmux vim tig silversearcher-ag xsel)
 
     if dpkg -l ubuntu-desktop > /dev/null 2>&1; then
         apt_dep+=(i3 i3blocks fonts-font-awesome xbacklight xss-lock)

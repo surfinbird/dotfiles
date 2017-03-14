@@ -32,13 +32,7 @@ au BufNewFile,BufRead SConstruct  setf python
 au BufNewFile,BufRead SConscript*  setf python
 
 """ Clipboard
-let os=substitute(system('uname'), '\n', '', '')
-
-if os == 'Darwin' || os == 'Mac'
-    set clipboard^=unnamed
-elseif os == 'Linux'
-    set clipboard^=unnamedplus
-endif
+set clipboard+=unnamedplus
 
 """ Misc ...
 syntax on                  " syntax highlighing
