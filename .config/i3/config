@@ -154,13 +154,13 @@ bar {
         tray_output primary
         position top
   colors {
-    separator #ffffff
-    background #3c3b37
-    statusline #ffffff
-    focused_workspace #526532 #526532 #ffffff
-    active_workspace #aea79f #aea79f #3c3b37
-    inactive_workspace #3c3b37 #3c3b37 #aea79f
-    urgent_workspace #FF0000 #FF0000 #ffffff
+    separator #7d7d7d
+    background #141414
+    statusline #00b0ef
+    focused_workspace #00b0ef #141414 #00b0ef
+    active_workspace #141414 #141414 #00b0ef
+    inactive_workspace #141414 #141414 #7d7d7d
+    urgent_workspace #ff7066 #141414 #ff7066
   }
 }
 
@@ -230,12 +230,12 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightnes
 
 # Change keyboard layouts
 bindsym $mod+n exec setxkbmap no
-#bindsym $mod+u exec setxkbmap us
+bindsym $mod+u exec setxkbmap us
 
 # Helpers
 exec --no-startup-id ~/.config/i3/load-layouts
 
-client.focused #526532 #526532 #ffffff #a4cb64
-client.focused_inactive #aea79f #aea79f #3c3b37 #aea79f
-client.unfocused #3c3b37 #3c3b37 #aea79f #3c3b37
-client.urgent #FF0000 #FF0000 #ffffff #FF0000
+client.focused #00b0ef #00b0ef #141414 #ff7066
+client.focused_inactive #141414 #141414 #00b0ef #472b2a
+client.unfocused #141414 #141414 #7d7d7d #141414
+client.urgent #ff7066 #ff7066 #141414 #ff7066
