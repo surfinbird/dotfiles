@@ -74,3 +74,6 @@ nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
 """ NerdTree
 nmap <leader>n :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+
+""" Tagbar
+nmap <F8> :TagbarToggle<CR>

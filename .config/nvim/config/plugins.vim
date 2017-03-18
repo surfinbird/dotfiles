@@ -9,5 +9,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'tpope/vim-fugitive'
+Plug 'majutsushi/tagbar', {'for': ['cpp', 'c', 'py', 'sh', 'js']}
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
