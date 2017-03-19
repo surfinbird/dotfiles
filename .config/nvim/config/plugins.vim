@@ -11,5 +11,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar', {'for': ['cpp', 'c', 'py', 'sh', 'js']}
 Plug 'easymotion/vim-easymotion'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
