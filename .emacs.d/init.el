@@ -171,7 +171,7 @@ Null prefix argument turns off the mode."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Keyboard shortcuts
 
-(global-set-key (kbd "<f1>")         'goto-line)
+(global-set-key (kbd "<f1>")        'goto-line)
 (global-set-key (kbd "M-<return>")  'toggle-fullscreen)
 (global-set-key (kbd "C-<tab>")     'other-window)
 
