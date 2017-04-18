@@ -9,11 +9,20 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 # Some functions
 ##############################################################################
 
-untarall ()
+untargzall ()
 {
     for el in $(ls *.tar.gz);
     do
         dr=$(basename $el .tar.gz)
+        mkdir $dr && tar xvf $el -C $dr
+    done
+}
+
+untarall ()
+{
+    for el in $(ls *.tar);
+    do
+        dr=$(basename $el .tar)
         mkdir $dr && tar xvf $el -C $dr
     done
 }
