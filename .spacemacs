@@ -42,17 +42,18 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
+     ;helm
      auto-completion
      ;; better-defaults
      c-c++
      colors
+     docker
      emacs-lisp
      fasd
      git
      gtags
      haskell
-;     ivy
+     ivy
      javascript
      markdown
      org
@@ -75,7 +76,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(bm
                                       google-c-style
-                                      ;;key-chord
+                                      counsel-gtags
                                       sws-mode
                                       haskell-mode
                                       js2-mode
@@ -576,9 +577,9 @@ Including indent-buffer, which should not be called automatically on save."
     (toggle-read-only))
   (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-  (defun no-backslash-today ()
-    (replace-string "\\" "/" nil (point-min) (point-max)))
-  (add-hook 'compilation-filter-hook 'no-backslash-today)
+;  (defun no-backslash-today ()
+;    (replace-string "\\" "/" nil (point-min) (point-max)))
+;  (add-hook 'compilation-filter-hook 'no-backslash-today)
 
   (setq magit-display-buffer-function
         #'magit-display-buffer-fullframe-status-v1)
@@ -602,12 +603,22 @@ Including indent-buffer, which should not be called automatically on save."
   (setq moe-theme-highlight-buffer-id t)
 
   ;; Resize titles
-  (setq moe-theme-resize-markdown-title '(1.5 1.4 1.3 1.2 1.0 1.0))
-  (setq moe-theme-resize-org-title '(1.5 1.4 1.3 1.2 1.1 1.0 1.0 1.0 1.0))
-  (setq moe-theme-resize-rst-title '(1.5 1.4 1.3 1.2 1.1 1.0))
+  (setq moe-theme-resize-markdown-title '(1.4 1.3 1.2 1.1 1.0 1.0))
+  (setq moe-theme-resize-org-title '(1.4 1.3 1.2 1.1 1.1 1.0 1.0 1.0 1.0))
+  (setq moe-theme-resize-rst-title '(1.4 1.3 1.2 1.1 1.1 1.0))
 
   ;; Change mode line color
   (moe-theme-set-color 'orange)
+
+  ;; Counsel Gtags
+  (add-hook 'c-mode-hook 'counsel-gtags-mode)
+  (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+
+  (with-eval-after-load 'counsel-gtags
+    (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
+    (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+    (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-find-symbol)
+    (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -691,8 +702,8 @@ This function is called at the very end of Spacemacs initialization."
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    (quote
-    ("4cbec5d41c8ca9742e7c31cc13d8d4d5a18bd3a0961c18eb56d69972bbcf3071" default)))
- '(evil-want-Y-yank-to-eol nil)
+    ("f78de13274781fbb6b01afd43327a4535438ebaeec91d93ebdbba1e3fba34d3c" "4cbec5d41c8ca9742e7c31cc13d8d4d5a18bd3a0961c18eb56d69972bbcf3071" default)))
+ '(evil-want-Y-yank-to-eol t)
  '(fci-rule-color "#20240E" t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
