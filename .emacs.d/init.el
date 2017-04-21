@@ -73,7 +73,6 @@ Including indent-buffer, which should not be called automatically on save."
   (delete-trailing-whitespace)
   (indent-buffer))
 
-
 (defun split-window-right-and-move-there-dammit ()
   (interactive)
   (split-window-right)
@@ -628,19 +627,15 @@ Null prefix argument turns off the mode."
     :defer t)
   (require 'ox-confluence)
   (setq
-   org-startup-folded nil
-  ; agenda
-   org-agenda-files "~/org/agenda-files"  
    org-agenda-start-on-weekday 1
-  ; clock
-   org-clock-into-drawer	"CLOCK"
+                                        ; clock
+   org-clock-into-drawer  "CLOCK"
    org-clock-out-when-done t
    org-clock-in-switch-to-state nil
-   ; log
+                                        ; log
    org-log-note-clock-out t
-   ; time
+                                        ; time
    org-time-clocksum-use-fractional t
-  ; todo
    org-todo-keywords
    '((sequence "TODO(t)" "INPROGRESS(i@)" "|" "DONE(f@)" "DELEGATED(d@)" "CANCELLED(c@)"))
    org-todo-keyword-faces
@@ -648,12 +643,7 @@ Null prefix argument turns off the mode."
      ("DONE" . (:foreground "green" :weight bold))
      ("DELEGATED" . (:foreground "yellow" :weight bold))
      ("CANCELLED" . (:foreground "red" :weight bold))
-     )
-   )
-  
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((plantuml . t)))
+     ))
 
   (key-chord-define-global "OM"
                            (defhydra hydra-org (:color red :columns 3)
