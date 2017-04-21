@@ -53,7 +53,7 @@ values."
      git
      gtags
      haskell
-     ivy
+     ;;ivy
      javascript
      markdown
      org
@@ -76,7 +76,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(bm
                                       google-c-style
-                                      counsel-gtags
+                                      ;;counsel-gtags
                                       sws-mode
                                       haskell-mode
                                       js2-mode
@@ -158,7 +158,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(moe-dark
+                         spacemacs-dark
                          spacemacs-light)
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -611,14 +612,14 @@ Including indent-buffer, which should not be called automatically on save."
   (moe-theme-set-color 'orange)
 
   ;; Counsel Gtags
-  (add-hook 'c-mode-hook 'counsel-gtags-mode)
-  (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-
-  (with-eval-after-load 'counsel-gtags
-    (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
-    (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
-    (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-find-symbol)
-    (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward))
+;;  (add-hook 'c-mode-hook 'counsel-gtags-mode)
+;;  (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+;;
+;;  (with-eval-after-load 'counsel-gtags
+;;    (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
+;;    (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+;;    (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-find-symbol)
+;;    (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
