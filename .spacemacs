@@ -620,6 +620,10 @@ Including indent-buffer, which should not be called automatically on save."
 ;;    (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
 ;;    (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-find-symbol)
 ;;    (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward))
+  (setq js-indent-level 2)
+  (setq js2-basic-offset 2)
+  (setq js2-bounce-indent-p nil)
+  
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
