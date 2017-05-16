@@ -154,13 +154,13 @@ bar {
         tray_output primary
         position top
   colors {
-    separator #515151
-    background #2d2d2d
-    statusline #cccccc
-    focused_workspace #99cc99 #99cc99 #000000
-    active_workspace #333333 #333333 #ffffff
-    inactive_workspace #2d2d2d #2d2d2d #999999
-    urgent_workspace #f2777a #f2777a #ffffff
+    separator #586e75
+    background #002b36
+    statusline #aea79f
+    focused_workspace #586e75 #586e75 #ffffff
+    active_workspace #073642 #073642 #ffffff
+    inactive_workspace #002b36 #002b36 #aea79f
+    urgent_workspace #77216f #77216f #ffffff
   }
 }
 
@@ -187,7 +187,7 @@ exec google-chrome
 exec thunderbird
 exec pidgin
 exec --no-startup-id dropbox start
-#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet
 
 # Force some applications to certain workspaces
@@ -236,7 +236,7 @@ bindsym $mod+u exec setxkbmap us
 # Helpers
 exec --no-startup-id ~/.config/i3/load-layouts
 
-client.focused #99cc99 #99cc99 #000000 #2d2d2d
-client.focused_inactive #393939 #393939 #888888 #292d2e
-client.unfocused #2d2d2d #2d2d2d #999999 #292d2e
-client.urgent #2f343a #900000 #ffffff #900000
+client.focused #586e75 #586e75 #fdf6e3 #268bd2
+client.focused_inactive #073642 #073642 #93a1a1 #002b36
+client.unfocused #002b36 #002b36 #586e75 #002b36
+client.urgent #dc322f #dc322f #fdf6e3 #dc322f
