@@ -36,6 +36,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     asciidoc
      vimscript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -53,7 +54,7 @@ values."
      git
      gtags
      haskell
-     ;;ivy
+     ;; ivy
      javascript
      markdown
      org
@@ -74,7 +75,8 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(bm
+   dotspacemacs-additional-packages '(bitbake
+                                      bm
                                       google-c-style
                                       ;;counsel-gtags
                                       sws-mode
@@ -473,8 +475,8 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
   (add-to-list 'auto-mode-alist '("SConstruct$" . python-mode))
   (add-to-list 'auto-mode-alist '("SConscript$" . python-mode))
   (add-to-list 'auto-mode-alist '("SConscript.*$" . python-mode))
-  (add-to-list 'auto-mode-alist '("\\.bb$" . python-mode))
-  (add-to-list 'auto-mode-alist '("\\.bbappend$" . python-mode))
+  (add-to-list 'auto-mode-alist '("\\.bb$" . bitbake-mode))
+  (add-to-list 'auto-mode-alist '("\\.bbappend$" . bitbake-mode))
   (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
   (add-to-list 'auto-mode-alist '("\\.dts$" . dts-mode))
   (add-to-list 'auto-mode-alist '("\\.dtsi$" . dts-mode))
@@ -604,12 +606,12 @@ Including indent-buffer, which should not be called automatically on save."
   (setq moe-theme-highlight-buffer-id t)
 
   ;; Resize titles
-  (setq moe-theme-resize-markdown-title '(1.4 1.3 1.2 1.1 1.0 1.0))
-  (setq moe-theme-resize-org-title '(1.4 1.3 1.2 1.1 1.1 1.0 1.0 1.0 1.0))
-  (setq moe-theme-resize-rst-title '(1.4 1.3 1.2 1.1 1.1 1.0))
+  ;(setq moe-theme-resize-markdown-title '(1.4 1.3 1.2 1.1 1.0 1.0))
+  ;(setq moe-theme-resize-org-title '(1.4 1.3 1.2 1.1 1.1 1.0 1.0 1.0 1.0))
+  ;(setq moe-theme-resize-rst-title '(1.4 1.3 1.2 1.1 1.1 1.0))
 
   ;; Change mode line color
-  (moe-theme-set-color 'orange)
+  (moe-theme-set-color 'blue)
 
   ;; Counsel Gtags
 ;;  (add-hook 'c-mode-hook 'counsel-gtags-mode)
