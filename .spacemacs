@@ -541,6 +541,38 @@ Including indent-buffer, which should not be called automatically on save."
            ("C-S-c C-e"     . mc/edit-ends-of-lines)
            ("C-S-c C-a"     . mc/edit-beginnings-of-lines)))
 
+  ;; plantuml and ditaa
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((plantuml . t)
+     (ditaa . t)))
+
+  (setq org-plantuml-jar-path
+        (expand-file-name "~/.spacemacs.d/plantuml.jar"))
+  (setq org-ditaa-jar-path "~/.spacemacs.d/ditaa.jar")
+
+  (setq org-src-fontify-natively t)
+
+  ;; latex exporting
+  ;; (unless (boundp 'org-latex-classes)
+  ;;   (setq org-latex-classes nil))
+
+  ;; (add-to-list 'org-latex-classes
+  ;;              '("anrstyle"
+  ;;                "\\documentclass{./.my-style}
+  ;;                [DEFAULT-PACKAGES]
+  ;;                [PACKAGES]
+  ;;                [EXTRA]"
+  ;;                ("\\section{%s}" . "\\section{%s}")
+  ;;                ("\\subsection{%s}" . "\\subsection{%s}")
+  ;;                ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+  ;;                ("\\paragraph{%s}" . "\\paragraph{%s}")
+  ;;                ("\\subparagraph{%s}" . "\\subparagraph{%s}")))
+
+  ;#+TITLE: My Fine Document
+  ;#+AUTHOR: Anders Rønningen
+  ;#+LaTeX_CLASS: anrstyle
+
   (setq
    org-agenda-start-on-weekday 1
    ; clock

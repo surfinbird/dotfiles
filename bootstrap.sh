@@ -5,7 +5,7 @@ create_symlinks() {
     echo "creating symlinks..."
     stuff=(".aliases .scripts .zshrc .zshenv .bash_profile \
         .bashrc .conkyrc .functions .tmux.conf \
-        .Xresources.d .xsessionrc .spacemacs")
+        .Xresources.d .xsessionrc .spacemacs .spacemacs.d")
 
     for el in $stuff; do
         ln -fs $(pwd)/$el ~
