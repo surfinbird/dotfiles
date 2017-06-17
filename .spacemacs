@@ -409,7 +409,13 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
 
   (add-hook 'find-file-hook
             'enable-minor-mode-based-on-extension)
-
+  (use-package no-littering               ; Keep .emacs.d clean
+    :ensure t
+    :config
+    (require 'recentf)
+    (add-to-list 'recentf-exclude no-littering-var-directory)
+    (add-to-list 'recentf-exclude no-littering-etc-directory))
+  
   (use-package sws-mode
     :ensure t
     :defer t)
