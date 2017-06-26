@@ -8,14 +8,14 @@ create_symlinks() {
         .Xresources.d .xsessionrc .spacemacs")
 
     for el in $stuff; do
-        ln -fsv $(pwd)/$el ~
+        ln -fs $(pwd)/$el ~
     done
 
     mkdir -p ~/.config
 
     for el in $(ls .config); do
         rm -f ~/.config/$el
-        ln -fsv $(pwd)/.config/$el ~/.config/$el
+        ln -fs $(pwd)/.config/$el ~/.config/$el
     done
 }
 
@@ -58,12 +58,12 @@ install_nix() {
 }
 
 install_mac() {
-    if which rg 2>&1 > /dev/null; then
+    if ! which rg 2>&1 > /dev/null; then
         echo "installing ripgrep..."
         brew install ripgrep
     fi
 
-    if which nvim 2>&1 > /dev/null; then
+    if ! which nvim 2>&1 > /dev/null; then
         echo "installing neovim..."
         brew install neovim
     fi
