@@ -1,4 +1,10 @@
-source /usr/local/share/antigen/antigen.zsh
+if [ -f /usr/local/share/antigen/antigen.zsh ]; then
+    source /usr/local/share/antigen/antigen.zsh
+fi
+
+if [ -f /usr/share/zsh-antigen/antigen.zsh ]; then
+    source /usr/share/zsh-antigen/antigen.zsh
+fi
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
