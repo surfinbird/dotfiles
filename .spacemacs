@@ -83,6 +83,7 @@ values."
                                       haskell-mode
                                       js2-mode
                                       jade-mode
+                                      no-littering
                                       nsis-mode
                                       qml-mode
                                       dts-mode
@@ -409,7 +410,8 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
 
   (add-hook 'find-file-hook
             'enable-minor-mode-based-on-extension)
-  (use-package no-littering               ; Keep .emacs.d clean
+  
+  (use-package no-littering  ; Keep .emacs.d clean
     :ensure t
     :config
     (require 'recentf)
