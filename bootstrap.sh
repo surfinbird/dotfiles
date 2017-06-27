@@ -50,7 +50,7 @@ install_nix() {
         sudo update-alternatives --config editor
     fi
 
-    if which rg 2>&1 > /dev/null; then
+    if ! which rg 2>&1 > /dev/null; then
         echo "installing ripgrep..."
         curl -ssf https://static.rust-lang.org/rustup.sh | sh
         cargo install ripgrep
