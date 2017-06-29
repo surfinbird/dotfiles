@@ -16,11 +16,6 @@ antigen bundle python
 antigen bundle command-not-found
 antigen bundle common-aliases
 
-# Show hostname on remote systems
-if [[ -n "$SSH_CLIENT" ]]; then
-    RPROMPT='%{$fg_bold[white]%}%M'
-fi
-
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
@@ -61,3 +56,9 @@ fi
 
 # Tell Antigen that you're done.
 antigen apply
+
+# Show hostname on remote systems
+if [[ -n "$SSH_CLIENT" ]]; then
+    RPROMPT='%{$fg_bold[white]%}%M'
+fi
+
