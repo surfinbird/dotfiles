@@ -59,6 +59,6 @@ antigen apply
 
 # Show hostname on remote systems
 if [[ -n "$SSH_CLIENT" ]]; then
-    RPROMPT='%{$fg_bold[white]%}%M'
+    RPROMPT='%{$fg_bold[white]%}%n@%M'
 fi
 
