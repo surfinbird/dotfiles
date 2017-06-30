@@ -56,9 +56,3 @@ fi
 
 # Tell Antigen that you're done.
 antigen apply
-
-# Show hostname on remote systems
-if [[ -n "$SSH_CLIENT" ]]; then
-    RPROMPT='%{$fg_bold[237]%}%n@%M'
-fi
-
