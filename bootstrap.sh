@@ -97,19 +97,38 @@ install_packages() {
     fi
 }
 
-case $1 in
-    "--force"|"-f")
-        :
-        ;;
-    *)
-        read -p "this may overwrite existing files in your home directory. are you sure? (y/n) " -n 1
-        echo
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            exit 1
-        fi
-        ;;
-esac
+# Default options
+force=false
+install=false
+
+while [[ $# -gt 0 ]]
+do
+    key="$1"
+
+    case $key in
+        -f|--force)
+            force=true
+            ;;
+        -i|--install)
+            install=true
+            ;;
+        *)
+            # unknown option
+            ;;
+    esac
+    shift # past argument or value
+done
+
+if ! $force; then
+    read -p "this may overwrite existing files in your home directory. are you sure? (y/n) " -n 1
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        exit 1
+    fi
+fi
 
 create_symlinks
-install_packages
+if $install; then
+    install_packages
+fi
 echo "done!"
