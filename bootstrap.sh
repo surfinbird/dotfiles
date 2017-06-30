@@ -14,7 +14,7 @@ create_symlinks() {
     mkdir -p ~/.config
 
     for el in $(ls .config); do
-        rm -f ~/.config/$el
+        rm -rf ~/.config/$el
         ln -fs $(pwd)/.config/$el ~/.config/$el
     done
 }
