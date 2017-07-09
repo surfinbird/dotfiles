@@ -18,8 +18,8 @@ if [ -d "/opt/local/bin" ] ; then
     export PATH="/opt/local/bin:$PATH"
 fi
 
-if [ -d "$HOME/Android/Sdk/platform-tools" ] ; then
-    export PATH="$HOME/Android/Sdk/platform-tools:$PATH"
+if [ -d "$HOME/android/sdk/tools/bin" ] ; then
+    export PATH="$HOME/android/sdk/tools/bin:$PATH"
 fi
 
 # Set the list of directories that Zsh searches for programs.
