@@ -55,6 +55,11 @@ install_nix() {
         curl -ssf https://static.rust-lang.org/rustup.sh | sh
         cargo install ripgrep
     fi
+
+    if ! which exa 2>&1 > /dev/null; then
+        echo "installing exa..."
+        cargo install --git https://github.com/ogham/exa
+    fi
 }
 
 install_mac() {
@@ -63,6 +68,11 @@ install_mac() {
         brew install ripgrep
     fi
 
+    if ! which exa 2>&1 > /dev/null; then
+        echo "installing exa..."
+        brew install exa
+    fi
+    
     if ! which nvim 2>&1 > /dev/null; then
         echo "installing neovim..."
         brew install neovim
