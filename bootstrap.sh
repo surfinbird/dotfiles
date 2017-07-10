@@ -4,7 +4,7 @@ cd "$(dirname "${BASH_SOURCE}")"
 create_symlinks() {
     echo "creating symlinks..."
     stuff=(".aliases .scripts .zshrc .zshenv .bash_profile \
-        .bashrc .conkyrc .functions .tmux.conf \
+        .bashrc .conkyrc .functions .tmux.conf .emacs.d \
         .Xresources.d .xsessionrc .spacemacs .spacemacs.d")
 
     for el in $stuff; do
