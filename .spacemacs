@@ -42,7 +42,7 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
+     ;helm
      auto-completion
      ;; better-defaults
      c-c++
@@ -53,7 +53,7 @@ This function should only modify configuration layer settings."
      git
      gtags
      haskell
-     ;;ivy
+     ivy
      javascript
      markdown
      org
@@ -167,7 +167,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -665,20 +665,6 @@ Including indent-buffer, which should not be called automatically on save."
 
   (windmove-default-keybindings)
   (global-company-mode)
-
-  ;; configure moe-theme
-  (require 'moe-theme)
-
-  ;; Show highlighted buffer-id as decoration.
-  (setq moe-theme-highlight-buffer-id t)
-
-  ;; Resize titles
-  ;(setq moe-theme-resize-markdown-title '(1.4 1.3 1.2 1.1 1.0 1.0))
-  ;(setq moe-theme-resize-org-title '(1.4 1.3 1.2 1.1 1.1 1.0 1.0 1.0 1.0))
-  ;(setq moe-theme-resize-rst-title '(1.4 1.3 1.2 1.1 1.1 1.0))
-
-  ;; Change mode line color
-  (moe-theme-set-color 'blue)
 
   ;; Counsel Gtags
 ;;  (add-hook 'c-mode-hook 'counsel-gtags-mode)
