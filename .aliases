@@ -14,6 +14,8 @@ alias ecd='d -e emacsclient'
 alias sec='sf -e emacsclient'
 alias secd='sd -e emacsclient'
 
+alias rm='rm -i'
+
 alias fuck='sudo $(fc -ln -1)'
 
 if type nvim > /dev/null 2>&1; then
