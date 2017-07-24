@@ -24,21 +24,21 @@ msg() {
 
 shopt -s nullglob
 
-# msg "Starting session [%s]" "$DESKTOP_SESSION"
+msg "Starting session [%s]" "$XDG_DESKTOP_SESSION"
 
-# for script in $HOME/.config/start-session/common.d/*.sh; do
-#     if [ -x "$script" ]; then
-# 	msg "= Running common script: %s" "$script"
-# 	"$script" "$DESKTOP_SESSION"
-#     fi
-# done
+for script in $HOME/.config/start-session/common.d/*.sh; do
+    if [ -x "$script" ]; then
+	msg "= Running common script: %s" "$script"
+	"$script" "$XDG_DESKTOP_SESSION"
+    fi
+done
 
-# for script in $HOME/.config/start-session/$DESKTOP_SESSION.d/*.sh; do
-#     if [ -x "$script" ]; then
-# 	msg "= Running %s script: %s" "$DESKTOP_SESSION" "$script"
-# 	"$script" "$DESKTOP_SESSION"
-#     fi
-# done
+for script in $HOME/.config/start-session/$XDG_DESKTOP_SESSION.d/*.sh; do
+    if [ -x "$script" ]; then
+	msg "= Running %s script: %s" "$XDG_DESKTOP_SESSION" "$script"
+	"$script" "$XDG_DESKTOP_SESSION"
+    fi
+done
 
 #export QT_DEVICE_PIXEL_RATIO=auto
 export no_proxy="localhost,127.*,10.*,192.168.*,169.254.*"

@@ -47,11 +47,12 @@ This function should only modify configuration layer settings."
      ;; better-defaults
      c-c++
      colors
+     cscope
      docker
      emacs-lisp
      fasd
      git
-     gtags
+     ;;gtags
      haskell
      ivy
      javascript
