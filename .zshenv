@@ -18,11 +18,11 @@ if [ -d "/opt/local/bin" ] ; then
     export PATH="/opt/local/bin:$PATH"
 fi
 
-if [ -d "$HOME/android/sdk/tools/bin" ] ; then
-    export PATH="$HOME/android/sdk/tools/bin:$PATH"
+if [ -d "$HOME/dev/android/sdk/tools/" ] ; then
+    export PATH="$HOME/dev/android/sdk/tools/:$PATH"
 fi
 
-if [ -d "$HOME/android/sdk/platform-tools" ] ; then
+if [ -d "$HOME/dev/android/sdk/platform-tools" ] ; then
     export PATH="$HOME/android/sdk/platform-tools:$PATH"
 fi
 
