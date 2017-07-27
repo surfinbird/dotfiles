@@ -86,6 +86,7 @@ This function should only modify configuration layer settings."
                                       no-littering
                                       nsis-mode
                                       qml-mode
+                                      qt-pro-mode
                                       dts-mode
                                       systemd
                                       fzf
@@ -513,6 +514,8 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
   (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
   (add-to-list 'auto-mode-alist '("\\.dts$" . dts-mode))
   (add-to-list 'auto-mode-alist '("\\.dtsi$" . dts-mode))
+  (add-to-list 'auto-mode-alist '("\\.pro$" . qt-pro-mode))
+  (add-to-list 'auto-mode-alist '("\\.pri$" . qt-pro-mode))
 
   ;; Shortcuts for error navigation
   (global-set-key (kbd "S-<f4>")      'next-error)
