@@ -26,12 +26,22 @@ shopt -s nullglob
 
 msg "Starting session [%s]" "DESKTOP_SESSION"
 
-for script in $HOME/.config/start-session/common.d/*.sh; do
-    if [ -x "$script" ]; then
-	msg "= Running common script: %s" "$script"
-	"$script" "$DESKTOP_SESSION"
-    fi
-done
+num_monitors=$(DISPLAY=:0 xrandr -q | grep ' connected' | wc -l)
+
+case "$num_monitors" in
+    1)
+        msg "skip dpi voodoo"
+        ;;
+    *)
+        for script in $HOME/.config/start-session/common.d/*.sh; do
+            if [ -x "$script" ]; then
+                msg "= Running common script: %s" "$script"
+                "$script" "$DESKTOP_SESSION"
+            fi
+        done
+        ;;
+esac
+
 
 #export QT_DEVICE_PIXEL_RATIO=auto
 export no_proxy="localhost,127.*,10.*,192.168.*,169.254.*"
