@@ -54,5 +54,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.aliases-this-machine" ]]; then
   source "${ZDOTDIR:-$HOME}/.aliases-this-machine"
 fi
 
+# Misc zsh setup
+zstyle ':completion:*' special-dirs true
+
 # Tell Antigen that you're done.
 antigen apply
