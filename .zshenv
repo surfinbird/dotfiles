@@ -23,7 +23,7 @@ if [ -d "$HOME/dev/android/sdk/tools/" ] ; then
 fi
 
 if [ -d "$HOME/dev/android/sdk/platform-tools" ] ; then
-    export PATH="$HOME/android/sdk/platform-tools:$PATH"
+    export PATH="$HOME/dev/android/sdk/platform-tools:$PATH"
 fi
 
 # Set the list of directories that Zsh searches for programs.
