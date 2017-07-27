@@ -436,14 +436,14 @@ The checking happens for all pairs in `auto-minor-mode-alist'"
 
   (add-hook 'find-file-hook
             'enable-minor-mode-based-on-extension)
-  
+
   (use-package no-littering  ; Keep .emacs.d clean
     :ensure t
     :config
     (require 'recentf)
     (add-to-list 'recentf-exclude no-littering-var-directory)
     (add-to-list 'recentf-exclude no-littering-etc-directory))
-  
+
   (use-package sws-mode
     :ensure t
     :defer t)
@@ -620,6 +620,10 @@ Including indent-buffer, which should not be called automatically on save."
      ("CANCELLED" . (:foreground "red" :weight bold))
      ))
 
+
+  (setq org-goto-interface 'outline-path-completion)
+  (setq org-outline-path-complete-in-steps nil)
+
   ;; Location of (most) my org files
   (setq org-directory "~/org")
 
@@ -630,7 +634,7 @@ Including indent-buffer, which should not be called automatically on save."
 
   ;; Don't split line when creating new org heading with <M-return>
   (setq org-M-RET-may-split-line '((item . nil)))
-  
+
   ;; org-capture
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (define-key global-map "\C-cc" 'org-capture)
@@ -682,7 +686,58 @@ Including indent-buffer, which should not be called automatically on save."
   (setq js-indent-level 2)
   (setq js2-basic-offset 2)
   (setq js2-bounce-indent-p nil)
-  
+
+  ;; Hydra
+
+  ; org headers
+  (bind-key "C-c o" 'hydra-org-headings/body)
+  (defhydra hydra-org-headings (:color red :columns 3)
+    "Org Mode Movements"
+    ("n" outline-next-visible-heading "next heading")
+    ("p" outline-previous-visible-heading "prev heading")
+    ("N" org-forward-heading-same-level "next heading at same level")
+    ("P" org-backward-heading-same-level "prev heading at same level")
+    ("u" outline-up-heading "up heading")
+    ("g" org-goto "goto" :exit t))
+
+  ; org clock
+  (bind-key "C-c w" 'hydra-org-clock/body)
+  (defhydra hydra-org-clock (:color blue :hint nil)
+    "
+Clock   In/out^     ^Edit^   ^Summary     (_?_)
+-----------------------------------------
+        _i_n         _e_dit   _g_oto entry
+        _c_ontinue   _q_uit   _d_isplay
+        _o_ut        ^ ^      _r_eport
+      "
+    ("i" org-clock-in)
+    ("o" org-clock-out)
+    ("c" org-clock-in-last)
+    ("e" org-clock-modify-effort-estimate)
+    ("q" org-clock-cancel)
+    ("g" org-clock-goto)
+    ("d" org-clock-display)
+    ("r" org-clock-report)
+    ("?" (org-info "Clocking commands")))
+
+  ; error movement
+  (defhydra hydra-next-error
+    (global-map "C-x")
+    "
+Compilation errors:
+_j_: next error        _h_: first error    _q_uit
+_k_: previous error    _l_: last error
+"
+    ("`" next-error     nil)
+    ("j" next-error     nil :bind nil)
+    ("k" previous-error nil :bind nil)
+    ("h" first-error    nil :bind nil)
+    ("l" (condition-case err
+             (while t
+               (next-error))
+           (user-error nil))
+     nil :bind nil)
+    ("q" nil            nil :color blue))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
