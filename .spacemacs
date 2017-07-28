@@ -75,7 +75,8 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(bitbake
+   dotspacemacs-additional-packages '(all-the-icons
+                                      bitbake
                                       bm
                                       google-c-style
                                       ;;counsel-gtags
@@ -568,6 +569,9 @@ Including indent-buffer, which should not be called automatically on save."
     :bind (("C-S-c C-S-c"   . mc/edit-lines)
            ("C-S-c C-e"     . mc/edit-ends-of-lines)
            ("C-S-c C-a"     . mc/edit-beginnings-of-lines)))
+
+  (use-package all-the-icons)
+  (setq neo-theme 'icons)
 
   ;; plantuml and ditaa
   (org-babel-do-load-languages
