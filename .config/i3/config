@@ -183,7 +183,7 @@ mode "$mode_launcher" {
 
 # Always start these applications
 exec emacs
-exec google-chrome
+exec firefox
 exec thunderbird
 exec pidgin
 #exec wavebox
