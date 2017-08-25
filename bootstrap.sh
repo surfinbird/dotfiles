@@ -21,7 +21,7 @@ create_symlinks() {
 
 install_nix() {
     echo "checking apt packages..."
-    apt_dep=(cargo zsh-antigen build-essential zsh emacs tmux vim tig silversearcher-ag xsel)
+    apt_dep=(cargo zsh-antigen build-essential zsh emacs tmux vim tig silversearcher-ag xsel xsettingsd)
 
     if dpkg -l ubuntu-desktop > /dev/null 2>&1; then
         apt_dep+=(i3 i3blocks fonts-font-awesome xbacklight xss-lock)

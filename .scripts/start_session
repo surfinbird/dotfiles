@@ -2,16 +2,7 @@
 
 export auto_proxy=""
 
-if [ -z "$GNOME_KEYRING_PID" ]; then
-    eval $(gnome-keyring-daemon --start)
-    export GNOME_KEYRING_SOCKET
-    export GNOME_KEYRING_PID
-fi
-
 case "$DESKTOP_SESSION" in 
-    xmonad)
-        gnome-settings-daemon &
-        ;;
     i3)
         #unity-settings-daemon &
         ;;
@@ -24,7 +15,7 @@ msg() {
 
 shopt -s nullglob
 
-msg "Starting session [%s]" "DESKTOP_SESSION"
+msg "Starting session [%s]" "$DESKTOP_SESSION"
 
 num_monitors=$(DISPLAY=:0 xrandr -q | grep ' connected' | wc -l)
 
@@ -42,8 +33,6 @@ case "$num_monitors" in
         ;;
 esac
 
-
-#export QT_DEVICE_PIXEL_RATIO=auto
 export no_proxy="localhost,127.*,10.*,192.168.*,169.254.*"
 setxkbmap -option 'caps:escape'
 setxkbmap no
