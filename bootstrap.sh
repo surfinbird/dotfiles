@@ -4,7 +4,7 @@ cd "$(dirname "${BASH_SOURCE}")"
 create_symlinks() {
     echo "creating symlinks..."
     stuff=(".aliases .scripts .zshrc .zshenv .bash_profile \
-        .bashrc .conkyrc .functions .tmux.conf \
+        .bashrc .functions .tmux.conf \
         .Xresources.d .xsessionrc .spacemacs .spacemacs.d")
 
     for el in $stuff; do
@@ -24,7 +24,7 @@ install_nix() {
     apt_dep=(cargo zsh-antigen build-essential zsh emacs tmux vim tig silversearcher-ag xsel xsettingsd)
 
     if dpkg -l ubuntu-desktop > /dev/null 2>&1; then
-        apt_dep+=(i3 i3blocks fonts-font-awesome xbacklight xss-lock)
+        apt_dep+=(i3wm i3blocks fonts-font-awesome xbacklight xss-lock)
     fi
 
     missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))
