@@ -181,11 +181,7 @@ mode "$mode_launcher" {
     bindsym Return mode "default"
 }
 
-# Always start these applications
-exec emacs
-exec firefox
-exec thunderbird
-exec pidgin
+# dex will start applications for us
 exec --no-startup-id "dex -ae i3"
 
 # Force some applications to certain workspaces
