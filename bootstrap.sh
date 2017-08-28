@@ -21,10 +21,10 @@ create_symlinks() {
 
 install_nix() {
     echo "checking apt packages..."
-    apt_dep=(cargo zsh-antigen build-essential zsh emacs tmux vim tig silversearcher-ag xsel xsettingsd)
+    apt_dep=(cargo zsh-antigen build-essential zsh emacs tmux vim tig silversearcher-ag xsel)
 
     if dpkg -l ubuntu-desktop > /dev/null 2>&1; then
-        apt_dep+=(i3wm i3blocks fonts-font-awesome xbacklight xss-lock)
+        apt_dep+=(i3-wm i3lock i3status i3blocks fonts-font-awesome xbacklight xss-lock feh xsettingsd dex)
     fi
 
     missing=($(comm -23 <(for i in "${apt_dep[@]}"; do echo $i; done|sort) <(dpkg -l| awk '/^i/{print $2}'|sort)))

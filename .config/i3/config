@@ -186,11 +186,7 @@ exec emacs
 exec firefox
 exec thunderbird
 exec pidgin
-#exec wavebox
-exec --no-startup-id dropbox start
-#exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id /usr/lib/x86_64-linux-gnu/libexec/polkit-kde-authentication-agent-1
-exec --no-startup-id nm-applet
+exec --no-startup-id "dex -ae i3"
 
 # Force some applications to certain workspaces
 assign [class="Emacs24"] 1
@@ -208,6 +204,7 @@ bindsym Control+mod1+l exec --no-startup-id "~/.scripts/fuzzy_lock.sh lock"
 exec --no-startup-id "~/.scripts/fuzzy_lock.sh init"
 
 # Wallpaper
+exec --no-startup-id "sh ~/Pictures/wallpaper &"
 
 # Move workspace to another screen
 bindsym $mod+x move workspace to output right
