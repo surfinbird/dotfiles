@@ -4,8 +4,8 @@ cd "$(dirname "${BASH_SOURCE}")"
 create_symlinks() {
     echo "creating symlinks..."
     stuff=(".aliases .scripts .zshrc .zshenv .bash_profile \
-        .bashrc .functions .tmux.conf \
-        .Xresources.d .xsessionrc .spacemacs .spacemacs.d")
+        .bashrc .functions .tmux.conf .Xresources \
+        .xsessionrc .spacemacs .spacemacs.d")
 
     for el in $stuff; do
         ln -fs $(pwd)/$el ~
