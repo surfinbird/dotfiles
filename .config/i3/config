@@ -200,7 +200,7 @@ bindsym Control+mod1+l exec --no-startup-id "~/.scripts/fuzzy_lock.sh lock"
 exec --no-startup-id "~/.scripts/fuzzy_lock.sh init"
 
 # Wallpaper
-exec --no-startup-id "sh ~/Pictures/wallpaper &"
+exec --no-startup-id "feh --bg-scale ~/Pictures/wallpaper"
 
 # Move workspace to another screen
 bindsym $mod+x move workspace to output right
