@@ -1,9 +1,12 @@
 if [ -f /usr/local/share/antigen/antigen.zsh ]; then
     source /usr/local/share/antigen/antigen.zsh
-fi
-
-if [ -f /usr/share/zsh-antigen/antigen.zsh ]; then
+elif [ -f /usr/share/zsh-antigen/antigen.zsh ]; then
     source /usr/share/zsh-antigen/antigen.zsh
+else
+    if [ ! -f $HOME/.antigen.zsh ]; then
+        curl -L git.io/antigen > $HOME/.antigen.zsh
+    fi
+    source $HOME/.antigen.zsh
 fi
 
 # Load the oh-my-zsh's library.
