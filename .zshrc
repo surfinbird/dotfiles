@@ -38,6 +38,9 @@ elif [[ $CURRENT_OS == 'Cygwin' ]]; then
     :
 fi
 
+# Tell Antigen that you're done.
+antigen apply
+
 # FASD
 eval "$(fasd --init auto)"
 
@@ -60,5 +63,3 @@ fi
 # Misc zsh setup
 zstyle ':completion:*' special-dirs true
 
-# Tell Antigen that you're done.
-antigen apply
