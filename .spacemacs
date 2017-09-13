@@ -856,6 +856,7 @@ This function is called at the very end of Spacemacs initialization."
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(magit-diff-use-overlays nil)
+ '(magit-ediff-dwim-show-on-hunks t)
  '(magit-pull-arguments nil)
  '(org-agenda-files
    (quote
