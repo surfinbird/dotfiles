@@ -162,8 +162,8 @@ mode "$mode_launcher" {
 }
 
 # Force some applications to certain workspaces
+assign [class="Emacs"] 1
 assign [class="Emacs24"] 1
-assign [class="Emacs25"] 1
 assign [class="Google-chrome"] 3
 assign [class="Firefox"] 3
 assign [class="Thunderbird"] 4

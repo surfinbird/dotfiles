@@ -44,7 +44,7 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      ;helm
      auto-completion
-     ;; better-defaults
+     better-defaults
      c-c++
      colors
      cscope
