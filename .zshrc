@@ -1,3 +1,4 @@
+# Load antigen from somewhere
 if [ -f /usr/local/share/antigen/antigen.zsh ]; then
     source /usr/local/share/antigen/antigen.zsh
 elif [ -f /usr/share/zsh-antigen/antigen.zsh ]; then
@@ -44,7 +45,7 @@ antigen apply
 # FASD
 eval "$(fasd --init auto)"
 
-# fzf
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Source some files
