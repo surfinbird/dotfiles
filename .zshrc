@@ -61,6 +61,10 @@ if [[ -s "${ZDOTDIR:-$HOME}/.aliases-this-machine" ]]; then
   source "${ZDOTDIR:-$HOME}/.aliases-this-machine"
 fi
 
+if [[ -s "${ZDOTDIR:-$HOME}/.path-setup-this-machine" ]]; then
+  source "${ZDOTDIR:-$HOME}/.path-setup-this-machine"
+fi
+
 # Misc zsh setup
 zstyle ':completion:*' special-dirs true
 
