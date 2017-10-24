@@ -76,6 +76,9 @@ install_mac() {
     if ! which nvim 2>&1 > /dev/null; then
         echo "installing neovim..."
         brew install neovim
+        brew install python3
+        pip2 install neovim --upgrade
+        pip3 install neovim --upgrade
     fi
 }
 
