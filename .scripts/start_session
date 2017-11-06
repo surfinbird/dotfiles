@@ -3,11 +3,15 @@
 export auto_proxy=""
 export no_proxy="localhost,127.*,10.*,192.168.*,169.254.*"
 
-#case "$DESKTOP_SESSION" in
-#    i3)
-#        :
-#        ;;
-#esac
+case "$DESKTOP_SESSION" in
+    i3)
+        polkit_kde="/usr/lib/x86_64-linux-gnu/libexec/polkit-kde-authentication-agent-1"
+        if [ -f "$polkit_kde" ]; then
+            echo "Starting kde auth agent"
+           "$polkit_kde" &
+        fi
+        ;;
+esac
 
 msg() {
     local template="$1"; shift
@@ -23,7 +27,8 @@ num_monitors=$(DISPLAY=:0 xrandr -q | grep ' connected' | wc -l)
 
 case "$num_monitors" in
     1)
-        msg "skip dpi voodoo"
+        #msg "skip dpi voodoo"
+        $HOME/.scripts/xsetup.sh
         ;;
     *)
         $HOME/.scripts/xsetup.sh
