@@ -79,7 +79,7 @@ This function should only modify configuration layer settings."
                                       bm
                                       expand-region
                                       google-c-style
-                                      ;;counsel-gtags
+                                      counsel-gtags
                                       sws-mode
                                       haskell-mode
                                       js2-mode
@@ -552,6 +552,11 @@ Including indent-buffer, which should not be called automatically on save."
     "C mode with adjusted defaults for use with the Linux kernel."
     (interactive)
     (setq c-basic-offset 8))
+
+  (defun uboot-c-mode-offset ()
+    "C mode with adjusted defaults for use with U-Boot."
+    (interactive)
+    (setq c-basic-offset 2))
 
   (use-package google-c-style
     :ensure t
