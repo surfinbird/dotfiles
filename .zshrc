@@ -19,7 +19,7 @@ antigen bundle pip
 antigen bundle python
 antigen bundle command-not-found
 antigen bundle common-aliases
-
+antigen bundle arialdomartini/oh-my-git
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
@@ -27,6 +27,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # antigen theme robbyrussell
 #antigen theme gnzh
 antigen theme af-magic
+#antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
 
 # OS specific plugins
 if [[ $CURRENT_OS == 'OS X' ]]; then
