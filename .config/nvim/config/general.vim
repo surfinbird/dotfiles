@@ -8,8 +8,8 @@ nnoremap <leader>. :lcd %:p:h<CR>
 
 """ Keyboard shortcuts
 
-noremap <S-Left> :cp<CR>
-noremap <S-Right> :cn<CR>
+noremap <leader>b :cp<CR>
+noremap <leader>f :cn<CR>
 
 noremap <C-Right> :bnext<CR>
 noremap <C-Left> :bprevious<CR>
