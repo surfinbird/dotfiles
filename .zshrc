@@ -24,10 +24,9 @@ antigen bundle arialdomartini/oh-my-git
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
-# antigen theme robbyrussell
-#antigen theme gnzh
 #antigen theme af-magic
-antigen theme arialdomartini/oh-my-git-themes arialdo-pathinline
+#antigen theme arialdomartini/oh-my-git-themes arialdo-pathinline
+antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
 
 # OS specific plugins
 if [[ $CURRENT_OS == 'OS X' ]]; then
