@@ -28,6 +28,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 #antigen theme arialdomartini/oh-my-git-themes arialdo-pathinline
 antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
 
+export omg_ungit_prompt="[%T] %{\033[36m%}%~%{\033[0m%} %B%F{1}❯%F{3}❯%F{2}❯%f%b "
+
 # OS specific plugins
 if [[ $CURRENT_OS == 'OS X' ]]; then
     antigen bundle brew
