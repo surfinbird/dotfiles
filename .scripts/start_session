@@ -23,15 +23,23 @@ shopt -s nullglob
 setxkbmap -option 'caps:escape'
 setxkbmap no
 
-num_monitors=$(DISPLAY=:0 xrandr -q | grep ' connected' | wc -l)
+case "$DESKTOP_SESSION" in
+    i3)
 
-case "$num_monitors" in
-    1)
-        #msg "skip dpi voodoo"
-        $HOME/.scripts/xsetup.sh
+        num_monitors=$(DISPLAY=:0 xrandr -q | grep ' connected' | wc -l)
+
+        case "$num_monitors" in
+            1)
+                msg "skip dpi voodoo"
+                #$HOME/.scripts/xsetup.sh
+                ;;
+            *)
+                $HOME/.scripts/xsetup.sh
+                ;;
+        esac
         ;;
     *)
-        $HOME/.scripts/xsetup.sh
+        msg "skip dpi voodoo for desktop session: $DESKTOP_SESSION"
         ;;
 esac
 
