@@ -14,5 +14,6 @@ Plug 'jceb/vim-orgmode'
 Plug 'majutsushi/tagbar', {'for': ['cpp', 'c', 'py', 'sh', 'js']}
 Plug 'easymotion/vim-easymotion'
 Plug 'vim-syntastic/syntastic'
+Plug 'iCyMind/NeoSolarized'
 call plug#end()
 

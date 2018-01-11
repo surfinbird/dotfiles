@@ -25,7 +25,8 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 
 """ Appearance
 set termguicolors
-colorscheme badwolf
+set background=dark
+colorscheme NeoSolarized
 
 """ Syntax highlighting
 au BufNewFile,BufRead SConstruct  setf python
