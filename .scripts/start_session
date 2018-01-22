@@ -24,19 +24,10 @@ setxkbmap -option 'caps:escape'
 setxkbmap no
 
 case "$DESKTOP_SESSION" in
-    i3)
-
-        num_monitors=$(DISPLAY=:0 xrandr -q | grep ' connected' | wc -l)
-
-        case "$num_monitors" in
-            1)
-                msg "skip dpi voodoo"
-                #$HOME/.scripts/xsetup.sh
-                ;;
-            *)
-                $HOME/.scripts/xsetup.sh
-                ;;
-        esac
+    *i3)
+        num_displays=$(DISPLAY=:0 xrandr -q | grep ' connected' | wc -l)
+        msg "setup i3 for $num_displays displays"
+        $HOME/.scripts/xsetup.sh $num_displays
         ;;
     *)
         msg "skip dpi voodoo for desktop session: $DESKTOP_SESSION"

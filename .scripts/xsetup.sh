@@ -1,13 +1,23 @@
 #!/bin/bash
 
-XRANDR_TEMP=$(mktemp -t xrandr.XXXXXX); xrandr > $XRANDR_TEMP
+num_displays=$1
 
-FULL_DPI=($(cat $XRANDR_TEMP | perl -ne 'if (/connected primary (\d+)x(\d+).* (\d+)mm x (\d+)mm/) { $dpi = sqrt($1**2+$2**2)*25.4/sqrt($3**2+$4**2); printf "%d %d", $dpi+.5, ($dpi*1024)+.5 }'))
+case "$num_displays" in
+    1)
+        REAL_DPI=96
+        FULL_DPI=98304
+    ;;
+    *)
+        XRANDR_TEMP=$(mktemp -t xrandr.XXXXXX); xrandr > $XRANDR_TEMP
 
-[ -z "$FULL_DPI" ] && FULL_DPI=($(cat $XRANDR_TEMP | perl -ne 'if (/connected (\d+)x(\d+).* (\d+)mm x (\d+)mm/) { $dpi = sqrt($1**2+$2**2)*25.4/sqrt($3**2+$4**2); printf "%d %d", $dpi+.5, ($dpi*1024)+.5; last }'))
+        FULL_DPI=($(cat $XRANDR_TEMP | perl -ne 'if (/connected primary (\d+)x(\d+).* (\d+)mm x (\d+)mm/) { $dpi = sqrt($1**2+$2**2)*25.4/sqrt($3**2+$4**2); printf "%d %d", $dpi+.5, ($dpi*1024)+.5 }'))
 
-REAL_DPI=${FULL_DPI[0]}
-DPI=${FULL_DPI[1]}
+        [ -z "$FULL_DPI" ] && FULL_DPI=($(cat $XRANDR_TEMP | perl -ne 'if (/connected (\d+)x(\d+).* (\d+)mm x (\d+)mm/) { $dpi = sqrt($1**2+$2**2)*25.4/sqrt($3**2+$4**2); printf "%d %d", $dpi+.5, ($dpi*1024)+.5; last }'))
+
+        REAL_DPI=${FULL_DPI[0]}
+        DPI=${FULL_DPI[1]}
+        ;;
+esac
 
 file=$HOME/.xsettingsd
 
