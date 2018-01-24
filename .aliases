@@ -21,3 +21,8 @@ alias fuck='sudo $(fc -ln -1)'
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
+
+alias ls='exa'
+
+alias upgrade='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+alias ccat='source-highlight --out-format=esc -o STDOUT -i'
