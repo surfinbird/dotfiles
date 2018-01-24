@@ -21,7 +21,7 @@ create_symlinks() {
 
 install_nix() {
     echo "checking apt packages..."
-    apt_dep=(cargo ncdu htop build-essential cmake zsh emacs tmux vim tig silversearcher-ag xsel multitail)
+    apt_dep=(cargo ncdu htop build-essential cmake zsh emacs tmux vim tig silversearcher-ag xsel multitail build-essential tree)
 
     if dpkg -l ubuntu-desktop > /dev/null 2>&1; then
         apt_dep+=(i3-wm i3lock i3status i3blocks suckless-tools fonts-font-awesome udiskie xbacklight xss-lock feh xsettingsd dex pasystray pavucontrol)
@@ -34,21 +34,21 @@ install_nix() {
         sudo apt-get install -y "${missing[@]}"
     fi
 
-    if ! which nvim 2>&1 > /dev/null; then
-        echo "installing neovim..."
-        sudo add-apt-repository ppa:neovim-ppa/unstable
-        sudo apt-get update
-        sudo apt-get install neovim
-        sudo apt-get install python-dev python-pip python3-dev python3-pip
-        sudo pip3 install neovim
-        # use neovim as the default for all things vim
-        sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
-        sudo update-alternatives --config vi
-        sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
-        sudo update-alternatives --config vim
-        sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-        sudo update-alternatives --config editor
-    fi
+#    if ! which nvim 2>&1 > /dev/null; then
+#        echo "installing neovim..."
+#        sudo add-apt-repository ppa:neovim-ppa/unstable
+#        sudo apt-get update
+#        sudo apt-get install neovim
+#        sudo apt-get install python-dev python-pip python3-dev python3-pip
+#        sudo pip3 install neovim
+#        # use neovim as the default for all things vim
+#        sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+#        sudo update-alternatives --config vi
+#        sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+#        sudo update-alternatives --config vim
+#        sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+#        sudo update-alternatives --config editor
+#    fi
 
     if ! which rg 2>&1 > /dev/null; then
         echo "installing ripgrep..."
@@ -73,13 +73,13 @@ install_mac() {
         brew install exa
     fi
     
-    if ! which nvim 2>&1 > /dev/null; then
-        echo "installing neovim..."
-        brew install neovim
-        brew install python3
-        pip2 install neovim --upgrade
-        pip3 install neovim --upgrade
-    fi
+#    if ! which nvim 2>&1 > /dev/null; then
+#        echo "installing neovim..."
+#        brew install neovim
+#        brew install python3
+#        pip2 install neovim --upgrade
+#        pip3 install neovim --upgrade
+#    fi
 }
 
 install_packages() {
@@ -106,7 +106,7 @@ install_packages() {
 
     if [ ! -d ~/.emacs.d ]; then
         echo "installing spacemacs..."
-        git clone git@github.com:syl20bnr/spacemacs.git ~/.emacs.d -b develop
+        git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d -b develop
     fi
 }
 
